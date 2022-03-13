@@ -1,2 +1,2 @@
-# katip_fs
-a browser based note editor for TMM
+# Kâtip
+- a browser based note editor for TMM
