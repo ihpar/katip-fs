@@ -1,7 +1,11 @@
-import "./App.css";
+import classes from "./App.module.css";
 
 function App() {
-  return <div className="App">hello world</div>;
+  return (
+    <div className="App">
+      <p className={classes.p}>Hi</p>
+    </div>
+  );
 }
 
 export default App;
