@@ -11,14 +11,16 @@
     "type": "git",
     "url": "git+https://github.com/ihpar/katip-fs.git"
   },
-  "author": "ihpar",
+  "author": "ihpar haşim",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ihpar/katip-fs/issues"
   },
   "homepage": "https://github.com/ihpar/katip-fs#readme",
   "dependencies": {
-    "express": "^4.17.3"
+    "body-parser": "^1.19.2",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.6"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
