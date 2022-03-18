@@ -9,11 +9,7 @@ const EditorWidget: React.FC = (props) => {
       </button>
       <div className="accordion-panel">
         <div className="accordion-contents">
-          <div className="content-scroller makam">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, illo accusantium ut minima veritatis
-            maiores libero cum. Aperiam voluptas, harum sunt vel sint quibusdam numquam rerum architecto accusantium,
-            illo a.
-          </div>
+          <div className="content-scroller makam">Lorem ipsum dolor sit amet.</div>
         </div>
       </div>
     </div>
