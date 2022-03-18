@@ -1,11 +1,10 @@
-import React from "react";
+import EditorWidget from "./components/katip/EditorWidget";
 import "./App.scss";
 
 function App() {
   return (
-    <div className="test">
-      Hello
-      <p>world</p>
+    <div>
+      <EditorWidget />
     </div>
   );
 }
