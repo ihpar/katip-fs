@@ -1,4 +1,64 @@
+@use "../../styles/variables";
+
 .accordion-wrapper {
-  box-shadow: 0 0 14px -12px #141414;
+  @extend %widget-shadow;
   margin-bottom: 24px;
+}
+
+.btn-accordion {
+  background-color: variables.$paper-bg-color;
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+  transition: 200ms;
+  display: flex;
+  align-items: center;
+  padding: 6px 0;
+}
+
+.accordion-active,
+.btn-accordion:hover {
+  background-color: variables.$active-fore-color;
+}
+
+.btn-accordion .material-icons-sharp.caret {
+  transition: all 200ms;
+}
+
+.accordion-active .material-icons-sharp.caret {
+  transform: rotate(90deg);
+}
+
+.accordion-panel {
+  padding: 0 12px;
+  background-color: variables.$paper-bg-color;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 200ms;
+}
+
+.accordion-contents {
+  margin: 12px 0;
+}
+
+.accordion-buttons-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.accordion-buttons-grid {
+  display: grid;
+  grid-gap: 6px;
+}
+
+.grid-3 {
+  grid-template-columns: auto auto auto;
+}
+
+.grid-4 {
+  grid-template-columns: auto auto auto auto;
 }
