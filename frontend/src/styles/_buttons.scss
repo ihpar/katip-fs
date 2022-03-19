@@ -1,0 +1,252 @@
+@use "variables";
+
+%button-base {
+  background-color: variables.$paper-bg-color;
+  padding: 3px 2px;
+  margin: 0;
+  cursor: pointer;
+  border: none;
+  display: block;
+  transition: background-color 200ms, box-shadow 200ms;
+
+  &:hover {
+    background-color: variables.$active-fore-color;
+    box-shadow: inset 0 0 12px variables.$lightest-color;
+  }
+
+  &:focus {
+    background-color: variables.$lightest-color;
+    box-shadow: inset 0 0 16px variables.$pure-white;
+  }
+}
+
+.user-menu button,
+.btn-hamburger {
+  margin: 0;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  transition: opacity 200ms;
+
+  &:hover,
+  &:focus {
+    opacity: 0.6;
+  }
+}
+
+.user-menu li:not(:last-child) {
+  margin-right: 4px;
+}
+
+.i-sharp.md-36 {
+  font-size: 36px;
+  color: variables.$font-color;
+}
+
+.top-menu-list {
+  button {
+    @extend %button-base;
+    display: inline-flex;
+    overflow: hidden;
+  }
+
+  &.accidental-controls {
+    height: 36px;
+    overflow: hidden;
+
+    button {
+      height: 100%;
+      padding: 3px 5px;
+
+      span {
+        height: 100%;
+        margin: 0;
+        display: inline-block;
+        background-image: url("../images/sprites/accidentals-sprite-6.svg");
+        width: 20px;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        &.bekar {
+          background-position-x: 0;
+          width: 10px;
+        }
+
+        &.fazla-bemol {
+          background-position-x: -176px;
+          width: 10px;
+        }
+
+        &.bakiyye-bemol {
+          background-position-x: -239px;
+          width: 10px;
+        }
+
+        &.k-mucennep-bemol {
+          background-position-x: -188px;
+          width: 10px;
+        }
+
+        &.b-mucennep-bemol {
+          background-position-x: -253px;
+          width: 10px;
+        }
+
+        &.tanini-bemol {
+          background-position-x: -220px;
+          width: 14px;
+        }
+
+        &.fazla-diyez {
+          background-position-x: -13px;
+          width: 10px;
+        }
+
+        &.bakiyye-diyez {
+          background-position-x: -25px;
+          width: 10px;
+        }
+
+        &.k-mucennep-diyez {
+          background-position-x: -67px;
+          width: 12px;
+        }
+
+        &.b-mucennep-diyez {
+          background-position-x: -83px;
+          width: 12px;
+        }
+
+        &.tanini-diyez {
+          background-position-x: -53px;
+          width: 11px;
+        }
+      }
+    }
+  }
+
+  &.duration-controls {
+    height: 36px;
+    overflow: hidden;
+
+    button {
+      height: 100%;
+      padding: 3px 5px;
+
+      span {
+        height: 100%;
+        margin: 0;
+        display: inline-block;
+        background-image: url("../images/sprites/duration-sprite.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        &.whole {
+          background-position-x: 1px;
+          width: 18px;
+        }
+
+        &.half {
+          background-position-x: -27px;
+          width: 15px;
+        }
+
+        &.fourth {
+          background-position-x: -51px;
+          width: 14px;
+        }
+
+        &.eighth {
+          background-position-x: -74px;
+          width: 22px;
+        }
+
+        &.sixteenth {
+          background-position-x: -105px;
+          width: 22px;
+        }
+
+        &.thirtysecond {
+          background-position-x: -135px;
+          width: 22px;
+        }
+
+        &.sixtyfourth {
+          background-position-x: -165px;
+          width: 22px;
+        }
+
+        &.onetwentyeighth {
+          background-position-x: -195px;
+          width: 20px;
+        }
+
+        &.dotted {
+          background-position-x: -224px;
+          width: 9px;
+        }
+
+        &.double-dotted {
+          background-position-x: -239px;
+          width: 14px;
+        }
+      }
+    }
+  }
+
+  &.rest-controls {
+    button {
+      height: 100%;
+      padding: 3px 5px;
+
+      span {
+        height: 100%;
+        width: 36px;
+        margin: 0;
+        display: inline-block;
+        background-image: url("../images/controls/rests.svg");
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+      }
+    }
+  }
+}
+
+.img-ht {
+  height: 30px;
+  display: block;
+}
+
+.accordion-buttons-wrap button,
+.accordion-buttons-grid button {
+  font-family: inherit;
+  color: inherit;
+  font-size: inherit;
+  background-color: variables.$paper-bg-color;
+  padding: 3px 12px;
+  margin: 0;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: variables.$active-fore-color;
+  box-shadow: inset 0 0 12px variables.$lightest-color;
+  transition: background-color 200ms, box-shadow 200ms;
+
+  &:hover {
+    background-color: variables.$active-fore-color;
+    box-shadow: inset 0 0 14px variables.$pure-white;
+  }
+
+  &:focus {
+    background-color: variables.$lightest-color;
+    box-shadow: inset 0 0 16px variables.$pure-white;
+  }
+}
+
+.widget-icon-button-text {
+  margin-left: 6px;
+}
