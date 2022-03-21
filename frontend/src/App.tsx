@@ -4,6 +4,7 @@ import Navigation from "./components/layout/Navigation";
 import Footer from "./components/layout/Footer";
 import EditorWidget from "./components/katip/EditorWidget";
 import ActionsMenu from "./components/katip/ActionsMenu";
+import Cirak from "./components/katip/Cirak";
 
 function App() {
   return (
@@ -20,9 +21,7 @@ function App() {
           <div className="paper-contents"></div>
         </div>
       </div>
-      <div className="no-print">
-        <div className="assistant accordion-wrapper">RHS</div>
-      </div>
+      <Cirak />
       <Footer />
     </div>
   );

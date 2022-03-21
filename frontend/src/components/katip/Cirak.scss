@@ -1,0 +1,81 @@
+@use "../../styles/variables";
+@use "../../styles/widgets";
+
+.assistant.accordion-wrapper {
+  @extend %sticking;
+}
+
+.assistant-title {
+  background-color: variables.$active-fore-color;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+  display: flex;
+  align-items: center;
+  padding: 6px;
+}
+
+.assistant-title-icon {
+  margin-right: 6px;
+}
+
+.assistant-body {
+  padding: 12px;
+  background-color: variables.$paper-bg-color;
+
+  .info-section {
+    padding-right: 12px;
+    max-height: 300px;
+  }
+}
+
+.search-section {
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.txt-input {
+  font-family: inherit;
+  color: inherit;
+  font-size: 16px;
+  padding: 6px 24px 6px 0;
+  border: none 0px;
+  outline: none;
+  width: 100%;
+  height: 28px;
+  box-sizing: border-box;
+  background-color: transparent;
+}
+
+.i-sharp.search-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0.4;
+  transition: opacity 200ms;
+}
+
+.txt-input:focus + span.i-sharp.search-icon {
+  opacity: 1;
+}
+
+.text-underline {
+  height: 2px;
+  width: 35px;
+  background-color: variables.$font-color-faded;
+  display: inline-block;
+  transition: width 200ms, background-color 200ms;
+  position: relative;
+  top: -13px;
+}
+
+.txt-input:focus ~ div.text-underline {
+  width: 100%;
+  background-color: variables.$font-color;
+}
+
+.assistant-link {
+  @extend %links;
+}
