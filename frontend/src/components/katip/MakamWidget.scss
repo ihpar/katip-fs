@@ -25,11 +25,11 @@
   background-color: variables.$active-fore-color;
 }
 
-.btn-accordion .material-icons-sharp.caret {
+.btn-accordion .i-sharp.caret {
   transition: all 200ms;
 }
 
-.accordion-active .material-icons-sharp.caret {
+.accordion-active .i-sharp.caret {
   transform: rotate(90deg);
 }
 

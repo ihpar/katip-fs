@@ -7,14 +7,14 @@
 
   &::before {
     border-bottom: 1px solid variables.$font-color-faded;
-    content: attr(top);
+    content: attr(data-top);
     display: block;
     line-height: 1.6em;
     padding: 0 0.2em;
   }
 
   &::after {
-    content: attr(bottom);
+    content: attr(data-bottom);
     display: block;
     line-height: 1.6em;
   }
@@ -65,9 +65,4 @@
 
 .content-scroller {
   overflow-y: scroll;
-}
-
-.content-scroller.makam,
-.content-scroller.usul {
-  height: 200px;
 }
