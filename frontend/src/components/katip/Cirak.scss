@@ -1,5 +1,5 @@
-@use "../../sass/variables";
-@use "../../sass/widgets";
+@use "../../sass/abstracts/variables";
+@use "../../sass/components/widgets";
 
 .assistant.accordion-wrapper {
   @extend %sticking;

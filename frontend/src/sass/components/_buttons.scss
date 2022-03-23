@@ -1,4 +1,4 @@
-@use "variables";
+@use "../abstracts/variables";
 
 %button-base {
   background-color: variables.$paper-bg-color;
@@ -63,7 +63,7 @@
         height: 100%;
         margin: 0;
         display: inline-block;
-        background-image: url("../images/sprites/accidentals-sprite-6.svg");
+        background-image: url("../../images/sprites/accidentals-sprite-6.svg");
         width: 20px;
         background-repeat: no-repeat;
         background-size: cover;
@@ -138,7 +138,7 @@
         height: 100%;
         margin: 0;
         display: inline-block;
-        background-image: url("../images/sprites/duration-sprite.svg");
+        background-image: url("../../images/sprites/duration-sprite.svg");
         background-repeat: no-repeat;
         background-size: cover;
 
@@ -205,7 +205,7 @@
         width: 36px;
         margin: 0;
         display: inline-block;
-        background-image: url("../images/controls/rests.svg");
+        background-image: url("../../images/controls/rests.svg");
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;

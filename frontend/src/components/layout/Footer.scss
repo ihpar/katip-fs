@@ -1,5 +1,5 @@
-@use "../../sass/variables";
-@use "../../sass/buttons";
+@use "../../sass/abstracts/variables";
+@use "../../sass/components/buttons";
 
 .footer {
   width: variables.$paper-width;
