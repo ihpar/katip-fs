@@ -1,17 +1,17 @@
-@use "sass/base/reset";
-@use "sass/base/scrollbars";
-@use "sass/abstracts/variables";
+@use "../base/reset";
+@use "../base/scrollbars";
+@use "../abstracts/variables";
 
 @font-face {
   font-family: BravuraText;
-  src: url("./fonts/BravuraText.woff2") format("woff2");
+  src: url("../../fonts/BravuraText.woff2") format("woff2");
 }
 
 @font-face {
   font-family: MaterialSharp;
   font-style: normal;
   font-weight: 400;
-  src: url("./fonts/material-sharp.woff2") format("woff2");
+  src: url("../../fonts/material-sharp.woff2") format("woff2");
 }
 
 .i-sharp {
@@ -178,7 +178,7 @@ h3.bpm-section {
   height: 22px;
   margin: 0;
   display: inline-block;
-  background-image: url("./images/sprites/duration-sprite.svg");
+  background-image: url("../../images/sprites/duration-sprite.svg");
   background-repeat: no-repeat;
   background-size: cover;
 
