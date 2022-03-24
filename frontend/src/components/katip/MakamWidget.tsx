@@ -1,3 +1,4 @@
+import { DragEvent } from "react";
 import "./MakamWidget.scss";
 
 import Makam from "../../models/makam";
@@ -11,11 +12,15 @@ const definedMakams: Makam[] = [
 ];
 
 const EditorWidget: React.FC<{ height: number }> = (props) => {
+  const dragStartHandler = (e: DragEvent<HTMLLIElement>) => {
+    console.log("drag started");
+  };
+
   return (
     <div className="content-scroller" style={{ height: props.height }}>
       <ul>
         {definedMakams.map((makam) => (
-          <li key={makam.name} className="widget-list-item">
+          <li draggable onDragStart={dragStartHandler} key={makam.name} className="widget-list-item">
             <div className="widget-makam-img">
               <img alt="filler" src={require(`../../images/makamlar/${makam.icon}`)} />
             </div>
