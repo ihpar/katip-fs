@@ -123,6 +123,38 @@
   grid-gap: 6px;
 }
 
+.accordion-buttons-wrap button,
+.accordion-buttons-grid button {
+  font-family: inherit;
+  color: inherit;
+  font-size: inherit;
+  background-color: variables.$paper-bg-color;
+  padding: 3px 12px;
+  margin: 0;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: variables.$active-fore-color;
+  box-shadow: inset 0 0 12px variables.$lightest-color;
+  transition: background-color 200ms, box-shadow 200ms;
+
+  &:hover {
+    background-color: variables.$active-fore-color;
+    box-shadow: inset 0 0 14px variables.$pure-white;
+  }
+
+  &:focus {
+    background-color: variables.$lightest-color;
+    box-shadow: inset 0 0 16px variables.$pure-white;
+  }
+}
+
+.widget-icon-button-text {
+  margin-left: 6px;
+}
+
 .grid-3 {
   grid-template-columns: auto auto auto;
 }

@@ -35,3 +35,27 @@
   width: 190mm;
   overflow: hidden;
 }
+
+.user-menu button,
+.btn-hamburger {
+  margin: 0;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  transition: opacity 200ms;
+
+  &:hover,
+  &:focus {
+    opacity: 0.6;
+  }
+}
+
+.user-menu li:not(:last-child) {
+  margin-right: 4px;
+}
+
+.i-sharp.md-36 {
+  font-size: 36px;
+  color: variables.$font-color;
+}
