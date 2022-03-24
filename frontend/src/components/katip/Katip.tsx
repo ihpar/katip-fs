@@ -1,3 +1,5 @@
+import "./Katip.scss";
+
 import Navigation from "../layout/Navigation";
 import Footer from "../layout/Footer";
 import ActionsMenu from "./ActionsMenu";

@@ -1,9 +1,58 @@
 @use "../../sass/abstracts/variables";
 @use "sass:math";
 
+.A4 {
+  width: variables.$paper-width;
+  height: 297mm;
+  margin: 24px auto;
+  background-color: variables.$paper-bg-color;
+  box-shadow: 0 0 24px -20px variables.$dark-shadow-color;
+  overflow: hidden;
+}
+
+.paper-contents {
+  margin: 25mm 15mm 20mm 15mm;
+}
+
+h1.song-title {
+  font-size: 36px;
+  margin: 0 auto 18px auto;
+  text-align: center;
+}
+
+h2.composer {
+  font-size: 20px;
+  margin: 0 auto 10px auto;
+  text-align: right;
+}
+
+h3.bpm-section {
+  font-size: 18px;
+}
+
+.duration {
+  height: 22px;
+  margin: 0;
+  display: inline-block;
+  background-image: url("../../images/sprites/duration-sprite.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &.dur-4 {
+    background-position-x: -37px;
+    width: 11px;
+  }
+
+  &.dur-8 {
+    background-position-x: -54px;
+    width: 15px;
+  }
+}
+
 .measure-svg {
   width: 100%;
 }
+
 .normal-text {
   font-family: "Times New Roman", Times, serif;
 }

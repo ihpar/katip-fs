@@ -1,0 +1,17 @@
+@use "../../sass/abstracts/variables";
+@use "../../sass/abstracts/placeholders";
+
+.top-menu {
+  @extend %sticking;
+  @extend %widget-shadow;
+  width: variables.$paper-width;
+  background-color: variables.$paper-bg-color;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  z-index: 3;
+}
+
+.top-menu-list {
+  display: flex;
+}

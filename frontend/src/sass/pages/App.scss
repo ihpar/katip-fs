@@ -1,10 +1,52 @@
+@use "../base/reset";
+@use "../base/scrollbars";
+@use "../abstracts/variables";
+@use "../abstracts/placeholders";
+
+@font-face {
+  font-family: BravuraText;
+  src: url("../../fonts/BravuraText.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: MaterialSharp;
+  font-style: normal;
+  font-weight: 400;
+  src: url("../../fonts/material-sharp.woff2") format("woff2");
+}
+
 html,
 body {
-  font-family: LelandText;
+  font-family: BravuraText;
   font-size: 16px;
-  color: #222;
+  color: variables.$font-color;
   height: 100%;
-  background-color: #f3f1e0;
+  background-color: variables.$far-bg-color;
   margin: 0;
   padding: 0;
+}
+
+body {
+  overflow-y: scroll;
+}
+
+.i-sharp {
+  font-family: MaterialSharp;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: auto;
+}
+
+.mus {
+  font-family: BravuraText;
+  font-size: 36px;
+  -webkit-font-smoothing: antialiased;
 }

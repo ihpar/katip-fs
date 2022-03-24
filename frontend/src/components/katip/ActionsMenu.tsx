@@ -1,3 +1,5 @@
+import "./ActionsMenu.scss";
+
 import soundOff from "../../images/controls/sound-off.svg";
 import rewind from "../../images/controls/rewind.svg";
 import play from "../../images/controls/play.svg";

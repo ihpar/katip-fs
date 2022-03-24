@@ -1,0 +1,39 @@
+@use "../../sass/abstracts/placeholders";
+
+.page-grid {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: 1fr 222mm 1fr;
+  grid-template-rows: min-content 1fr min-content;
+  gap: 6px 6px;
+  grid-template-areas:
+    ". . ."
+    ". . ."
+    ". . .";
+}
+
+.header-section,
+.footer {
+  padding: 6px 0;
+}
+
+.left-right-navs {
+  min-width: 270px;
+  width: 25%;
+  display: flex;
+  flex: 1;
+}
+
+.left-nav {
+  @extend .left-right-navs;
+  justify-content: flex-end;
+}
+
+.left-menu-wrapper {
+  @extend %sticking;
+  width: 250px;
+}
+
+.right-nav {
+  @extend .left-right-navs;
+}

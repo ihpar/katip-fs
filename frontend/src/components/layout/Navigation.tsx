@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import "./Navigation.scss";
+import "../../sass/vendors/hamburger.scss";
 
 const Navigation = () => {
   const [isNavVisible, setIsNavVisible] = useState<boolean>(false);
