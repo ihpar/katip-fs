@@ -1,0 +1,27 @@
+@use "../../sass/abstracts/variables";
+
+.fraction {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+
+  &::before {
+    border-bottom: 1px solid variables.$font-color-faded;
+    content: attr(data-top);
+    display: block;
+    line-height: 1.6em;
+    padding: 0 0.2em;
+  }
+
+  &::after {
+    content: attr(data-bottom);
+    display: block;
+    line-height: 1.6em;
+  }
+}
+
+.widget-usul-rep {
+  width: 18%;
+  text-align: right;
+  margin-right: 12px;
+}

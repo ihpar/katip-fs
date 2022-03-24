@@ -1,3 +1,5 @@
+import "./UsulWidget.scss";
+
 const UsulWidget: React.FC<{ height: number }> = (props) => {
   return (
     <div className="content-scroller" style={{ height: props.height }}>

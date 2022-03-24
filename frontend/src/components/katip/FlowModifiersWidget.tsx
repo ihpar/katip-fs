@@ -1,3 +1,5 @@
+import "./FlowModifiersWidget.scss";
+
 const FlowModifierWidget = () => {
   return (
     <div className="accordion-buttons-grid grid-4">

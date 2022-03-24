@@ -1,3 +1,5 @@
+import "./MakamWidget.scss";
+
 import aa from "../../images/makamlar/aa.png";
 import bes from "../../images/makamlar/bes.png";
 import bey from "../../images/makamlar/bey.png";

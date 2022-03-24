@@ -1,3 +1,5 @@
+import "./GroupingWidget.scss";
+
 const GroupingWidget = () => {
   return (
     <div className="accordion-buttons-grid grid-3">
