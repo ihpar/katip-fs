@@ -2,7 +2,7 @@ import "./Cirak.scss";
 
 const Cirak = () => {
   return (
-    <div className="no-print">
+    <aside className="no-print">
       <div className="assistant accordion-wrapper">
         <div className="assistant-title">
           <span className="i-sharp assistant-title-icon">assistant</span>
@@ -43,7 +43,7 @@ const Cirak = () => {
           </a>
         </div>
       </div>
-    </div>
+    </aside>
   );
 };
 

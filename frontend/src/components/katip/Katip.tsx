@@ -12,10 +12,10 @@ const Katip = () => {
     <div className="page-grid">
       <Navigation />
       <LHSWidgets />
-      <div>
+      <main>
         <ActionsMenu />
         <NoteSheet />
-      </div>
+      </main>
       <Cirak />
       <Footer />
     </div>

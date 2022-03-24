@@ -8,7 +8,7 @@ import FlowModifierWidget from "./FlowModifiersWidget";
 
 const LHSWidgets = () => {
   return (
-    <div className="no-print" style={{ justifySelf: "end" }}>
+    <aside className="no-print" style={{ justifySelf: "end" }}>
       <div className="left-menu-wrapper">
         <AccordionWidget initialVisibility={true} title={"Makam"} contentHeight={200}>
           <MakamWidget height={200} />
@@ -23,7 +23,7 @@ const LHSWidgets = () => {
           <FlowModifierWidget />
         </AccordionWidget>
       </div>
-    </div>
+    </aside>
   );
 };
 
