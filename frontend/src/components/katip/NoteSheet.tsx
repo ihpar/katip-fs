@@ -1,93 +1,30 @@
-import "./NoteSheet.scss";
+import { useEffect, useRef } from "react";
+
+import Snap from "snapsvg";
+// import TmmScore from "./sheet";
 
 const NoteSheet = () => {
+  const sheetRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (sheetRef.current) {
+      sheetRef.current.innerHTML = "test";
+
+      const s = Snap("#svg");
+      const bigSquare = s.rect(100, 100, 200, 200);
+
+      s.circle(100, 100, 7);
+
+      bigSquare.attr({
+        fill: "#fff",
+        stroke: "#000",
+        strokeWidth: 5,
+      });
+    }
+  }, []);
+
   return (
-    <div className="A4">
-      <div className="paper-contents">
-        <h1 className="song-title">Eserin Başlığı</h1>
-        <h2 className="composer">Besteci Ad Soyad</h2>
-        <h3 className="bpm-section">
-          <span className="duration dur-8"></span>
-          <span className="normal-text">=</span>
-          <span>150</span>
-        </h3>
-        <div>
-          <div className="music-line incomplete">
-            <div className="measure">
-              <div className="staff-lines">
-                <div className="staff-space"></div>
-                <div className="staff-top"></div>
-                <div className="staff-space"></div>
-                <div className="staff-top"></div>
-                <div className="staff-space"></div>
-                <div className="staff-top"></div>
-                <div className="staff-space"></div>
-                <div className="staff-top"></div>
-                <div className="staff-space"></div>
-                <div className="staff-top"></div>
-                <div className="staff-space"></div>
-                <div className="staff-middle"></div>
-                <div className="staff-space"></div>
-                <div className="staff-middle"></div>
-                <div className="staff-space"></div>
-                <div className="staff-middle"></div>
-                <div className="staff-space"></div>
-                <div className="staff-middle"></div>
-                <div className="staff-space"></div>
-                <div className="staff-middle"></div>
-                <div className="staff-space"></div>
-                <div className="staff-bottom"></div>
-                <div className="staff-space"></div>
-                <div className="staff-bottom"></div>
-                <div className="staff-space"></div>
-                <div className="staff-bottom"></div>
-                <div className="staff-space"></div>
-                <div className="staff-bottom"></div>
-                <div className="staff-space"></div>
-                <div className="staff-bottom"></div>
-                <div className="staff-space"></div>
-              </div>
-              <div className="music-symbols">
-                <span className="clef">&#xE050;</span>
-                <div className="key-signature">
-                  <span className="g4">&#xE440;</span>
-                  <span className="c5">&#xE284;</span>
-                  <span className="f5">&#xE447;</span>
-                </div>
-                <div className="time-signature">
-                  <div className="numerator">
-                    <span className="num-9"></span>
-                  </div>
-                  <div className="denominator">
-                    <span className="num-8"></span>
-                  </div>
-                </div>
-                <div className="notes-wrapper">
-                  <svg className="measure-svg">
-                    <text fontSize="46" fontFamily="BravuraText" fill="#222222">
-                      <tspan x="0" y="83">
-                        &#xE1D6;
-                      </tspan>
-                      <tspan x="25" y="93">
-                        &#xE1D6;
-                      </tspan>
-                      <tspan x="50" y="88">
-                        &#xE1D6;
-                      </tspan>
-                      <tspan x="75" y="98">
-                        &#xE1DA;
-                      </tspan>
-                      <tspan x="100" y="103">
-                        &#xE1DB;
-                      </tspan>
-                    </text>
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div ref={sheetRef} id="sheet">
+      <svg id="svg" height="100vh" width="100wv" version="1.1" xmlns="http://www.w3.org/2000/svg" />
     </div>
   );
 };

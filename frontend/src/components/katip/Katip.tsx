@@ -5,7 +5,7 @@ import Footer from "../layout/Footer";
 import ActionsMenu from "./ActionsMenu";
 import Cirak from "./Cirak";
 import LHSWidgets from "./LHSWidgets";
-import NoteSheet from "./NoteSheet";
+import NoteSheetArea from "./NoteSheetArea";
 
 const Katip = () => {
   return (
@@ -14,7 +14,7 @@ const Katip = () => {
       <LHSWidgets />
       <main>
         <ActionsMenu />
-        <NoteSheet />
+        <NoteSheetArea />
       </main>
       <Cirak />
       <Footer />
