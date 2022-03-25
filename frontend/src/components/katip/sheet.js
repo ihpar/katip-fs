@@ -1,4 +1,4 @@
-("use strict");
+const Snap = require("snapsvg-cjs");
 
 /*
   <script type="text/javascript" src="js/snap.svg.js"></script>
@@ -441,194 +441,6 @@ function noteGClick(e, sender, stCol, selCol, note) {
   }
 }
 
-function toServerBtnClick(e, sender) {
-  sender.style.color = "#ddd";
-  sender.style.pointerEvents = "none";
-  e.stopPropagation();
-
-  resetProgressStatus();
-  toggleProgressModal(true);
-
-  try {
-    let song = tmmScore.getWholePlayableObject();
-    let notes = [];
-    for (let note of song) {
-      notes.push(note.toNoteStr(true, true));
-    }
-    let xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-      if (this.status === 200) {
-        let response = JSON.parse(xhr.response);
-        console.log("response is:", response);
-        if (response["res"] === "OK") {
-          let fileName = response["id"];
-          setTimeout(function () {
-            updateCompositionProgress(fileName);
-          }, 500);
-        } else {
-          toggleProgressError(true);
-          return false;
-        }
-      } else {
-        console.log("Err X");
-        toggleProgressError(true);
-        return false;
-      }
-    };
-
-    xhr.open("POST", "services.php", true);
-    let makamName = mParams.makam.name === "Hicaz" ? "Hicaz" : "Nihavent";
-    xhr.send(JSON.stringify({ makam: makamName, notes: notes }));
-  } catch (e) {
-    console.log(e);
-    toggleProgressError(true);
-    return false;
-  }
-}
-
-let composedSong = {
-  m: [
-    ["Do5#4:1/8", "Re5:1/4", "Sol5:1/8", "Fa5:1/8", "Mi5:1/8", "Re5:1/8", "Do5#4:1/8", "Si4b4:1/8"],
-    ["La4:1/8", "Sol4:1/8", "La4:1/8", "Si4b4:1/8", "Do5#4:1/8", "Re5:1/8", "Mi5:1/8", "Fa5:1/8", "Mi5:1/8"],
-    ["Mi5:1/8", "Do5#4:1/8", "Re5:1/8", "Mi5:1/8", "Mi5:1/8", "Fa5:1/8", "Mi5:1/8", "Fa5:1/8", "Mi5:1/8"],
-    ["Re5:1/8", "Do5#4:1/8", "Re5:1/4", "Fa5:1/8", "Mi5:1/8", "Re5:1/8", "Do5#4:1/4"],
-  ],
-  n: [
-    [
-      "La4:1/16",
-      "Si4b4:1/16",
-      "Do5#4:1/16",
-      "Re5:1/8",
-      "Mi5:1/8",
-      "Re5:1/8",
-      "Do5#4:1/8",
-      "Si4b4:1/8",
-      "La4:1/8",
-      "La4:1/8",
-      "Si4b4:1/16",
-    ],
-    ["Do5#4:1/16", "Si4b4:1/16", "La4:1/16", "La4:1/4", "La4:1/4", "Rest:1/8", "Re5:1/4", "Mi5:1/16"],
-    [
-      "Re5:1/8",
-      "Mi5:1/16",
-      "Mi5:1/16",
-      "Re5:1/16",
-      "Do5#4:1/16",
-      "Re5:1/4",
-      "Do5#4:1/8",
-      "Re5:1/8",
-      "Mi5:1/8",
-      "Re5:1/8",
-    ],
-    ["Do5#4:1/8", "Re5:1/8", "Mi5:1/8", "Fa5:1/8", "Fa5:1/8", "Mi5:1/8", "Mi5:1/8", "Re5:1/8", "Re5:1/8"],
-  ],
-  sr: ["Si4b4:1/16", "Do5#4:1/16", "Si4b4:1/16", "La4:1/16", "La4:3/8", "La4:1/4", "La4:1/8", "La4:1/8"],
-  z: [
-    ["La4:1/8", "Fa5#4:1/8", "Mi5:1/8", "Fa5#4:1/8", "Mi5:1/8", "Re5:1/8", "Do5#4:1/8", "Si4b4:1/8", "Si4b4:1/8"],
-    ["La4:1/8", "La4:1/2", "Rest:1/8", "Do5#4:1/4", "Re5:1/8"],
-    ["Re5:1/8", "Mi5:1/8", "Re5:1/8", "Do5#4:1/8", "Do5#4:1/8", "Si4b4:1/8", "La4:1/8", "Si4b4:1/8", "Do5#4:1/8"],
-    [
-      "Re5:1/8",
-      "Do5#4:1/16",
-      "Si4b4:1/16",
-      "La4:1/16",
-      "Si4b4:1/16",
-      "La4:1/16",
-      "Si4b4:1/16",
-      "Re5:1/16",
-      "Mi5:1/16",
-      "Re5:1/16",
-      "Do5#4:1/16",
-      "Si4b4:1/16",
-      "La4:1/4",
-      "Sol4:1/16",
-    ],
-  ],
-};
-
-function updateCompositionProgress(fileName) {
-  let filePrefix = mParams.makam.name === "Hicaz" ? "hicaz" : "nihavent";
-  let xhr = new XMLHttpRequest();
-  xhr.onload = function () {
-    if (this.status === 200) {
-      try {
-        let response = JSON.parse(xhr.response);
-        console.log("response is:", response);
-        let state = response["state"];
-        let status = response["status"];
-
-        if (state === "ERR") {
-          toggleProgressError(true);
-          return false;
-        }
-
-        if (mParams.lastStatus !== status) {
-          mParams.lastStatus = status;
-          switch (status) {
-            case "begin":
-              setProgressStatus("Besteci başlatıldı", "start", false);
-              setTimeout(function () {
-                setProgressStatus("Zemin besteleniyor", "zemin", true);
-              }, 500);
-              break;
-            case "zemin":
-              setProgressStatus("Zemin bestelendi", "zemin", false);
-              setTimeout(function () {
-                setProgressStatus("Nakarat besteleniyor", "nakarat", true);
-              }, 500);
-              break;
-            case "nakarat":
-              setProgressStatus("Nakarat bestelendi", "nakarat", false);
-              setTimeout(function () {
-                setProgressStatus("Meyan besteleniyor", "meyan", true);
-              }, 500);
-              break;
-            case "meyan":
-              setProgressStatus("Meyan bestelendi", "meyan", false);
-              setTimeout(function () {
-                setProgressStatus("İndirme hazırlanıyor", "finish", true);
-              }, 100);
-              break;
-            case "mu2":
-              setProgressStatus("Meyan bestelendi", "meyan", false);
-              setTimeout(function () {
-                setProgressStatus(
-                  "" +
-                    '<a onclick="closeProgressBoxAfter(2000);" href="' +
-                    filePrefix +
-                    "-" +
-                    fileName +
-                    ".mu2" +
-                    '" download>İndirme hazır ↯</a>',
-                  "finish",
-                  true
-                );
-              }, 1500);
-              break;
-            default:
-              break;
-          }
-        }
-
-        if (status !== "mu2") {
-          setTimeout(function () {
-            updateCompositionProgress(fileName);
-          }, 2000);
-        }
-      } catch (e) {
-        console.log(e);
-        toggleProgressError(true);
-        return false;
-      }
-    } else {
-      toggleProgressError(true);
-      return false;
-    }
-  };
-  xhr.open("POST", "status.php", true);
-  xhr.send(JSON.stringify({ makam: filePrefix, fileName: fileName }));
-}
-
 function soundButtonClick(e, sender) {
   setTimeout(function () {
     sender.blur();
@@ -642,13 +454,14 @@ function soundButtonClick(e, sender) {
 
     if (!mParams.soundStarted) {
       mParams.soundStarted = true;
-
+      /*
       Soundfont.instrument(new AudioContext(), "acoustic_grand_piano", { soundfont: "FluidR3_GM", gain: 9 })
         .then(function (instrument) {
           mParams.instrument = instrument;
           mParams.canUseSound = true;
         })
         .catch((err) => console.log("Sound font error!", err));
+        */
     }
   } else {
     mParams.soundActive = false;
@@ -769,7 +582,7 @@ function createTMMMenu(containerSelector, paper) {
           tempo = 160;
         }
         setUsul(usul, meter, tempo);
-        tmmScore.changeScoreMakamAndMeter(selectedMakam, accidentals, usul, meter);
+        // tmmScore.changeScoreMakamAndMeter(selectedMakam, accidentals, usul, meter);
       }
       makamInput.blur();
     });
@@ -832,7 +645,7 @@ function createTMMMenu(containerSelector, paper) {
           accidentals = ["B4b5", "E5b5"];
         }
         setMakam(makam, accidentals);
-        tmmScore.changeScoreMakamAndMeter(makam, accidentals, usul, meter);
+        // tmmScore.changeScoreMakamAndMeter(makam, accidentals, usul, meter);
       }
       meterInput.blur();
     });
@@ -922,9 +735,6 @@ function createTMMMenu(containerSelector, paper) {
   toServerBtn.tabIndex = tabIndex;
   toServerBtn.className = "tmm-menu-btn-no";
   toServerBtn.innerHTML = '<span class="spn-button-text">Bestele!</span>';
-  toServerBtn.addEventListener("click", function (e) {
-    toServerBtnClick(e, this);
-  });
 
   dvUIBtns.appendChild(toServerBtn);
 
@@ -2097,7 +1907,7 @@ function SatirObject(satirNo, paper, configs, left, top, width, parentScore) {
   };
 }
 
-export default function TmmScore(containerSelector) {
+function TmmScore(containerSelector) {
   this.configs = {
     padding: { top: 20, right: 20, bottom: 20, left: 20 },
     lineThickness: 1,
@@ -2253,5 +2063,4 @@ export default function TmmScore(containerSelector) {
   };
 }
 
-// const tmmScore = new TmmScore("#sheet");
-// tmmScore.begin();
+module.exports = TmmScore;
