@@ -1,7 +1,6 @@
 const Snap = require("snapsvg-cjs");
 
 /*
-  <script type="text/javascript" src="js/snap.svg.js"></script>
   <script type="text/javascript" src="js/soundfont-player.js"></script>
   <script type="text/javascript" src="js/tune.js"></script>
  */
@@ -223,207 +222,14 @@ let mParams = {
 };
 
 function setMakam(makam, accidentals) {
-  document.getElementById("selectedMakamName").innerHTML = makam;
   mParams.makam.name = makam;
   mParams.makam.accidentals = accidentals.slice();
 }
 
 function setUsul(usuName, meter, tempo) {
-  document.getElementById("selectedUsulName").innerHTML = usuName;
-  document.getElementById("selectedUsulNum").innerHTML = meter[0];
-  document.getElementById("selectedUsulDen").innerHTML = meter[1];
   mParams.usul.name = usuName;
   mParams.usul.meter = meter.slice();
   mParams.usul.tempo = tempo;
-}
-
-function tmmMenuButtonClick(e, paper) {
-  let sender = e.currentTarget;
-
-  let isAcc = sender.classList.contains("acc-btn");
-  let isRest = sender.classList.contains("rest-btn");
-  let isDur = sender.classList.contains("dur-btn");
-  let isDot = sender.classList.contains("dot-btn");
-  let isLoc = sender.classList.contains("loc-btn");
-
-  if (!sender.classList.contains("clicked")) {
-    // activate
-    if (isAcc) {
-      // deactivate rest
-      mParams.rest = null;
-      if (mParams.type === "rest") {
-        mParams.type = null;
-      }
-      document.querySelectorAll(".rest-btn").forEach((button) => button.classList.remove("clicked"));
-      // deactivate loc
-      mParams.loc = null;
-      document.querySelectorAll(".loc-btn").forEach((button) => button.classList.remove("clicked"));
-      // activate acc
-      document.querySelectorAll(".acc-btn").forEach((button) => button.classList.remove("clicked"));
-      mParams.acci = sender.getAttribute("data-acc-val");
-    }
-
-    if (isDur) {
-      // deactivate rest
-      mParams.rest = null;
-      document.querySelectorAll(".rest-btn").forEach((button) => button.classList.remove("clicked"));
-      // deactivate loc
-      mParams.loc = null;
-      document.querySelectorAll(".loc-btn").forEach((button) => button.classList.remove("clicked"));
-      // activate dur
-      document.querySelectorAll(".dur-btn").forEach((button) => button.classList.remove("clicked"));
-
-      mParams.type = "note";
-      mParams.duration = sender.getAttribute("data-dur-val");
-
-      if (mParams.ghostNote.symbol) {
-        mParams.ghostNote.symbol.remove();
-      }
-      if (mParams.ghostNote.symbolR) {
-        mParams.ghostNote.symbolR.remove();
-      }
-
-      mParams.ghostNote.symbol = paper.path(symbols[mParams.duration]);
-      mParams.ghostNote.symbolR = paper.path(symbols[mParams.duration + "r"]);
-      mParams.ghostNote.symbol.attr({
-        fill: "transparent",
-      });
-      mParams.ghostNote.symbolR.attr({
-        fill: "transparent",
-      });
-      mParams.ghostNote.symbol.addClass("no-print");
-      mParams.ghostNote.symbolR.addClass("no-print");
-      mParams.ghostNote.width = mParams.ghostNote.symbol.getBBox().width;
-      mParams.ghostNote.height = mParams.ghostNote.symbol.getBBox().height;
-    }
-
-    if (isDot) {
-      if (!mParams.duration || mParams.rest) {
-        return;
-      }
-      mParams.dot = true;
-      if (!mParams.ghostNote.symbolDot) {
-        mParams.ghostNote.symbolDot = paper.circle(-2, -2, 1);
-        mParams.ghostNote.symbolDot.attr({
-          fill: "transparent",
-        });
-      }
-    }
-
-    if (isRest) {
-      // deactivate acci
-      mParams.acci = null;
-      document.querySelectorAll(".acc-btn").forEach((button) => button.classList.remove("clicked"));
-      // deactivate dur
-      mParams.duration = null;
-      document.querySelectorAll(".dur-btn").forEach((button) => button.classList.remove("clicked"));
-      // deactivate dot
-      mParams.dot = false;
-      document.querySelector(".dot-btn").classList.remove("clicked");
-      // deactivate loc
-      mParams.loc = null;
-      document.querySelectorAll(".loc-btn").forEach((button) => button.classList.remove("clicked"));
-      // activate rest
-      document.querySelectorAll(".rest-btn").forEach((button) => button.classList.remove("clicked"));
-
-      mParams.type = "rest";
-      mParams.rest = sender.getAttribute("data-rest-val");
-      mParams.duration = sender.getAttribute("data-dur-val");
-
-      if (mParams.ghostNote.symbol) {
-        mParams.ghostNote.symbol.remove();
-      }
-      if (mParams.ghostNote.symbolR) {
-        mParams.ghostNote.symbolR.remove();
-      }
-      mParams.ghostNote.symbol = paper.path(symbols[mParams.rest]);
-      mParams.ghostNote.symbol.attr({
-        fill: "transparent",
-      });
-      mParams.ghostNote.symbol.addClass("no-print");
-      mParams.ghostNote.width = mParams.ghostNote.symbol.getBBox().width;
-      mParams.ghostNote.height = mParams.ghostNote.symbol.getBBox().height;
-    }
-
-    if (isLoc) {
-      // deactivate acci
-      mParams.acci = null;
-      document.querySelectorAll(".acc-btn").forEach((button) => button.classList.remove("clicked"));
-      // deactivate dur
-      mParams.duration = null;
-      document.querySelectorAll(".dur-btn").forEach((button) => button.classList.remove("clicked"));
-      // deactivate dot
-      mParams.dot = false;
-      document.querySelector(".dot-btn").classList.remove("clicked");
-      // deactivate rest
-      mParams.rest = null;
-      document.querySelectorAll(".rest-btn").forEach((button) => button.classList.remove("clicked"));
-      // activate loc
-      document.querySelectorAll(".loc-btn").forEach((button) => button.classList.remove("clicked"));
-
-      mParams.type = "loc";
-      mParams.loc = sender.getAttribute("data-loc-val");
-
-      if (mParams.ghostNote.symbol) {
-        mParams.ghostNote.symbol.remove();
-      }
-      if (mParams.ghostNote.symbolR) {
-        mParams.ghostNote.symbolR.remove();
-      }
-      mParams.ghostNote.symbol = paper.path(symbols[mParams.loc]);
-      mParams.ghostNote.symbol.attr({
-        fill: "transparent",
-      });
-      mParams.ghostNote.symbol.addClass("no-print");
-      mParams.ghostNote.width = mParams.ghostNote.symbol.getBBox().width;
-      mParams.ghostNote.height = mParams.ghostNote.symbol.getBBox().height;
-    }
-
-    sender.classList.add("clicked");
-  } else {
-    // deactivate sender
-    if (isAcc) {
-      mParams.acci = null;
-    }
-    if (isRest) {
-      mParams.rest = null;
-      mParams.type = null;
-
-      if (mParams.ghostNote.symbol) {
-        mParams.ghostNote.symbol.remove();
-      }
-    }
-    if (isDur) {
-      mParams.type = null;
-      mParams.duration = null;
-      // deactivate dot
-      mParams.dot = false;
-      document.querySelector(".dot-btn").classList.remove("clicked");
-      // deactivate accidentals
-      mParams.acci = null;
-      document.querySelectorAll(".acc-btn").forEach((button) => button.classList.remove("clicked"));
-
-      if (mParams.ghostNote.symbol) {
-        mParams.ghostNote.symbol.remove();
-      }
-      if (mParams.ghostNote.symbolR) {
-        mParams.ghostNote.symbolR.remove();
-      }
-    }
-    if (isDot) {
-      mParams.dot = false;
-    }
-    if (isLoc) {
-      mParams.loc = null;
-      mParams.type = null;
-
-      if (mParams.ghostNote.symbol) {
-        mParams.ghostNote.symbol.remove();
-      }
-    }
-
-    sender.classList.remove("clicked");
-  }
 }
 
 function noteGClick(e, sender, stCol, selCol, note) {
@@ -507,252 +313,7 @@ function playWhole(songObj) {
 }
 
 function allowNewInsertion(allow) {
-  let toServerBtn = document.getElementById("btnBestele");
-  if (allow) {
-    mParams.allowInsert = true;
-    toServerBtn.style.color = "#ddd";
-    toServerBtn.style.pointerEvents = "none";
-  } else {
-    mParams.allowInsert = false;
-    toServerBtn.style.color = "";
-    toServerBtn.style.pointerEvents = "";
-    if (document.querySelector(".tmm-menu-btn.dur-btn.clicked")) {
-      document.querySelector(".tmm-menu-btn.dur-btn.clicked").click();
-    }
-  }
-}
-
-function createTMMMenu(containerSelector, paper) {
-  let tabIndex = 0;
-
-  let dvSoundButtons = document.createElement("div");
-  dvSoundButtons.className = "btn-group";
-
-  let soundBtn = document.createElement("div");
-  soundBtn.id = "btnSound";
-  tabIndex += 1;
-  soundBtn.tabIndex = tabIndex;
-  soundBtn.className = "tmm-menu-btn-no";
-  //soundBtn.innerHTML = '<img alt="sound" src="img/sound_off.svg" style="height: 80%;">';
-  soundBtn.innerHTML = '<div class="sound"></div>';
-  soundBtn.addEventListener("click", function (e) {
-    soundButtonClick(e, this);
-  });
-
-  dvSoundButtons.appendChild(soundBtn);
-
-  let tmmMakams = [
-    { name: "Hicaz", accidentals: ["Si4b4", "Fa5#4", "Do5#4"] },
-    { name: "Nihâvent", accidentals: ["Si4b5", "Mi5b5"] },
-  ];
-
-  let scoreMenu = document.createElement("div");
-  scoreMenu.setAttribute("id", "dv-score-menu");
-  scoreMenu.className = "dv-score-menu";
-
-  let dvGroupGlobals = document.createElement("div");
-  dvGroupGlobals.className = "btn-group";
-
-  let makamInput = document.createElement("div");
-  tabIndex += 1;
-  makamInput.tabIndex = tabIndex;
-  makamInput.className = "tmm-menu-btn-no";
-  makamInput.innerHTML = '<span id="selectedMakamName">Hicaz</span>';
-  makamInput.style.position = "relative";
-
-  let ddMakam = document.createElement("div");
-  ddMakam.className = "ddTmmList";
-  for (let m of tmmMakams) {
-    let ddItem = document.createElement("div");
-    ddItem.className = "ddTmmItem";
-    ddItem.innerHTML = m.name;
-    ddItem.setAttribute("data-accidentals", JSON.stringify(m.accidentals));
-    ddItem.addEventListener("click", function (e) {
-      let sender = e.currentTarget;
-      let selectedMakam = sender.innerHTML;
-      if (mParams.makam.name !== selectedMakam) {
-        let accidentals = JSON.parse(sender.getAttribute("data-accidentals"));
-        setMakam(selectedMakam, accidentals);
-        let usul = "Aksak";
-        let meter = [9, 8];
-        let tempo = 124;
-        if (selectedMakam === "Nihâvent") {
-          usul = "Düyek";
-          meter = [8, 8];
-          tempo = 160;
-        }
-        setUsul(usul, meter, tempo);
-        // tmmScore.changeScoreMakamAndMeter(selectedMakam, accidentals, usul, meter);
-      }
-      makamInput.blur();
-    });
-    ddMakam.appendChild(ddItem);
-  }
-  makamInput.appendChild(ddMakam);
-
-  let tmmUsuls = [
-    { name: "Aksak", meter: [9, 8], tempo: 124 },
-    { name: "Düyek", meter: [8, 8], tempo: 160 },
-  ];
-
-  let meterInput = document.createElement("div");
-  meterInput.className = "tmm-menu-btn-no";
-  tabIndex += 1;
-  meterInput.tabIndex = tabIndex;
-  meterInput.innerHTML =
-    '<div id="selectedUsulWrapper">' +
-    '<span class="usulNum" id="selectedUsulNum">9</span>' +
-    '<span class="usulDivision"></span>' +
-    '<span class="usulDen" id="selectedUsulDen">8</span>' +
-    '<span class="usulName" id="selectedUsulName">Aksak</span>' +
-    "</div>";
-  meterInput.style.position = "relative";
-
-  let ddUsul = document.createElement("div");
-  ddUsul.className = "ddTmmList";
-  for (let u of tmmUsuls) {
-    let ddItem = document.createElement("div");
-    ddItem.className = "ddTmmItem";
-    ddItem.innerHTML =
-      '<span class="ddUsulWrapper">' +
-      '<span class="usulNum">' +
-      u.meter[0] +
-      "</span>" +
-      '<span class="usulDivision"></span>' +
-      '<span class="usulDen">' +
-      u.meter[1] +
-      "</span>" +
-      "</span>" +
-      '<span class="usulName">' +
-      u.name +
-      "</span>";
-    ddItem.setAttribute("data-meter", JSON.stringify(u.meter));
-    ddItem.setAttribute("data-usul", JSON.stringify(u.name));
-    ddItem.setAttribute("data-tempo", JSON.stringify(u.tempo));
-    ddItem.addEventListener("click", function (e) {
-      let sender = e.currentTarget;
-      let meter = JSON.parse(sender.getAttribute("data-meter"));
-      let usul = JSON.parse(sender.getAttribute("data-usul"));
-      let tempo = parseInt(sender.getAttribute("data-tempo"));
-      if (mParams.usul.name !== usul) {
-        setUsul(usul, meter, tempo);
-        let makam, accidentals;
-        if (usul === "Aksak") {
-          makam = "Hicaz";
-          accidentals = ["B4b4", "F5#4", "C5#4"];
-        } else {
-          makam = "Nihâvent";
-          accidentals = ["B4b5", "E5b5"];
-        }
-        setMakam(makam, accidentals);
-        // tmmScore.changeScoreMakamAndMeter(makam, accidentals, usul, meter);
-      }
-      meterInput.blur();
-    });
-    ddUsul.appendChild(ddItem);
-  }
-  meterInput.appendChild(ddUsul);
-
-  dvGroupGlobals.appendChild(makamInput);
-  dvGroupGlobals.appendChild(meterInput);
-
-  let dvGroupAcc = document.createElement("div");
-  dvGroupAcc.className = "btn-group acc-group";
-
-  let accidentalParams = [
-    { accVal: "b8", img: "b8.svg" },
-    { accVal: "b5", img: "b5.svg" },
-    { accVal: "b4", img: "b4.svg" },
-    { accVal: "b1", img: "b1.svg" },
-    { accVal: "n", img: "nat.svg" },
-    { accVal: "d1", img: "d1.svg" },
-    { accVal: "d4", img: "d4.svg" },
-    { accVal: "d5", img: "d5.svg" },
-    { accVal: "d8", img: "d8.svg" },
-  ];
-
-  for (let acc of accidentalParams) {
-    let btn = document.createElement("div");
-    btn.className = "tmm-menu-btn acc-btn";
-    btn.setAttribute("data-acc-val", acc.accVal);
-    btn.innerHTML = '<img alt="' + acc.accVal + '" src="img/' + acc.img + '">';
-    dvGroupAcc.appendChild(btn);
-  }
-
-  let dvGroupDurs = document.createElement("div");
-  dvGroupDurs.className = "btn-group";
-
-  let durParams = [
-    //{durVal: 'n1', img: 'nd1.svg'},
-    { durVal: "n2", img: "nd2.svg" },
-    { durVal: "n4", img: "nd4.svg" },
-    { durVal: "n8", img: "nd8.svg" },
-    { durVal: "n16", img: "nd16.svg" },
-    { durVal: "n32", img: "nd32.svg" },
-  ];
-
-  for (let dur of durParams) {
-    let btn = document.createElement("div");
-    btn.className = "tmm-menu-btn dur-btn";
-    btn.setAttribute("data-dur-val", dur.durVal);
-    btn.innerHTML = '<img alt="' + dur.durVal + '" src="img/' + dur.img + '">';
-    dvGroupDurs.appendChild(btn);
-  }
-
-  let btnDot = document.createElement("div");
-  btnDot.className = "tmm-menu-btn dot-btn";
-  btnDot.innerHTML = '<img alt="bd" src="img/dot.svg">';
-
-  dvGroupDurs.appendChild(btnDot);
-
-  let dvGroupRests = document.createElement("div");
-  dvGroupRests.className = "btn-group";
-
-  let restParams = [
-    //{val: 'r1', dur: '1/1', img: 'rest1.svg'},
-    //{val: 'r2', dur: '1/2', img: 'rest2.svg'},
-    { val: "r4", dur: "1/4", img: "rest4.svg" },
-    { val: "r8", dur: "1/8", img: "rest8.svg" },
-    { val: "r16", dur: "1/16", img: "rest16.svg" },
-    { val: "r32", dur: "1/32", img: "rest32.svg" },
-  ];
-
-  for (let rest of restParams) {
-    let btn = document.createElement("div");
-    btn.className = "tmm-menu-btn rest-btn";
-    btn.setAttribute("data-rest-val", rest.val);
-    btn.setAttribute("data-dur-val", rest.dur);
-    btn.innerHTML = '<img alt="' + rest.val + '" src="img/' + rest.img + '">';
-    dvGroupRests.appendChild(btn);
-  }
-
-  let dvUIBtns = document.createElement("div");
-  dvUIBtns.className = "btn-group";
-
-  let toServerBtn = document.createElement("div");
-  toServerBtn.id = "btnBestele";
-  tabIndex += 1;
-  toServerBtn.tabIndex = tabIndex;
-  toServerBtn.className = "tmm-menu-btn-no";
-  toServerBtn.innerHTML = '<span class="spn-button-text">Bestele!</span>';
-
-  dvUIBtns.appendChild(toServerBtn);
-
-  scoreMenu.appendChild(dvSoundButtons);
-  scoreMenu.appendChild(dvGroupGlobals);
-  scoreMenu.appendChild(dvGroupAcc);
-  scoreMenu.appendChild(dvGroupDurs);
-  scoreMenu.appendChild(dvGroupRests);
-  scoreMenu.appendChild(dvUIBtns);
-
-  document.querySelector(containerSelector).prepend(scoreMenu);
-
-  let tmmMenuButtons = document.querySelectorAll(".tmm-menu-btn");
-  for (let tmmMenuButton of tmmMenuButtons) {
-    tmmMenuButton.addEventListener("click", function (e) {
-      tmmMenuButtonClick(e, paper);
-    });
-  }
+  mParams.allowInsert = !!allow;
 }
 
 function Note(pitch, duration) {
@@ -1487,14 +1048,10 @@ function Measure(meter, accidentals) {
     mParams.totalNoteCount += 1;
     this.refreshMeasure();
 
-    if (mParams.totalNoteCount === 8) {
-      allowNewInsertion(false);
-    } else {
-      if (this.isFull() || this.isExceeded()) {
-        let meter = this.getMeter();
-        let acci = this.getAccidentalsStr();
-        this.parentSatir.requestNewMeasure(this.arrIdx, this.startPos + this.lastDrawnWidth, meter, acci);
-      }
+    if (this.isFull() || this.isExceeded()) {
+      let meter = this.getMeter();
+      let acci = this.getAccidentalsStr();
+      this.parentSatir.requestNewMeasure(this.arrIdx, this.startPos + this.lastDrawnWidth, meter, acci);
     }
 
     playNote(note);
@@ -1909,7 +1466,7 @@ function SatirObject(satirNo, paper, configs, left, top, width, parentScore) {
 
 function TmmScore(containerSelector) {
   this.configs = {
-    padding: { top: 20, right: 20, bottom: 20, left: 20 },
+    padding: { top: 0, right: 0, bottom: 0, left: 0 },
     lineThickness: 1,
     porteLineHeight: 10,
     highColor: "#46879E",
@@ -1927,11 +1484,9 @@ function TmmScore(containerSelector) {
   let porLiHe = this.configs.porteLineHeight;
   this.configs.emptyMeasureWidth = this.configs.emptyMeasureLen * porLiHe * 1.5;
   // prep work
-  let windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-  let scorePaperWidth = this.configs.maxPaperWidth;
-  if (windowWidth < this.configs.maxPaperWidth + 50) {
-    scorePaperWidth = windowWidth - 50;
-  }
+
+  const parentElem = document.querySelector(containerSelector);
+  let scorePaperWidth = parentElem.clientWidth;
 
   this.svgElem = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   let svgID = "svg-tmm-score";
@@ -1940,10 +1495,9 @@ function TmmScore(containerSelector) {
   this.svgElem.style.backgroundColor = this.configs.paperBgColor;
   this.svgElem.style.width = scorePaperWidth + "px";
 
-  document.querySelector(containerSelector).append(this.svgElem);
+  parentElem.append(this.svgElem);
   this.paper = Snap("#" + svgID);
 
-  createTMMMenu(containerSelector, this.paper);
   allowNewInsertion(true);
   // eof prep work
 
@@ -2059,7 +1613,32 @@ function TmmScore(containerSelector) {
   this.begin = function () {
     this.initScore();
     this.attachEventHandlers();
-    document.querySelector('[data-dur-val="n8"]').click();
+    // deactivate rest
+    mParams.rest = null;
+    // deactivate loc
+    mParams.loc = null;
+    mParams.type = "note";
+    mParams.duration = "n8";
+
+    if (mParams.ghostNote.symbol) {
+      mParams.ghostNote.symbol.remove();
+    }
+    if (mParams.ghostNote.symbolR) {
+      mParams.ghostNote.symbolR.remove();
+    }
+
+    mParams.ghostNote.symbol = this.paper.path(symbols[mParams.duration]);
+    mParams.ghostNote.symbolR = this.paper.path(symbols[mParams.duration + "r"]);
+    mParams.ghostNote.symbol.attr({
+      fill: "transparent",
+    });
+    mParams.ghostNote.symbolR.attr({
+      fill: "transparent",
+    });
+    mParams.ghostNote.symbol.addClass("no-print");
+    mParams.ghostNote.symbolR.addClass("no-print");
+    mParams.ghostNote.width = mParams.ghostNote.symbol.getBBox().width;
+    mParams.ghostNote.height = mParams.ghostNote.symbol.getBBox().height;
   };
 }
 
