@@ -1,6 +1,9 @@
+import { useState } from "react";
+
 import "./ActionsMenu.scss";
 
 import soundOff from "../../images/controls/sound-off.svg";
+import soundOn from "../../images/controls/sound-on.svg";
 import rewind from "../../images/controls/rewind.svg";
 import play from "../../images/controls/play.svg";
 import repeat from "../../images/controls/repeat.svg";
@@ -8,13 +11,21 @@ import metronome from "../../images/controls/metronome.svg";
 import tuningFork from "../../images/controls/tuning-fork.svg";
 
 const ActionsMenu = () => {
+  const [isSoundOn, setIsSoundOn] = useState(false);
+
+  const soundButtonClickHandler = () => {
+    setIsSoundOn((prevSound) => {
+      return !prevSound;
+    });
+  };
+
   return (
     <div className="top-menu no-print">
       {/* Player controls */}
       <ul className="top-menu-list player-controls">
         <li>
-          <button>
-            <img alt="filler" className="img-ht" src={soundOff} />
+          <button onClick={soundButtonClickHandler}>
+            <img alt="filler" className="img-ht" src={isSoundOn ? soundOn : soundOff} />
           </button>
         </li>
         <li>

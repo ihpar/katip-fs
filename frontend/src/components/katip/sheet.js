@@ -1,7 +1,7 @@
 const Snap = require("snapsvg-cjs");
+const Soundfont = require("soundfont-player");
 
 /*
-  <script type="text/javascript" src="js/soundfont-player.js"></script>
   <script type="text/javascript" src="js/tune.js"></script>
  */
 
@@ -248,32 +248,21 @@ function noteGClick(e, sender, stCol, selCol, note) {
 }
 
 function soundButtonClick(e, sender) {
-  setTimeout(function () {
-    sender.blur();
-  }, 200);
-
   if (!mParams.soundActive) {
     mParams.soundActive = true;
-    setTimeout(function () {
-      sender.firstElementChild.style.backgroundImage = 'url("img/sound_on.svg")';
-    }, 210);
 
     if (!mParams.soundStarted) {
       mParams.soundStarted = true;
-      /*
+
       Soundfont.instrument(new AudioContext(), "acoustic_grand_piano", { soundfont: "FluidR3_GM", gain: 9 })
         .then(function (instrument) {
           mParams.instrument = instrument;
           mParams.canUseSound = true;
         })
         .catch((err) => console.log("Sound font error!", err));
-        */
     }
   } else {
     mParams.soundActive = false;
-    setTimeout(function () {
-      sender.firstElementChild.style.backgroundImage = 'url("img/sound_off.svg")';
-    }, 210);
   }
 }
 
@@ -469,7 +458,7 @@ function Note(pitch, duration) {
         let accPath = symbols[acci];
         accSymbol = paper.path(accPath);
         let scaleFactor = parseFloat((porteLiHe / 2.75).toFixed(2));
-        accSymbol.transform("t " + relLeft + " " + 0 + " " + "s" + scaleFactor + " 0 0");
+        accSymbol.transform(`t ${relLeft} 0 s ${scaleFactor} 0 0`);
         relLeft += accSymbol.getBBox().width + porteLiHe / 4;
       }
 
@@ -766,11 +755,11 @@ function Measure(meter, accidentals) {
 
   this.getReqAccidentalAtPos = function (noteRoot, forcedAcci, pos) {
     let accidentals = JSON.parse(JSON.stringify(this.mAccJson));
-    let acci;
+    /* let acci;
     for (let i = 0; i < pos; i++) {
       let eNote = this.notes[i];
       acci = this.getReqAccidental(eNote, accidentals);
-    }
+    } */
     let notePitch = noteRoot.slice(0, -1);
     if (notePitch in accidentals) {
       if (!forcedAcci) {
