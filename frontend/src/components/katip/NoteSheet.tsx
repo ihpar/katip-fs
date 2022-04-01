@@ -1,15 +1,17 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
-const TmmScore = require("./sheet");
+import "./NoteSheet.scss";
+
+import Snap from "snapsvg-cjs";
 
 const NoteSheet = () => {
-  const sheetRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const tmmScore = new TmmScore("#sheet");
-    tmmScore.begin();
+    const s = Snap("#sheet");
+    const bigSquare = s.rect(100, 100, 200, 200);
+    console.log(bigSquare);
   }, []);
 
-  return <div ref={sheetRef} id="sheet"></div>;
+  return <svg className="sheet" id="sheet" xmlns="http://www.w3.org/2000/svg"></svg>;
 };
 
 export default NoteSheet;

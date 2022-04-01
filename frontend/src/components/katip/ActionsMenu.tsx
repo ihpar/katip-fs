@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { soundActions } from "../../store";
 
 import "./ActionsMenu.scss";
+
+import Soundfont from "soundfont-player";
 
 import soundOff from "../../images/controls/sound-off.svg";
 import soundOn from "../../images/controls/sound-on.svg";
@@ -11,10 +15,23 @@ import metronome from "../../images/controls/metronome.svg";
 import tuningFork from "../../images/controls/tuning-fork.svg";
 
 const ActionsMenu = () => {
+  const dispatch = useDispatch();
+
   const [isSoundOn, setIsSoundOn] = useState(false);
+  const [instrumentCreated, setInstrumentCreated] = useState(false);
 
   const soundButtonClickHandler = () => {
     setIsSoundOn((prevSound) => {
+      if (!instrumentCreated) {
+        Soundfont.instrument(new AudioContext(), "acoustic_grand_piano", { soundfont: "FluidR3_GM", gain: 8 })
+          .then((ins: any) => {
+            dispatch(soundActions.setInstrument(ins));
+            dispatch(soundActions.playSound({ pitch: "A4", dur: 0.5 }));
+            setInstrumentCreated(true);
+          })
+          .catch((err: any) => console.log("Sound font error!", err));
+      }
+
       return !prevSound;
     });
   };

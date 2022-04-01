@@ -1,3 +1,6 @@
+import { Provider } from "react-redux";
+import store from "../../store";
+
 import "./Katip.scss";
 
 import Navigation from "../layout/Navigation";
@@ -9,16 +12,18 @@ import NoteSheetArea from "./NoteSheetArea";
 
 const Katip = () => {
   return (
-    <div className="page-grid">
-      <Navigation />
-      <LHSWidgets />
-      <main>
-        <ActionsMenu />
-        <NoteSheetArea />
-      </main>
-      <Cirak />
-      <Footer />
-    </div>
+    <Provider store={store}>
+      <div className="page-grid">
+        <Navigation />
+        <LHSWidgets />
+        <main>
+          <ActionsMenu />
+          <NoteSheetArea />
+        </main>
+        <Cirak />
+        <Footer />
+      </div>
+    </Provider>
   );
 };
 
