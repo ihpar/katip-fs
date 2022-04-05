@@ -8,7 +8,7 @@ const TmmScore = require("./sheet");
 
 const NoteSheet = () => {
   const myStr: any = useSelector<any>((state) => {
-    // console.log(state);
+    console.log(state);
     return state;
   });
   console.log("Hey: " + myStr.myVar);
