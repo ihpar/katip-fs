@@ -7,6 +7,7 @@ import Snap from "snapsvg-cjs";
 const NoteSheet = () => {
   useEffect(() => {
     const s = Snap("#sheet");
+    console.log("main branch");
     const bigSquare = s.rect(100, 100, 200, 200);
     console.log(bigSquare);
   }, []);
