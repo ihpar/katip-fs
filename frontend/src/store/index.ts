@@ -2,9 +2,10 @@ import { createSlice, configureStore } from "@reduxjs/toolkit";
 
 type initialStateType = {
   instrument: any;
+  myVar: string;
 };
 
-const initialState: initialStateType = { instrument: null };
+const initialState: initialStateType = { instrument: null, myVar: "" };
 
 const soundSlice = createSlice({
   name: "instrument",
@@ -15,6 +16,9 @@ const soundSlice = createSlice({
     },
     playSound(state, action) {
       state.instrument.start(action.payload.pitch, 0, { duration: action.payload.dur });
+    },
+    dummy(state, action) {
+      state.myVar = action.payload;
     },
   },
 });

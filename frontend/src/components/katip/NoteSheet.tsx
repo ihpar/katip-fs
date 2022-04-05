@@ -1,17 +1,29 @@
-import { useEffect } from "react";
-
-import "./NoteSheet.scss";
+import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { soundActions } from "../../store";
 
 import Snap from "snapsvg-cjs";
+// import TmmScore from "./sheet";
+const TmmScore = require("./sheet");
 
 const NoteSheet = () => {
-  useEffect(() => {
-    const s = Snap("#sheet");
-    const bigSquare = s.rect(100, 100, 200, 200);
-    console.log(bigSquare);
-  }, []);
+  const myStr: any = useSelector<any>((state) => {
+    // console.log(state);
+    return state;
+  });
+  console.log("Hey:" + myStr.myVar);
+  // state
 
-  return <svg className="sheet" id="sheet" xmlns="http://www.w3.org/2000/svg"></svg>;
+  // object
+
+  const sheetRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    console.log("use eff call");
+    const tmmScore = new TmmScore("#sheet", myStr.myVar);
+    tmmScore.begin();
+  }, [myStr]);
+
+  return <div ref={sheetRef} id="sheet" style={{ width: "90%", margin: 10 }}></div>;
 };
 
 export default NoteSheet;

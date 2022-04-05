@@ -19,6 +19,7 @@ const ActionsMenu = () => {
 
   const [isSoundOn, setIsSoundOn] = useState(false);
   const [instrumentCreated, setInstrumentCreated] = useState(false);
+  const [counter, setCounter] = useState(1);
 
   const soundButtonClickHandler = () => {
     setIsSoundOn((prevSound) => {
@@ -31,6 +32,11 @@ const ActionsMenu = () => {
           })
           .catch((err: any) => console.log("Sound font error!", err));
       }
+
+      setCounter((oldVal) => {
+        dispatch(soundActions.dummy("hello " + counter));
+        return oldVal++;
+      });
 
       return !prevSound;
     });
