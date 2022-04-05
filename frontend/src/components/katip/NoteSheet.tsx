@@ -11,7 +11,7 @@ const NoteSheet = () => {
     // console.log(state);
     return state;
   });
-  console.log("Hey:" + myStr.myVar);
+  console.log("Hey: " + myStr.myVar);
   // state
 
   // object
