@@ -1,4 +1,4 @@
-# Kâtip
+# Kâtip (In progress...)
 - a browser based note editor for TMM
 - please do not contribute
 
