@@ -1430,8 +1430,7 @@ function SatirObject(satirNo, paper, configs, left, top, width, parentScore) {
   };
 }
 
-function TmmScore(containerSelector, myStr) {
-  console.log(`got a str: ${myStr}`);
+function TmmScore(containerSelector) {
   this.configs = {
     padding: { top: 0, right: 0, bottom: 0, left: 0 },
     lineThickness: 1,

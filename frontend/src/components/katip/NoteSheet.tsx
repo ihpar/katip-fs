@@ -1,27 +1,33 @@
 import { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { soundActions } from "../../store";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+import Soundfont from "soundfont-player";
 
-import Snap from "snapsvg-cjs";
-// import TmmScore from "./sheet";
 const TmmScore = require("./sheet");
+let tmmEditor: any = null;
+let soundFontInstrument: any = null;
+/*
+Soundfont.instrument(new AudioContext(), "acoustic_grand_piano", { soundfont: "FluidR3_GM", gain: 8 })
+          .then((ins: any) => {
+            dispatch(soundActions.setInstrument(ins));
+            dispatch(soundActions.playSound({ pitch: "A4", dur: 0.5 }));
+            setInstrumentCreated(true);
+          })
+          .catch((err: any) => console.log("Sound font error!", err));
+*/
 
 const NoteSheet = () => {
-  const myStr: any = useSelector<any>((state) => {
-    console.log(state);
-    return state;
-  });
-  console.log("Hey: " + myStr.myVar);
-  // state
-
-  // object
+  const soundOn: boolean = useSelector<RootState, boolean>((state) => state.soundOn);
+  console.log(soundOn);
 
   const sheetRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    console.log("use eff call");
-    const tmmScore = new TmmScore("#sheet", myStr.myVar);
-    tmmScore.begin();
-  }, [myStr]);
+    if (!tmmEditor) {
+      tmmEditor = new TmmScore("#sheet");
+      tmmEditor.begin();
+    }
+  }, []);
 
   return <div ref={sheetRef} id="sheet" style={{ width: "90%", margin: 10 }}></div>;
 };
