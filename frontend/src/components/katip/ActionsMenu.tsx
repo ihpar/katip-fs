@@ -1,15 +1,14 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { soundActions } from "../../store";
+import { useDispatch, useSelector } from "react-redux";
+import { playerActions } from "../../store/player";
+import { RootState } from "../../store";
 
 import "./ActionsMenu.scss";
-
-import Soundfont from "soundfont-player";
 
 import soundOff from "../../images/controls/sound-off.svg";
 import soundOn from "../../images/controls/sound-on.svg";
 import rewind from "../../images/controls/rewind.svg";
 import play from "../../images/controls/play.svg";
+import pause from "../../images/controls/pause.svg";
 import repeat from "../../images/controls/repeat.svg";
 import metronome from "../../images/controls/metronome.svg";
 import tuningFork from "../../images/controls/tuning-fork.svg";
@@ -17,23 +16,15 @@ import tuningFork from "../../images/controls/tuning-fork.svg";
 const ActionsMenu = () => {
   const dispatch = useDispatch();
 
-  const [isSoundOn, setIsSoundOn] = useState(false);
-  const [instrumentCreated, setInstrumentCreated] = useState(false);
+  const isSoundOn = useSelector<RootState, boolean>((state) => state.player.soundOn);
+  const isPlaying = useSelector<RootState, boolean>((state) => state.player.playing);
 
   const soundButtonClickHandler = () => {
-    setIsSoundOn((prevSound) => {
-      if (!instrumentCreated) {
-        Soundfont.instrument(new AudioContext(), "acoustic_grand_piano", { soundfont: "FluidR3_GM", gain: 8 })
-          .then((ins: any) => {
-            dispatch(soundActions.setInstrument(ins));
-            dispatch(soundActions.playSound({ pitch: "A4", dur: 0.5 }));
-            setInstrumentCreated(true);
-          })
-          .catch((err: any) => console.log("Sound font error!", err));
-      }
+    dispatch(playerActions.toggleSound());
+  };
 
-      return !prevSound;
-    });
+  const playButtonClickHandler = () => {
+    dispatch(playerActions.togglePlaying());
   };
 
   return (
@@ -51,8 +42,8 @@ const ActionsMenu = () => {
           </button>
         </li>
         <li>
-          <button>
-            <img alt="filler" className="img-ht" src={play} />
+          <button onClick={playButtonClickHandler}>
+            <img alt="filler" className="img-ht" src={isPlaying ? pause : play} />
           </button>
         </li>
         <li>
