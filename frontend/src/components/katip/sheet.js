@@ -1,5 +1,4 @@
 const Snap = require("snapsvg-cjs");
-const Soundfont = require("soundfont-player");
 
 const notePositions = {
   b2: 9,
@@ -1605,6 +1604,15 @@ function TmmScore(containerSelector) {
     mParams.ghostNote.symbolR.addClass("no-print");
     mParams.ghostNote.width = mParams.ghostNote.symbol.getBBox().width;
     mParams.ghostNote.height = mParams.ghostNote.symbol.getBBox().height;
+  };
+
+  this.setInstrument = function (instrument) {
+    mParams.instrument = instrument;
+    mParams.canUseSound = true;
+  };
+
+  this.toggleSound = function (isSoundActive) {
+    mParams.soundActive = isSoundActive;
   };
 }
 

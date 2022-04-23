@@ -1,26 +1,15 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store";
 import Soundfont from "soundfont-player";
+import { RootState } from "../../store";
 
 const TmmScore = require("./sheet");
+
 let tmmEditor: any = null;
-let soundFontInstrument: any = null;
-/*
-Soundfont.instrument(new AudioContext(), "acoustic_grand_piano", { soundfont: "FluidR3_GM", gain: 8 })
-          .then((ins: any) => {
-            dispatch(soundActions.setInstrument(ins));
-            dispatch(soundActions.playSound({ pitch: "A4", dur: 0.5 }));
-            setInstrumentCreated(true);
-          })
-          .catch((err: any) => console.log("Sound font error!", err));
-*/
+let instrument: any = null;
 
 const NoteSheet = () => {
-  const soundOn: boolean = useSelector<RootState, boolean>((state) => state.soundOn);
-  console.log(soundOn);
-
-  const sheetRef = useRef<HTMLDivElement>(null);
+  const isSoundOn: boolean = useSelector<RootState, boolean>((state) => state.player.soundOn);
 
   useEffect(() => {
     if (!tmmEditor) {
@@ -29,7 +18,18 @@ const NoteSheet = () => {
     }
   }, []);
 
-  return <div ref={sheetRef} id="sheet" style={{ width: "90%", margin: 10 }}></div>;
+  useEffect(() => {
+    if (isSoundOn && !instrument) {
+      Soundfont.instrument(new AudioContext(), "acoustic_grand_piano").then((inst: any) => {
+        instrument = inst;
+        tmmEditor.setInstrument(inst);
+      });
+    }
+
+    tmmEditor.toggleSound(isSoundOn);
+  }, [isSoundOn]);
+
+  return <div id="sheet" style={{ width: "90%", margin: 10 }}></div>;
 };
 
 export default NoteSheet;

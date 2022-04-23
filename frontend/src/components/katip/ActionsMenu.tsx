@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { soundActions, RootState } from "../../store";
+import { playerActions } from "../../store/player";
+import { RootState } from "../../store";
 
 import "./ActionsMenu.scss";
 
@@ -13,10 +14,10 @@ import tuningFork from "../../images/controls/tuning-fork.svg";
 
 const ActionsMenu = () => {
   const dispatch = useDispatch();
-  const isSoundOn: boolean = useSelector<RootState, boolean>((state) => state.soundOn);
+  const isSoundOn: boolean = useSelector<RootState, boolean>((state) => state.player.soundOn);
 
   const soundButtonClickHandler = () => {
-    dispatch(soundActions.toggleSound());
+    dispatch(playerActions.toggleSound());
   };
 
   return (
