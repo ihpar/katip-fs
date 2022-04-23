@@ -1,4 +1,4 @@
-# Kâtip (In progress...)
+# Kâtip (Work in progress...)
 - a browser based note editor for Turkish Makam Music (TMM)
 - please do not contribute
 
