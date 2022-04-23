@@ -19,6 +19,7 @@ const NoteSheet = () => {
 
   const songEndedHandler = () => {
     dispatch(playerActions.stopPlaying());
+    console.log("Song ended");
   };
 
   useEffect(() => {
