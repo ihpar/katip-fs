@@ -9,8 +9,14 @@ const playerSlice = createSlice({
     toggleSound(state) {
       state.soundOn = !state.soundOn;
     },
+    togglePlaying(state) {
+      state.playing = !state.playing;
+    },
     startPlaying(state) {
       state.playing = true;
+    },
+    stopPlaying(state) {
+      state.playing = false;
     },
     toggleLoop(state) {
       state.loop = !state.loop;

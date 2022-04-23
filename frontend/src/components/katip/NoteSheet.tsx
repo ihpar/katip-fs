@@ -1,7 +1,10 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Soundfont from "soundfont-player";
 import { RootState } from "../../store";
+import { playerActions } from "../../store/player";
+
+import "./NoteSheet.scss";
 
 const TmmScore = require("./sheet");
 
@@ -9,14 +12,22 @@ let tmmEditor: any = null;
 let instrument: any = null;
 
 const NoteSheet = () => {
-  const isSoundOn: boolean = useSelector<RootState, boolean>((state) => state.player.soundOn);
+  const isSoundOn = useSelector<RootState, boolean>((state) => state.player.soundOn);
+  const isPlaying = useSelector<RootState, boolean>((state) => state.player.playing);
+
+  const dispatch = useDispatch();
+
+  const songEndedHandler = () => {
+    dispatch(playerActions.stopPlaying());
+  };
 
   useEffect(() => {
     if (!tmmEditor) {
       tmmEditor = new TmmScore("#sheet");
+      tmmEditor.setSongEndedHandler(songEndedHandler);
       tmmEditor.begin();
     }
-  }, []);
+  }, [songEndedHandler]);
 
   useEffect(() => {
     if (isSoundOn && !instrument) {
@@ -29,7 +40,11 @@ const NoteSheet = () => {
     tmmEditor.toggleSound(isSoundOn);
   }, [isSoundOn]);
 
-  return <div id="sheet" style={{ width: "90%", margin: 10 }}></div>;
+  useEffect(() => {
+    tmmEditor.togglePlay(isPlaying);
+  }, [isPlaying]);
+
+  return <div id="sheet"></div>;
 };
 
 export default NoteSheet;

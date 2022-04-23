@@ -265,15 +265,19 @@ function playNote(note) {
   return duration;
 }
 
-function playWhole(songObj) {
-  if (!songObj || songObj.length === 0) return;
+function playWhole(songObj, songEndedCallback) {
+  if (!songObj || songObj.length === 0) {
+    songEndedCallback();
+    return;
+  }
   let note = songObj[0];
   let tail = songObj.slice(1);
-  if (!tail) return;
-  console.log(note);
+  if (!tail) {
+    return;
+  }
   let wait = playNote(note) * 1000;
   setTimeout(function () {
-    playWhole(tail);
+    playWhole(tail, songEndedCallback);
   }, wait);
 }
 
@@ -1568,10 +1572,6 @@ function TmmScore(containerSelector) {
         let smn = mParams.highElem.attr("smn").split(",");
         that.satirlar[smn[0]].deleteSatirNote(smn[1], smn[2]);
       }
-
-      if (evt.key === " " || evt.code === "Space") {
-        playWhole(that.getWholePlayableObject());
-      }
     });
   };
 
@@ -1613,6 +1613,18 @@ function TmmScore(containerSelector) {
 
   this.toggleSound = function (isSoundActive) {
     mParams.soundActive = isSoundActive;
+  };
+
+  this.togglePlay = function (isPlaying) {
+    if (isPlaying && mParams.canUseSound && mParams.soundActive) {
+      playWhole(this.getWholePlayableObject(), this.songEndedCallback);
+    }
+  };
+
+  this.songEndedCallback = null;
+
+  this.setSongEndedHandler = function (callback) {
+    this.songEndedCallback = callback;
   };
 }
 
