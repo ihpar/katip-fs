@@ -13,5 +13,5 @@
 
 ### Backend
 - MongoDB
-- Node.js (TypeScript)
+- Node.js
 - Express
