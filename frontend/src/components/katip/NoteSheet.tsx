@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Soundfont from "soundfont-player";
 import { RootState } from "../../store";
@@ -9,19 +9,20 @@ import "./NoteSheet.scss";
 const TmmScore = require("./sheet");
 
 let tmmEditor: any = null;
-let instrument: any = null;
 
 const NoteSheet = () => {
   const isSoundOn = useSelector<RootState, boolean>((state) => state.player.soundOn);
   const isPlaying = useSelector<RootState, boolean>((state) => state.player.playing);
+  const isInstrumentCreated = useSelector<RootState, boolean>((state) => state.player.isInstrumentCreated);
 
   const dispatch = useDispatch();
 
-  const songEndedHandler = () => {
+  const songEndedHandler = useCallback(() => {
     dispatch(playerActions.stopPlaying());
-  };
+  }, []);
 
   useEffect(() => {
+    console.log("hey");
     if (!tmmEditor) {
       tmmEditor = new TmmScore("#sheet");
       tmmEditor.setSongEndedHandler(songEndedHandler);
@@ -30,13 +31,14 @@ const NoteSheet = () => {
   }, [songEndedHandler]);
 
   useEffect(() => {
-    if (isSoundOn && !instrument) {
+    if (isInstrumentCreated) {
       Soundfont.instrument(new AudioContext(), "acoustic_grand_piano").then((inst: any) => {
-        instrument = inst;
         tmmEditor.setInstrument(inst);
       });
     }
+  }, [isInstrumentCreated]);
 
+  useEffect(() => {
     tmmEditor.toggleSound(isSoundOn);
   }, [isSoundOn]);
 
