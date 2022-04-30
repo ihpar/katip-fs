@@ -15,14 +15,15 @@ const NoteSheet = () => {
   const isPlaying = useSelector<RootState, boolean>((state) => state.player.playing);
   const isInstrumentCreated = useSelector<RootState, boolean>((state) => state.player.isInstrumentCreated);
 
+  const accidental = useSelector<RootState, string | null>((state) => state.noteModifier.accidental);
+
   const dispatch = useDispatch();
 
   const songEndedHandler = useCallback(() => {
     dispatch(playerActions.stopPlaying());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
-    console.log("hey");
     if (!tmmEditor) {
       tmmEditor = new TmmScore("#sheet");
       tmmEditor.setSongEndedHandler(songEndedHandler);
@@ -45,6 +46,10 @@ const NoteSheet = () => {
   useEffect(() => {
     tmmEditor.togglePlay(isPlaying);
   }, [isPlaying]);
+
+  useEffect(() => {
+    tmmEditor.setAccidental(accidental);
+  }, [accidental]);
 
   return <div id="sheet"></div>;
 };

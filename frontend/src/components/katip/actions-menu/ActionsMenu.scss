@@ -1,6 +1,6 @@
-@use "../../sass/abstracts/variables";
-@use "../../sass/abstracts/placeholders";
-@use "../../sass/components/buttons";
+@use "../../../sass/abstracts/variables";
+@use "../../../sass/abstracts/placeholders";
+@use "../../../sass/components/buttons";
 
 .top-menu {
   @extend %sticking;
@@ -24,6 +24,37 @@
     overflow: hidden;
   }
 
+  button[data-sound-status] {
+    width: 34px;
+    height: 36px;
+    display: flex;
+
+    & img {
+      position: absolute;
+      transition: opacity 200ms;
+    }
+  }
+
+  button[data-sound-status="false"] {
+    img.on {
+      opacity: 0;
+    }
+    img.off {
+      opacity: 1;
+      transition-delay: 100ms;
+    }
+  }
+
+  button[data-sound-status="true"] {
+    img.on {
+      opacity: 1;
+      transition-delay: 100ms;
+    }
+    img.off {
+      opacity: 0;
+    }
+  }
+
   &.accidental-controls {
     height: 36px;
     overflow: hidden;
@@ -36,7 +67,7 @@
         height: 100%;
         margin: 0;
         display: inline-block;
-        background-image: url("../../images/sprites/accidentals-sprite-6.svg");
+        background-image: url("../../../images/sprites/accidentals-sprite-6.svg");
         width: 20px;
         background-repeat: no-repeat;
         background-size: cover;
@@ -111,7 +142,7 @@
         height: 100%;
         margin: 0;
         display: inline-block;
-        background-image: url("../../images/sprites/duration-sprite.svg");
+        background-image: url("../../../images/sprites/duration-sprite.svg");
         background-repeat: no-repeat;
         background-size: cover;
 
@@ -178,7 +209,7 @@
         width: 36px;
         margin: 0;
         display: inline-block;
-        background-image: url("../../images/controls/rests.svg");
+        background-image: url("../../../images/controls/rests.svg");
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;

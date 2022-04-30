@@ -1626,6 +1626,10 @@ function TmmScore(containerSelector) {
   this.setSongEndedHandler = function (callback) {
     this.songEndedCallback = callback;
   };
+
+  this.setAccidental = function (accidental) {
+    mParams.acci = accidental;
+  };
 }
 
 module.exports = TmmScore;

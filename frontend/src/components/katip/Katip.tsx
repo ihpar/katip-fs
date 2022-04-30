@@ -5,7 +5,7 @@ import "./Katip.scss";
 
 import Navigation from "../layout/Navigation";
 import Footer from "../layout/Footer";
-import ActionsMenu from "./ActionsMenu";
+import ActionsMenu from "./actions-menu/ActionsMenu";
 import Cirak from "./Cirak";
 import LHSWidgets from "./LHSWidgets";
 import NoteSheetArea from "./NoteSheetArea";

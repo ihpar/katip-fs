@@ -1,17 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
-import { playerActions } from "../../store/player";
-import { RootState } from "../../store";
+import { playerActions } from "../../../store/player";
+import { RootState } from "../../../store";
 
 import "./ActionsMenu.scss";
 
-import soundOff from "../../images/controls/sound-off.svg";
-import soundOn from "../../images/controls/sound-on.svg";
-import rewind from "../../images/controls/rewind.svg";
-import play from "../../images/controls/play.svg";
-import pause from "../../images/controls/pause.svg";
-import repeat from "../../images/controls/repeat.svg";
-import metronome from "../../images/controls/metronome.svg";
-import tuningFork from "../../images/controls/tuning-fork.svg";
+import soundOff from "../../../images/controls/sound-off.svg";
+import soundOn from "../../../images/controls/sound-on.svg";
+import rewind from "../../../images/controls/rewind.svg";
+import play from "../../../images/controls/play.svg";
+import pause from "../../../images/controls/pause.svg";
+import repeat from "../../../images/controls/repeat.svg";
+import metronome from "../../../images/controls/metronome.svg";
+import tuningFork from "../../../images/controls/tuning-fork.svg";
+import AccidentalsControl from "./AccidentalsControll";
 
 const ActionsMenu = () => {
   const dispatch = useDispatch();
@@ -32,8 +33,9 @@ const ActionsMenu = () => {
       {/* Player controls */}
       <ul className="top-menu-list player-controls">
         <li>
-          <button onClick={soundButtonClickHandler}>
-            <img alt="filler" className="img-ht" src={isSoundOn ? soundOn : soundOff} />
+          <button onClick={soundButtonClickHandler} data-sound-status={isSoundOn}>
+            <img alt="filler" className="img-ht on" src={soundOn} />
+            <img alt="filler" className="img-ht off" src={soundOff} />
           </button>
         </li>
         <li>
@@ -63,63 +65,7 @@ const ActionsMenu = () => {
         </li>
       </ul>
       {/* Accidental controls */}
-      <ul className="top-menu-list accidental-controls">
-        <li>
-          <button>
-            <span className="acci bekar"></span>
-          </button>
-        </li>
-        <li>
-          <button>
-            <span className="acci fazla-bemol"></span>
-          </button>
-        </li>
-        <li>
-          <button>
-            <span className="acci bakiyye-bemol"></span>
-          </button>
-        </li>
-        <li>
-          <button>
-            <span className="acci k-mucennep-bemol"></span>
-          </button>
-        </li>
-        <li>
-          <button>
-            <span className="acci b-mucennep-bemol"></span>
-          </button>
-        </li>
-        <li>
-          <button>
-            <span className="acci tanini-bemol"></span>
-          </button>
-        </li>
-        <li>
-          <button>
-            <span className="acci fazla-diyez"></span>
-          </button>
-        </li>
-        <li>
-          <button>
-            <span className="acci bakiyye-diyez"></span>
-          </button>
-        </li>
-        <li>
-          <button>
-            <span className="acci k-mucennep-diyez"></span>
-          </button>
-        </li>
-        <li>
-          <button>
-            <span className="acci b-mucennep-diyez"></span>
-          </button>
-        </li>
-        <li>
-          <button>
-            <span className="acci tanini-diyez"></span>
-          </button>
-        </li>
-      </ul>
+      <AccidentalsControl />
       {/*  Duration controls */}
       <ul className="top-menu-list duration-controls">
         <li>
