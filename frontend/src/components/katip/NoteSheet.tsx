@@ -16,6 +16,8 @@ const NoteSheet = () => {
   const isInstrumentCreated = useSelector<RootState, boolean>((state) => state.player.isInstrumentCreated);
 
   const accidental = useSelector<RootState, string | null>((state) => state.noteModifier.accidental);
+  const noteDuration = useSelector<RootState, string>((state) => state.noteModifier.duration);
+  const isDotted = useSelector<RootState, boolean>((state) => state.noteModifier.isDotted);
 
   const dispatch = useDispatch();
 
@@ -50,6 +52,14 @@ const NoteSheet = () => {
   useEffect(() => {
     tmmEditor.setAccidental(accidental);
   }, [accidental]);
+
+  useEffect(() => {
+    tmmEditor.setDuration(noteDuration);
+  }, [noteDuration]);
+
+  useEffect(() => {
+    tmmEditor.setIsDotted(isDotted);
+  }, [isDotted]);
 
   return <div id="sheet"></div>;
 };

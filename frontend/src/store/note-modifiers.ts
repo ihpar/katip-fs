@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { accidental: null as null | string };
+const initialState = {
+  accidental: null as null | string,
+  duration: "n8",
+  isDotted: false,
+};
 
 const noteModifierSlice = createSlice({
   name: "note-modifier-slice",
@@ -12,6 +16,12 @@ const noteModifierSlice = createSlice({
       } else {
         state.accidental = action.payload;
       }
+    },
+    changeDuration(state, action) {
+      state.duration = action.payload;
+    },
+    toggleDotted(state) {
+      state.isDotted = !state.isDotted;
     },
   },
 });

@@ -1630,6 +1630,43 @@ function TmmScore(containerSelector) {
   this.setAccidental = function (accidental) {
     mParams.acci = accidental;
   };
+
+  this.setDuration = function (duration) {
+    mParams.type = "note";
+    mParams.duration = duration;
+
+    if (mParams.ghostNote.symbol) {
+      mParams.ghostNote.symbol.remove();
+    }
+    if (mParams.ghostNote.symbolR) {
+      mParams.ghostNote.symbolR.remove();
+    }
+
+    mParams.ghostNote.symbol = this.paper.path(symbols[mParams.duration]);
+    mParams.ghostNote.symbolR = this.paper.path(symbols[mParams.duration + "r"]);
+    mParams.ghostNote.symbol.attr({
+      fill: "transparent",
+    });
+    mParams.ghostNote.symbolR.attr({
+      fill: "transparent",
+    });
+    mParams.ghostNote.symbol.addClass("no-print");
+    mParams.ghostNote.symbolR.addClass("no-print");
+    mParams.ghostNote.width = mParams.ghostNote.symbol.getBBox().width;
+    mParams.ghostNote.height = mParams.ghostNote.symbol.getBBox().height;
+  };
+
+  this.setIsDotted = function (isDotted) {
+    mParams.dot = isDotted;
+    if (mParams.dot) {
+      if (!mParams.ghostNote.symbolDot) {
+        mParams.ghostNote.symbolDot = this.paper.circle(-2, -2, 1);
+        mParams.ghostNote.symbolDot.attr({
+          fill: "transparent",
+        });
+      }
+    }
+  };
 }
 
 module.exports = TmmScore;

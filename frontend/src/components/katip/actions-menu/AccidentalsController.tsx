@@ -15,7 +15,7 @@ const accidentals = [
   { name: "tanini-diyez", value: "d9" },
 ];
 
-const AccidentalsControl = () => {
+const AccidentalsController = () => {
   const dispatch = useDispatch();
 
   const accidentalButtonClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -36,4 +36,4 @@ const AccidentalsControl = () => {
   );
 };
 
-export default AccidentalsControl;
+export default AccidentalsController;

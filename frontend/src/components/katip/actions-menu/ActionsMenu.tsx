@@ -4,6 +4,9 @@ import { RootState } from "../../../store";
 
 import "./ActionsMenu.scss";
 
+import AccidentalsController from "./AccidentalsController";
+import DurationsController from "./DurationsController";
+
 import soundOff from "../../../images/controls/sound-off.svg";
 import soundOn from "../../../images/controls/sound-on.svg";
 import rewind from "../../../images/controls/rewind.svg";
@@ -12,7 +15,6 @@ import pause from "../../../images/controls/pause.svg";
 import repeat from "../../../images/controls/repeat.svg";
 import metronome from "../../../images/controls/metronome.svg";
 import tuningFork from "../../../images/controls/tuning-fork.svg";
-import AccidentalsControl from "./AccidentalsControll";
 
 const ActionsMenu = () => {
   const dispatch = useDispatch();
@@ -65,60 +67,9 @@ const ActionsMenu = () => {
         </li>
       </ul>
       {/* Accidental controls */}
-      <AccidentalsControl />
+      <AccidentalsController />
       {/*  Duration controls */}
-      <ul className="top-menu-list duration-controls">
-        <li>
-          <button>
-            <span className="durs whole"></span>
-          </button>
-        </li>
-        <li>
-          <button>
-            <span className="durs half"></span>
-          </button>
-        </li>
-        <li>
-          <button>
-            <span className="durs fourth"></span>
-          </button>
-        </li>
-        <li>
-          <button>
-            <span className="durs eighth"></span>
-          </button>
-        </li>
-        <li>
-          <button>
-            <span className="durs sixteenth"></span>
-          </button>
-        </li>
-        <li>
-          <button>
-            <span className="durs thirtysecond"></span>
-          </button>
-        </li>
-        <li>
-          <button>
-            <span className="durs sixtyfourth"></span>
-          </button>
-        </li>
-        <li style={{ display: "none" }}>
-          <button>
-            <span className="durs onetwentyeighth"></span>
-          </button>
-        </li>
-        <li>
-          <button>
-            <span className="durs dotted"></span>
-          </button>
-        </li>
-        <li style={{ display: "none" }}>
-          <button>
-            <span className="durs double-dotted"></span>
-          </button>
-        </li>
-      </ul>
+      <DurationsController />
       {/* Rest controls */}
       <ul className="top-menu-list rest-controls">
         <li>
