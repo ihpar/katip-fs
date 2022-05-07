@@ -31,7 +31,7 @@
 
     & img {
       position: absolute;
-      transition: opacity 200ms;
+      transition: opacity 100ms;
     }
   }
 
@@ -41,14 +41,12 @@
     }
     img.off {
       opacity: 1;
-      transition-delay: 100ms;
     }
   }
 
   button[data-sound-status="true"] {
     img.on {
       opacity: 1;
-      transition-delay: 100ms;
     }
     img.off {
       opacity: 0;
@@ -195,24 +193,6 @@
           background-position-x: -239px;
           width: 14px;
         }
-      }
-    }
-  }
-
-  &.rest-controls {
-    button {
-      height: 100%;
-      padding: 3px 5px;
-
-      span {
-        height: 100%;
-        width: 36px;
-        margin: 0;
-        display: inline-block;
-        background-image: url("../../../images/controls/rests.svg");
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: center;
       }
     }
   }

@@ -4,6 +4,11 @@ const initialState = {
   accidental: null as null | string,
   duration: "n8",
   isDotted: false,
+  isRest: false,
+  restParams: {
+    value: "",
+    duration: "",
+  },
 };
 
 const noteModifierSlice = createSlice({
@@ -22,6 +27,11 @@ const noteModifierSlice = createSlice({
     },
     toggleDotted(state) {
       state.isDotted = !state.isDotted;
+    },
+    setRest(state, action) {
+      state.isRest = true;
+      state.restParams.value = action.payload.value;
+      state.restParams.duration = action.payload.duration;
     },
   },
 });

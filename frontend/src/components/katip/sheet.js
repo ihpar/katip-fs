@@ -1628,10 +1628,24 @@ function TmmScore(containerSelector) {
   };
 
   this.setAccidental = function (accidental) {
+    // deactivate rest
+    mParams.rest = null;
+    if (mParams.type === "rest") {
+      mParams.type = null;
+    }
+    // deactivate loc
+    mParams.loc = null;
+    // activate acc
     mParams.acci = accidental;
   };
 
   this.setDuration = function (duration) {
+    // deactivate rest
+    mParams.rest = null;
+    // deactivate loc
+    mParams.loc = null;
+    // activate dur
+
     mParams.type = "note";
     mParams.duration = duration;
 
@@ -1657,15 +1671,46 @@ function TmmScore(containerSelector) {
   };
 
   this.setIsDotted = function (isDotted) {
-    mParams.dot = isDotted;
-    if (mParams.dot) {
-      if (!mParams.ghostNote.symbolDot) {
-        mParams.ghostNote.symbolDot = this.paper.circle(-2, -2, 1);
-        mParams.ghostNote.symbolDot.attr({
-          fill: "transparent",
-        });
-      }
+    if (!mParams.duration || mParams.rest) {
+      return;
     }
+    mParams.dot = isDotted;
+    if (!mParams.ghostNote.symbolDot) {
+      mParams.ghostNote.symbolDot = this.paper.circle(-2, -2, 1);
+      mParams.ghostNote.symbolDot.attr({
+        fill: "transparent",
+      });
+    }
+  };
+
+  this.setRest = function (restVal, durVal) {
+    // deactivate acci
+    mParams.acci = null;
+    // deactivate dur
+    mParams.duration = null;
+    // deactivate dot
+    mParams.dot = false;
+    // deactivate loc
+    mParams.loc = null;
+    // activate rest
+
+    mParams.type = "rest";
+    mParams.rest = restVal;
+    mParams.duration = durVal;
+
+    if (mParams.ghostNote.symbol) {
+      mParams.ghostNote.symbol.remove();
+    }
+    if (mParams.ghostNote.symbolR) {
+      mParams.ghostNote.symbolR.remove();
+    }
+    mParams.ghostNote.symbol = this.paper.path(symbols[mParams.rest]);
+    mParams.ghostNote.symbol.attr({
+      fill: "transparent",
+    });
+    mParams.ghostNote.symbol.addClass("no-print");
+    mParams.ghostNote.width = mParams.ghostNote.symbol.getBBox().width;
+    mParams.ghostNote.height = mParams.ghostNote.symbol.getBBox().height;
   };
 }
 

@@ -19,6 +19,9 @@ const NoteSheet = () => {
   const noteDuration = useSelector<RootState, string>((state) => state.noteModifier.duration);
   const isDotted = useSelector<RootState, boolean>((state) => state.noteModifier.isDotted);
 
+  const isRest = useSelector<RootState, boolean>((state) => state.noteModifier.isRest);
+  const restObj = useSelector<RootState, { value: string; duration: string }>((state) => state.noteModifier.restParams);
+
   const dispatch = useDispatch();
 
   const songEndedHandler = useCallback(() => {
@@ -60,6 +63,12 @@ const NoteSheet = () => {
   useEffect(() => {
     tmmEditor.setIsDotted(isDotted);
   }, [isDotted]);
+
+  useEffect(() => {
+    if (isRest && restObj.value && restObj.duration) {
+      tmmEditor.setRest(restObj.value, restObj.duration);
+    }
+  }, [isRest, restObj]);
 
   return <div id="sheet"></div>;
 };
