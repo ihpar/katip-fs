@@ -1,51 +1,28 @@
+import { Usul } from "../../models/Usul";
 import "./UsulWidget.scss";
+
+const usuls = [
+  new Usul("nim_sofyan_2_4", "Nim Sofyan", 2, 4),
+  new Usul("nim_sofyan_2_8", "Nim Sofyan", 2, 8),
+  new Usul("semai_3_4", "Semâî", 3, 4),
+  new Usul("semai_3_8", "Semâî", 3, 8),
+  new Usul("sofyan_4_8", "Sofyan", 4, 8),
+  new Usul("sofyan_4_4", "Sofyan", 4, 4),
+  new Usul("sofyan_4_2", "Sofyan", 4, 2),
+];
 
 const UsulWidget: React.FC<{ height: number }> = (props) => {
   return (
     <div className="content-scroller" style={{ height: props.height }}>
       <ul>
-        <li className="widget-list-item">
-          <div className="widget-usul-rep">
-            <div className="fraction" data-top="2" data-bottom="8"></div>
-          </div>
-          <div className="widget-usul-name">Nim Sofyan</div>
-        </li>
-        <li className="widget-list-item">
-          <div className="widget-usul-rep">
-            <div className="fraction" data-top="2" data-bottom="4"></div>
-          </div>
-          <div className="widget-usul-name">Nim Sofyan</div>
-        </li>
-        <li className="widget-list-item">
-          <div className="widget-usul-rep">
-            <div className="fraction" data-top="3" data-bottom="8"></div>
-          </div>
-          <div className="widget-usul-name">Semâî</div>
-        </li>
-        <li className="widget-list-item">
-          <div className="widget-usul-rep">
-            <div className="fraction" data-top="3" data-bottom="4"></div>
-          </div>
-          <div className="widget-usul-name">Semâî</div>
-        </li>
-        <li className="widget-list-item">
-          <div className="widget-usul-rep">
-            <div className="fraction" data-top="4" data-bottom="4"></div>
-          </div>
-          <div className="widget-usul-name">Sofyan</div>
-        </li>
-        <li className="widget-list-item">
-          <div className="widget-usul-rep">
-            <div className="fraction" data-top="7" data-bottom="18"></div>
-          </div>
-          <div className="widget-usul-name">Devr-i Tûran</div>
-        </li>
-        <li className="widget-list-item">
-          <div className="widget-usul-rep">
-            <div className="fraction" data-top="10" data-bottom="8"></div>
-          </div>
-          <div className="widget-usul-name">Aksak Semâî</div>
-        </li>
+        {usuls.map((usul) => (
+          <li draggable="true" className="widget-list-item" key={usul.id}>
+            <div className="widget-usul-rep">
+              <div className="fraction" data-top={usul.numerator} data-bottom={usul.denominator}></div>
+            </div>
+            <div className="widget-usul-name">{usul.name}</div>
+          </li>
+        ))}
       </ul>
     </div>
   );

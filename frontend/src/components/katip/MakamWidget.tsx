@@ -1,28 +1,34 @@
-import { DragEvent } from "react";
+import { Makam } from "../../models/Makam";
+
 import "./MakamWidget.scss";
 
-import Makam from "../../models/makam";
-
 const definedMakams: Makam[] = [
-  new Makam("Acemaşîran", "acemasiran.svg"),
-  new Makam("Acemkürdî", "acemkurdi.svg"),
-  new Makam("Bestenigâr", "bestenigar.svg"),
-  new Makam("Beyâtî", "beyati.svg"),
-  new Makam("Beyâtî Araban", "beyati-araban.svg"),
+  new Makam("acem_asiran", "Acemaşîran", "acemasiran.svg"),
+  new Makam("acem_kurdi", "Acemkürdî", "acemkurdi.svg"),
+  new Makam("bestenigar", "Bestenigâr", "bestenigar.svg"),
+  new Makam("beyati", "Beyâtî", "beyati.svg"),
+  new Makam("beyati_araban", "Beyâtî Araban", "beyati-araban.svg"),
 ];
 
 const EditorWidget: React.FC<{ height: number }> = (props) => {
-  const dragStartHandler = (e: DragEvent<HTMLLIElement>) => {
-    console.log("drag started");
+  const dragStartHandler = (event: React.DragEvent<HTMLLIElement>) => {
+    const makam = event.currentTarget.dataset.makam as string;
+    event.dataTransfer.setData("text/plain", makam);
   };
 
   return (
     <div className="content-scroller" style={{ height: props.height }}>
       <ul>
         {definedMakams.map((makam) => (
-          <li draggable onDragStart={dragStartHandler} key={makam.name} className="widget-list-item">
+          <li
+            draggable="true"
+            onDragStart={dragStartHandler}
+            key={makam.name}
+            data-makam={makam.id}
+            className="widget-list-item"
+          >
             <div className="widget-makam-img">
-              <img alt={makam.name} src={require(`../../images/makamlar/${makam.icon}`)} />
+              <img draggable="false" alt={makam.name} src={require(`../../images/makamlar/${makam.icon}`)} />
             </div>
             <div className="widget-makam-name">{makam.name}</div>
           </li>

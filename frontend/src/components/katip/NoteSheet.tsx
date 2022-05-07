@@ -6,7 +6,7 @@ import { playerActions } from "../../store/player";
 
 import "./NoteSheet.scss";
 
-const TmmScore = require("./sheet");
+const TmmScore = require("./sheet/sheet");
 
 let tmmEditor: any = null;
 

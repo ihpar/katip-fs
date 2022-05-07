@@ -1,11 +1,3 @@
-class Makam {
-  name: string;
-  icon: string;
-
-  constructor(name: string, icon: string) {
-    this.name = name;
-    this.icon = icon;
-  }
+export class Makam {
+  constructor(public id: string, public name: string, public icon: string) {}
 }
-
-export default Makam;
