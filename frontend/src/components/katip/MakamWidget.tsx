@@ -4,11 +4,11 @@ import "./MakamWidget.scss";
 import Makam from "../../models/makam";
 
 const definedMakams: Makam[] = [
-  new Makam("Acemaşîran", "aa.png"),
-  new Makam("Acemkürdî", "aa.png"),
-  new Makam("Bestenigâr", "bes.png"),
-  new Makam("Beyâtî", "bey.png"),
-  new Makam("Beyâtî Araban", "bey-arab.png"),
+  new Makam("Acemaşîran", "acemasiran.svg"),
+  new Makam("Acemkürdî", "acemkurdi.svg"),
+  new Makam("Bestenigâr", "bestenigar.svg"),
+  new Makam("Beyâtî", "beyati.svg"),
+  new Makam("Beyâtî Araban", "beyati-araban.svg"),
 ];
 
 const EditorWidget: React.FC<{ height: number }> = (props) => {
@@ -22,7 +22,7 @@ const EditorWidget: React.FC<{ height: number }> = (props) => {
         {definedMakams.map((makam) => (
           <li draggable onDragStart={dragStartHandler} key={makam.name} className="widget-list-item">
             <div className="widget-makam-img">
-              <img alt="filler" src={require(`../../images/makamlar/${makam.icon}`)} />
+              <img alt={makam.name} src={require(`../../images/makamlar/${makam.icon}`)} />
             </div>
             <div className="widget-makam-name">{makam.name}</div>
           </li>
