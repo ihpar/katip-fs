@@ -5,7 +5,7 @@ import "./MakamWidget.scss";
 const EditorWidget: React.FC<{ height: number }> = (props) => {
   const dragStartHandler = (event: React.DragEvent<HTMLLIElement>) => {
     const makam = event.currentTarget.dataset.makam as string;
-    event.dataTransfer.setData("text/plain", makam);
+    event.dataTransfer.setData("text/plain", "makam:" + makam);
   };
 
   return (
