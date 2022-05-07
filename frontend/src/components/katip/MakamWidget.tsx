@@ -1,14 +1,6 @@
-import { Makam } from "../../models/Makam";
+import { ALL_MAKAMS } from "./sheet/constants";
 
 import "./MakamWidget.scss";
-
-const definedMakams: Makam[] = [
-  new Makam("acem_asiran", "Acemaşîran", "acemasiran.svg"),
-  new Makam("acem_kurdi", "Acemkürdî", "acemkurdi.svg"),
-  new Makam("bestenigar", "Bestenigâr", "bestenigar.svg"),
-  new Makam("beyati", "Beyâtî", "beyati.svg"),
-  new Makam("beyati_araban", "Beyâtî Araban", "beyati-araban.svg"),
-];
 
 const EditorWidget: React.FC<{ height: number }> = (props) => {
   const dragStartHandler = (event: React.DragEvent<HTMLLIElement>) => {
@@ -19,7 +11,7 @@ const EditorWidget: React.FC<{ height: number }> = (props) => {
   return (
     <div className="content-scroller" style={{ height: props.height }}>
       <ul>
-        {definedMakams.map((makam) => (
+        {ALL_MAKAMS.map((makam) => (
           <li
             draggable="true"
             onDragStart={dragStartHandler}

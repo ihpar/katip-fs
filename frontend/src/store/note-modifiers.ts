@@ -24,6 +24,7 @@ const noteModifierSlice = createSlice({
     },
     changeDuration(state, action) {
       state.duration = action.payload;
+      state.isRest = false;
     },
     toggleDotted(state) {
       state.isDotted = !state.isDotted;

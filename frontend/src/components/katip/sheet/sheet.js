@@ -1,5 +1,5 @@
 import { mParams } from "./mparams";
-import { symbols } from "../constants";
+import { symbols, ALL_MAKAMS } from "./constants";
 import { Measure } from "./Measure";
 import { SatirObject } from "./SatirObject";
 import { setMakam, setUsul, playWhole, allowNewInsertion } from "./utils";
@@ -136,9 +136,16 @@ export function TmmScore(containerSelector) {
       "drop",
       function (evt) {
         evt.preventDefault();
-        const dropData = evt.dataTransfer.getData("text");
+        const dropMakamId = evt.dataTransfer.getData("text");
+        const droppedMakam = ALL_MAKAMS.find((makam) => makam.id === dropMakamId);
+        setMakam(droppedMakam.name, droppedMakam.accidentals);
+        that.changeScoreMakamAndMeter(
+          mParams.makam.name,
+          mParams.makam.accidentals,
+          mParams.usul.name,
+          mParams.usul.meter
+        );
         evt.dataTransfer.clearData();
-        console.log("drop", dropData);
       },
       false
     );

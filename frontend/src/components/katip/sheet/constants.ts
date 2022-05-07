@@ -1,3 +1,5 @@
+import { Makam } from "../../../models/Makam";
+
 export const notePositions = {
   b2: 9,
   c3: 8.5,
@@ -193,3 +195,11 @@ export const tmmMidiPitches = {
   la6: 93.0,
   si6: 95.039100017,
 };
+
+export const ALL_MAKAMS: Makam[] = [
+  new Makam("acem_asiran", "Acemaşîran", "acemasiran.svg", ["Si4b5"]),
+  new Makam("acem_kurdi", "Acemkürdî", "acemkurdi.svg", ["Si4b5"]),
+  new Makam("bestenigar", "Bestenigâr", "bestenigar.svg", ["Si4b1", "Re5b4"]),
+  new Makam("beyati", "Beyâtî", "beyati.svg", ["Si4b1"]),
+  new Makam("beyati_araban", "Beyâtî Araban", "beyati-araban.svg", ["Si4b1", "Mi5b4", "Fa5#4"]),
+];

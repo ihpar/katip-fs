@@ -64,7 +64,7 @@ const NoteSheet = () => {
   }, [isDotted]);
 
   useEffect(() => {
-    if (isRest && restObj.value && restObj.duration) {
+    if (isRest) {
       tmmEditor.setRest(restObj.value, restObj.duration);
     }
   }, [isRest, restObj]);
