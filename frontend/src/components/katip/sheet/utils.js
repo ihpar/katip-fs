@@ -1,5 +1,5 @@
-const { tmmKomas, tmmMidiPitches } = require("./constants");
-const mParams = require("./mparams");
+import { mParams } from "./mparams";
+import { tmmKomas, tmmMidiPitches } from "../constants";
 
 function setMakam(makam, accidentals) {
   mParams.makam.name = makam;

@@ -1,4 +1,4 @@
-const { notePositions, symbols } = require("./constants");
+import { notePositions, symbols } from "../constants";
 
 function Note(pitch, duration) {
   this.noteRoot = "";

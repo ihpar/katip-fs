@@ -1,11 +1,9 @@
+import { mParams } from "./mparams";
+import { symbols } from "../constants";
+
 const Snap = require("snapsvg-cjs");
-const { symbols } = require("./constants");
 const { setMakam, setUsul, playWhole, allowNewInsertion } = require("./utils");
-
-const mParams = require("./mparams");
-
 const Measure = require("./Measure");
-
 const SatirObject = require("./SatirObject");
 
 function TmmScore(containerSelector) {

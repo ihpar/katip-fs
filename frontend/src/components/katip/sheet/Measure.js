@@ -1,8 +1,7 @@
-const { notePositions, notePositionsRev, symbols } = require("./constants");
+import { mParams } from "./mparams";
+import { notePositions, notePositionsRev, symbols } from "../constants";
 
 const { playNote, allowNewInsertion } = require("./utils");
-
-const mParams = require("./mparams");
 const Note = require("./Note");
 
 function noteGClick(e, sender, stCol, selCol, note) {

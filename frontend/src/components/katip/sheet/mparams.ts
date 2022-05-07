@@ -1,4 +1,4 @@
-let mParams = {
+export const mParams = {
   makam: { name: "Hicaz", accidentals: ["B4b4", "F5#4", "C5#4"] },
   usul: { name: "Aksak", meter: [9, 8], tempo: 124 },
   acci: null,
@@ -17,5 +17,3 @@ let mParams = {
   canUseSound: false,
   lastStatus: null,
 };
-
-module.exports = mParams;
