@@ -1,6 +1,6 @@
 import { notePositions, symbols } from "../constants";
 
-function Note(pitch, duration) {
+export function Note(pitch, duration) {
   this.noteRoot = "";
   this.noteOctave = 0;
   this.noteComma = "";
@@ -267,5 +267,3 @@ function Note(pitch, duration) {
     return res;
   };
 }
-
-module.exports = Note;

@@ -3,10 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import Soundfont from "soundfont-player";
 import { RootState } from "../../store";
 import { playerActions } from "../../store/player";
+import { TmmScore } from "./sheet/sheet";
 
 import "./NoteSheet.scss";
-
-const TmmScore = require("./sheet/sheet");
 
 let tmmEditor: any = null;
 

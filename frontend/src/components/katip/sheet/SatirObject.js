@@ -1,6 +1,6 @@
-const Measure = require("./Measure");
+import { Measure } from "./Measure";
 
-function SatirObject(satirNo, paper, configs, left, top, width, parentScore) {
+export function SatirObject(satirNo, paper, configs, left, top, width, parentScore) {
   this.satirNo = satirNo;
   this.parentScore = parentScore;
   this.paper = paper;
@@ -102,5 +102,3 @@ function SatirObject(satirNo, paper, configs, left, top, width, parentScore) {
     }
   };
 }
-
-module.exports = SatirObject;

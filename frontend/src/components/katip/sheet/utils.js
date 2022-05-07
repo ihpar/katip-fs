@@ -1,18 +1,18 @@
 import { mParams } from "./mparams";
 import { tmmKomas, tmmMidiPitches } from "../constants";
 
-function setMakam(makam, accidentals) {
+export function setMakam(makam, accidentals) {
   mParams.makam.name = makam;
   mParams.makam.accidentals = accidentals.slice();
 }
 
-function setUsul(usuName, meter, tempo) {
+export function setUsul(usuName, meter, tempo) {
   mParams.usul.name = usuName;
   mParams.usul.meter = meter.slice();
   mParams.usul.tempo = tempo;
 }
 
-function playNote(note) {
+export function playNote(note) {
   if (!mParams.soundActive || !mParams.canUseSound) {
     return;
   }
@@ -35,7 +35,7 @@ function playNote(note) {
   return duration;
 }
 
-function playWhole(songObj, songEndedCallback) {
+export function playWhole(songObj, songEndedCallback) {
   if (!songObj || songObj.length === 0) {
     songEndedCallback();
     return;
@@ -51,14 +51,6 @@ function playWhole(songObj, songEndedCallback) {
   }, wait);
 }
 
-function allowNewInsertion(allow) {
+export function allowNewInsertion(allow) {
   mParams.allowInsert = !!allow;
 }
-
-module.exports = {
-  setMakam,
-  setUsul,
-  playNote,
-  playWhole,
-  allowNewInsertion,
-};

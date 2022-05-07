@@ -1,8 +1,7 @@
 import { mParams } from "./mparams";
 import { notePositions, notePositionsRev, symbols } from "../constants";
-
-const { playNote, allowNewInsertion } = require("./utils");
-const Note = require("./Note");
+import { Note } from "./Note";
+import { playNote, allowNewInsertion } from "./utils";
 
 function noteGClick(e, sender, stCol, selCol, note) {
   if (sender.attr("selected") === "yes") {
@@ -19,7 +18,7 @@ function noteGClick(e, sender, stCol, selCol, note) {
   }
 }
 
-function Measure(meter, accidentals) {
+export function Measure(meter, accidentals) {
   this.notes = [];
   this.allYPos = [];
   this.noteLefts = [];
@@ -795,5 +794,3 @@ function Measure(meter, accidentals) {
     this.mainGroup.transform("t " + this.startPos + " " + this.porteTop);
   };
 }
-
-module.exports = Measure;

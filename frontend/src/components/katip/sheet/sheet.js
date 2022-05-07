@@ -1,12 +1,12 @@
 import { mParams } from "./mparams";
 import { symbols } from "../constants";
+import { Measure } from "./Measure";
+import { SatirObject } from "./SatirObject";
+import { setMakam, setUsul, playWhole, allowNewInsertion } from "./utils";
 
 const Snap = require("snapsvg-cjs");
-const { setMakam, setUsul, playWhole, allowNewInsertion } = require("./utils");
-const Measure = require("./Measure");
-const SatirObject = require("./SatirObject");
 
-function TmmScore(containerSelector) {
+export function TmmScore(containerSelector) {
   this.configs = {
     padding: { top: 0, right: 0, bottom: 0, left: 0 },
     lineThickness: 1,
@@ -305,5 +305,3 @@ function TmmScore(containerSelector) {
     mParams.ghostNote.height = mParams.ghostNote.symbol.getBBox().height;
   };
 }
-
-module.exports = TmmScore;
