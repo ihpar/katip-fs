@@ -1,30 +1,19 @@
-import { useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 
-import flagTr from "../images/flags/tr.svg";
-import flagEn from "../images/flags/en.svg";
-// import * as flagEn from "../images/flags/gb.svg";
-// const flagEn: string = require("../images/flags/en.svg").default;
+const useLanguage = (fileName: string) => {
+  const langCode = useSelector<RootState, string>(state => state.language.code);
 
-const LANGUAGES = [
-  { code: "tr", flag: flagTr },
-  { code: "en", flag: flagEn },
-];
+  const LANG_FILES = [
+    { code: "en", texts: require(`../locales/en/${fileName}.json`) },
+    { code: "tr", texts: require(`../locales/tr/${fileName}.json`) }
+  ];
 
-const useLanguage = () => {
-  const defaultLanguage = "en";
-  const [lang, setLang] = useState(defaultLanguage);
-  const [langFlag, setLangFlag] = useState(flagEn);
-
-  const changeLanguage = (code: string) => {
-    setLang(code);
-    const flag = LANGUAGES.find(lang => lang.code === code)!.flag;
-    setLangFlag(flag);
-  }
+  const texts = LANG_FILES.find(f => f.code === langCode)!.texts;
 
   return {
-    lang,
-    langFlag,
-    changeLanguage
+    langCode: langCode,
+    t: texts
   }
 };
 

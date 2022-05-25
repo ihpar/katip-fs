@@ -57,13 +57,13 @@
   transition: opacity 200ms;
 }
 
-.txt-input:focus + span.i-sharp.search-icon {
+.txt-input:focus+span.i-sharp.search-icon {
   opacity: 1;
 }
 
 .text-underline {
   height: 2px;
-  width: 35px;
+  width: 44px;
   background-color: variables.$font-color-faded;
   display: inline-block;
   transition: width 200ms, background-color 200ms;
@@ -71,7 +71,7 @@
   top: -13px;
 }
 
-.txt-input:focus ~ div.text-underline {
+.txt-input:focus~div.text-underline {
   width: 100%;
   background-color: variables.$font-color;
 }
