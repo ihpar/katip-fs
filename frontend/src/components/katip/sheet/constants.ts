@@ -1,7 +1,6 @@
 import { Makam } from "../../../models/Makam";
 import { Usul } from "../../../models/Usul";
 
-
 export const notePositions = {
   b2: 9,
   c3: 8.5,
