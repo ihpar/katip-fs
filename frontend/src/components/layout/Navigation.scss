@@ -56,6 +56,16 @@
 }
 
 .i-sharp.md-36 {
-  font-size: 36px;
+  font-size: variables.$nav-icon-height;
   color: variables.$font-color;
+}
+
+button:disabled,
+button:disabled:hover {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.flag {
+  height: variables.$nav-icon-height;
 }
