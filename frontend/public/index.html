@@ -9,7 +9,13 @@
 </head>
 
 <body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <script>
+    const th = localStorage.getItem("tmmTheme") || "light";
+    if (th === "dark") {
+      console.log("Hey");
+      document.body.classList.add("dark");
+    }
+  </script>
   <div id="root"></div>
   <div id="overlay-root"></div>
 </body>

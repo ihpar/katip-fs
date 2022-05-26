@@ -19,7 +19,9 @@ const NoteSheet = () => {
   const isDotted = useSelector<RootState, boolean>((state) => state.noteModifier.isDotted);
 
   const isRest = useSelector<RootState, boolean>((state) => state.noteModifier.isRest);
-  const restObj = useSelector<RootState, { value: string; duration: string }>((state) => state.noteModifier.restParams);
+  const restObj = useSelector<RootState, { value: string; duration: string; }>((state) => state.noteModifier.restParams);
+
+  const theme = useSelector<RootState, string>(state => state.theme.theme);
 
   const dispatch = useDispatch();
 
@@ -31,9 +33,13 @@ const NoteSheet = () => {
     if (!tmmEditor) {
       tmmEditor = new TmmScore("#sheet");
       tmmEditor.setSongEndedHandler(songEndedHandler);
-      tmmEditor.begin();
     }
   }, [songEndedHandler]);
+
+  useEffect(() => {
+    tmmEditor.setTheme(theme);
+    tmmEditor.begin();
+  }, [theme]);
 
   useEffect(() => {
     if (isInstrumentCreated) {

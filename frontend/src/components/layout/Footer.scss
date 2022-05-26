@@ -25,6 +25,7 @@
       display: inline-block;
       background-color: variables.$paper-bg-color;
       transition: background-color 200ms;
+
       &:hover {
         background-color: variables.$active-fore-color;
       }
@@ -45,5 +46,26 @@
 
   .small-text {
     font-size: 14px;
+  }
+}
+
+.dark {
+  .footer {
+    ul {
+      box-shadow: 0 0 8px -6px variables.$dark-shadow-color-dark;
+
+      a {
+        background-color: variables.$paper-bg-color-dark;
+        transition: background-color 200ms;
+
+        &:hover {
+          background-color: variables.$active-fore-color-dark;
+        }
+
+        img {
+          filter: invert(100%);
+        }
+      }
+    }
   }
 }

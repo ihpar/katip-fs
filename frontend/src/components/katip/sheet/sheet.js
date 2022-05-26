@@ -17,11 +17,13 @@ export function TmmScore(containerSelector) {
     mainColor: "#565345",
     porteLineColor: "#BDA37E",
     paperBgColor: "#F7F5EA",
+    paperBgColorDark: "#252526",
     ghostColor: "#998166",
     ghostLineColor: "#E5DCD0",
     maxPaperWidth: 1100,
     emptyMeasureLen: 4,
     emptyMeasureWidth: 0,
+    theme: "light"
   };
   let porLiHe = this.configs.porteLineHeight;
   this.configs.emptyMeasureWidth = this.configs.emptyMeasureLen * porLiHe * 1.5;
@@ -34,7 +36,12 @@ export function TmmScore(containerSelector) {
   let svgID = "svg-tmm-score";
   this.svgElem.setAttribute("id", svgID);
   this.svgElem.setAttribute("class", "shadowed-porte");
-  this.svgElem.style.backgroundColor = this.configs.paperBgColor;
+  /*
+  this.svgElem.style.backgroundColor = this.configs.theme === "light" ?
+    this.configs.paperBgColor :
+    this.configs.paperBgColorDark;
+  */
+  this.svgElem.style.backgroundColor = "transparent";
   this.svgElem.style.width = scorePaperWidth + "px";
 
   parentElem.append(this.svgElem);
@@ -320,5 +327,17 @@ export function TmmScore(containerSelector) {
     mParams.ghostNote.symbol.addClass("no-print");
     mParams.ghostNote.width = mParams.ghostNote.symbol.getBBox().width;
     mParams.ghostNote.height = mParams.ghostNote.symbol.getBBox().height;
+  };
+
+  this.setTheme = function (theme) {
+    this.configs.theme = theme;
+    if (this.svgElem) {
+      if (theme === "dark") {
+        this.svgElem.style.filter = "invert(1)";
+      }
+      else {
+        this.svgElem.style.filter = null;
+      }
+    }
   };
 }
