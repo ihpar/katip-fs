@@ -61,10 +61,6 @@
         &:hover {
           background-color: variables.$active-fore-color-dark;
         }
-
-        img {
-          filter: invert(100%);
-        }
       }
     }
   }

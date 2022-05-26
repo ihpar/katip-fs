@@ -8,6 +8,7 @@ import LanguageSelector from "../utils/LanguageSelector";
 import "./Navigation.scss";
 import "../../sass/vendors/hamburger.scss";
 import UserSettingsItems from "../user-menu/UserSettingsItems";
+import UserFileActions from "../user-menu/UserFileActions";
 
 const Navigation = () => {
   const [isNavVisible, setIsNavVisible] = useState(false);
@@ -62,43 +63,7 @@ const Navigation = () => {
               </li>
             </ul>
             {/* User file actions */}
-            <ul className="user-menu">
-              <li>
-                <button disabled>
-                  <span className="i-sharp md-36">note_add</span>
-                </button>
-              </li>
-              <li>
-                <button disabled>
-                  <span className="i-sharp md-36">folder_open</span>
-                </button>
-              </li>
-              <li>
-                <button disabled>
-                  <span className="i-sharp md-36">upload</span>
-                </button>
-              </li>
-              <li>
-                <button disabled>
-                  <span className="i-sharp md-36">save</span>
-                </button>
-              </li>
-              <li>
-                <button disabled>
-                  <span className="i-sharp md-36">download</span>
-                </button>
-              </li>
-              <li>
-                <button disabled>
-                  <span className="i-sharp md-36">print</span>
-                </button>
-              </li>
-              <li>
-                <button disabled>
-                  <span className="i-sharp md-36">delete_forever</span>
-                </button>
-              </li>
-            </ul>
+            <UserFileActions />
             {/* User action controls */}
             <ul className="user-menu">
               <li>

@@ -56,3 +56,19 @@ body {
   font-size: 36px;
   -webkit-font-smoothing: antialiased;
 }
+
+@media print {
+  body {
+    zoom: 1.5;
+  }
+
+  .A4 {
+    box-shadow: none !important;
+    margin: 0 auto !important;
+  }
+
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+}
