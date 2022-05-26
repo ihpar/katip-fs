@@ -6,3 +6,10 @@
   background-color: variables.$paper-bg-color;
   @extend %widget-shadow;
 }
+
+.dark {
+  .card-wrapper {
+    background-color: variables.$active-fore-color-dark;
+    @extend %widget-shadow-dark;
+  }
+}

@@ -47,6 +47,7 @@
   height: 28px;
   box-sizing: border-box;
   background-color: transparent;
+  font-weight: bold;
 }
 
 .i-sharp.search-icon {
@@ -83,6 +84,11 @@
 .dark {
   .assistant-title {
     background-color: variables.$active-fore-color-dark;
+    color: variables.$title-color-dark;
+  }
+
+  .assistant-title-icon {
+    color: variables.$title-color-darker;
   }
 
   .assistant-body {
@@ -91,10 +97,14 @@
   }
 
   .text-underline {
-    background-color: variables.$font-color-faded-dark;
+    background-color: variables.$dark-purple;
   }
 
   .txt-input:focus~div.text-underline {
-    background-color: variables.$font-color-dark;
+    background-color: variables.$dark-purple;
+  }
+
+  .assistant-link {
+    @extend %links-dark;
   }
 }

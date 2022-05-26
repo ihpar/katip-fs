@@ -32,7 +32,7 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <span className="small-text"> &#169; 2021 Dokuz Eylül Üniversitesi </span>
+            <span className="small-text"> &#169; 2022 | Parlak </span>
           </div>
         </footer>
       </div>

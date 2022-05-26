@@ -209,26 +209,19 @@
   .top-menu {
     @extend %widget-shadow-dark;
     background-color: variables.$paper-bg-color-dark;
-
-    button {
-      img {
-        filter: invert(100%);
-      }
-    }
   }
-
-
 
   .top-menu-list {
     button {
       @extend %button-base;
       @extend %button-base-dark;
+      display: flex;
     }
 
     &.accidental-controls {
       button {
         span {
-          filter: invert(100%);
+          background-image: url("../../../images/sprites/accidentals-sprite-6_dark.svg");
         }
       }
     }
@@ -236,7 +229,7 @@
     &.duration-controls {
       button {
         span {
-          filter: invert(100%);
+          background-image: url("../../../images/sprites/duration-sprite_dark.svg");
         }
       }
     }

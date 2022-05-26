@@ -1,3 +1,9 @@
 export class Makam {
-  constructor(public id: string, public name: string, public icon: string, public accidentals: string[]) {}
+  constructor(
+    public id: string,
+    public name: string,
+    public icon: string,
+    public iconDark: string,
+    public accidentals: string[]
+  ) { }
 }

@@ -7,11 +7,3 @@
     transition: opacity 200ms;
   }
 }
-
-.dark {
-  .widget-makam-img {
-    img {
-      filter: invert(100%);
-    }
-  }
-}

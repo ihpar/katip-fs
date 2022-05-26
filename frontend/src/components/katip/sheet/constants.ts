@@ -198,13 +198,13 @@ export const tmmMidiPitches = {
 };
 
 export const ALL_MAKAMS: Makam[] = [
-  new Makam("acem_asiran", "Acemaşîran", "acemasiran.svg", ["Si4b5"]),
-  new Makam("acem_kurdi", "Acemkürdî", "acemkurdi.svg", ["Si4b5"]),
-  new Makam("bestenigar", "Bestenigâr", "bestenigar.svg", ["Si4b1", "Re5b4"]),
-  new Makam("beyati", "Beyâtî", "beyati.svg", ["Si4b1"]),
-  new Makam("beyati_araban", "Beyâtî Araban", "beyati-araban.svg", ["Si4b1", "Mi5b4", "Fa5#4"]),
-  new Makam("hicaz", "Hicaz", "hicaz.svg", ["Si4b4", "Fa5#4", "Do5#4"]),
-  new Makam("nihavent", "Nihâvent", "nihavent.svg", ["Si4b5", "Mi5b5"]),
+  new Makam("acem_asiran", "Acemaşîran", "acemasiran.svg", "acemasiran_dark.svg", ["Si4b5"]),
+  new Makam("acem_kurdi", "Acemkürdî", "acemkurdi.svg", "acemkurdi_dark.svg", ["Si4b5"]),
+  new Makam("bestenigar", "Bestenigâr", "bestenigar.svg", "bestenigar_dark.svg", ["Si4b1", "Re5b4"]),
+  new Makam("beyati", "Beyâtî", "beyati.svg", "beyati_dark.svg", ["Si4b1"]),
+  new Makam("beyati_araban", "Beyâtî Araban", "beyati-araban.svg", "beyati-araban_dark.svg", ["Si4b1", "Mi5b4", "Fa5#4"]),
+  new Makam("hicaz", "Hicaz", "hicaz.svg", "hicaz_dark.svg", ["Si4b4", "Fa5#4", "Do5#4"]),
+  new Makam("nihavent", "Nihâvent", "nihavent.svg", "nihavent_dark.svg", ["Si4b5", "Mi5b5"]),
 ];
 
 export const ALL_USULS = [

@@ -118,11 +118,12 @@
 .dark {
   .widget-list-item {
     border: 1px solid variables.$lightest-color-dark;
-    box-shadow: inset 0 0 16px variables.$lightest-color-dark;
+    box-shadow: inset 0 0 0 variables.$lightest-color-dark;
+    background-color: variables.$active-fore-color-dark;
 
     &:hover {
-      box-shadow: inset 0 0 26px variables.$pure-white-dark;
-      border-color: variables.$pure-white-dark;
+      box-shadow: inset 0 0 2px variables.$paper-bg-color-dark;
+      border-color: variables.$lightest-color-dark;
       color: variables.$font-color-faded-dark;
     }
   }
@@ -133,6 +134,11 @@
 
   .btn-accordion {
     background-color: variables.$paper-bg-color-dark;
+    color: variables.$title-color-dark;
+  }
+
+  .btn-accordion .i-sharp.caret {
+    color: variables.$title-color-darker;
   }
 
   .accordion-active,

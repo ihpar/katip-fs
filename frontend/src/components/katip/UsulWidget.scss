@@ -29,7 +29,7 @@
 .dark {
   .fraction {
     &::before {
-      border-bottom: 1px solid variables.$font-color-faded-dark;
+      border-bottom: 1px solid variables.$dark-purple;
     }
   }
 }

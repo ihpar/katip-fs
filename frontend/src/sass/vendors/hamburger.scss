@@ -39,13 +39,13 @@
   .hamburger.is-active .hamburger-inner,
   .hamburger.is-active .hamburger-inner::before,
   .hamburger.is-active .hamburger-inner::after {
-    background-color: variables.$font-color-dark;
+    background-color: variables.$dark-brown;
   }
 
   .hamburger-inner,
   .hamburger-inner::before,
   .hamburger-inner::after {
-    background-color: variables.$font-color-dark;
+    background-color: variables.$dark-brown;
   }
 }
 
