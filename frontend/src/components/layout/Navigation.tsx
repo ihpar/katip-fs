@@ -1,19 +1,35 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { languageActions } from "../../store/language";
+import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+
+import Modal from "../utils/Modal";
 
 import "./Navigation.scss";
 import "../../sass/vendors/hamburger.scss";
+import LanguageSelector from "../utils/LanguageSelector";
 
 const Navigation = () => {
-  const [isNavVisible, setIsNavVisible] = useState<boolean>(false);
+  const [isNavVisible, setIsNavVisible] = useState(false);
+  const [isLangModalVisible, setIsLangModalVisible] = useState(false);
+  const [isKillModal, setIsKillModal] = useState(true);
+
   const langCode = useSelector<RootState, string>(state => state.language.code);
   const langFlag = useSelector<RootState, string>(state => state.language.flag);
-  const dispatch = useDispatch();
 
   const hamburgerClickHandler = () => {
     setIsNavVisible((prev) => !prev);
+  };
+
+  const languageSelectorClickHandler = () => {
+    setIsKillModal(false);
+    setIsLangModalVisible(true);
+  };
+
+  const closeModalHandler = () => {
+    setIsLangModalVisible(false);
+    setTimeout(() => {
+      setIsKillModal(true);
+    }, 250);
   };
 
   const userMenuClass = `user-menu-wrap ${isNavVisible ? "user-menu-visible" : ""}`;
@@ -21,6 +37,9 @@ const Navigation = () => {
 
   return (
     <React.Fragment>
+      <Modal show={isLangModalVisible} kill={isKillModal} onClose={closeModalHandler}>
+        <LanguageSelector onClose={closeModalHandler} />
+      </Modal>
       <div className="no-print"></div>
       <header id="header-menu" className="header-section no-print">
         <div>
@@ -105,7 +124,7 @@ const Navigation = () => {
                 </button>
               </li>
               <li>
-                <button onClick={() => { dispatch(languageActions.setLenguage("tr")) }}>
+                <button onClick={languageSelectorClickHandler}>
                   <img className="flag" alt={langCode} src={langFlag} />
                 </button>
               </li>

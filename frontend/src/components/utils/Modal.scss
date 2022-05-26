@@ -1,0 +1,37 @@
+.overlay {
+  background-color: rgba(0, 0, 0, 0.85);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9;
+
+  transition: opacity 200ms;
+  opacity: 1;
+
+  &.opening,
+  &.closing {
+    opacity: 0;
+  }
+}
+
+.modal-content-wrapper {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  transition: opacity 200ms, margin-top 200ms;
+  margin-top: 0;
+  opacity: 1;
+
+  &.opening,
+  &.closing {
+    margin-top: -100px;
+    opacity: 0;
+  }
+}

@@ -9,9 +9,9 @@ const LANGUAGES = [
 ];
 
 const initialState = {
-  code: "en",
-  flag: flagEn
-}
+  code: localStorage.getItem("tmmLang") || "en",
+  flag: localStorage.getItem("tmmLang") === "tr" ? flagTr : flagEn
+};
 
 const languageSlice = createSlice({
   name: "language-slice",
@@ -20,6 +20,7 @@ const languageSlice = createSlice({
     setLenguage(state, action) {
       state.code = action.payload;
       state.flag = LANGUAGES.find(lang => lang.code === action.payload)!.flag;
+      localStorage.setItem("tmmLang", action.payload);
     }
   }
 });

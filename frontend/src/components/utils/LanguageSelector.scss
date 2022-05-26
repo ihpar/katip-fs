@@ -1,0 +1,28 @@
+.language-selector-wrap {
+  display: flex;
+}
+
+.lang-selector-button-wrap {
+  button {
+    padding: 0;
+    margin: 0;
+    border: 0px none;
+    display: block;
+    cursor: pointer;
+    transition: all 200ms;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  img {
+    width: 80px;
+    height: 80px;
+    display: block;
+  }
+}
+
+.lang-selector-button-wrap+.lang-selector-button-wrap {
+  margin-left: 12px;
+}
