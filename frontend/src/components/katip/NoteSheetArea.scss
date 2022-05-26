@@ -9,3 +9,10 @@
   box-shadow: 0 0 24px -20px variables.$dark-shadow-color;
   overflow: hidden;
 }
+
+.dark {
+  .A4 {
+    background-color: variables.$paper-bg-color-dark;
+    box-shadow: 0 0 24px -20px variables.$dark-shadow-color-dark;
+  }
+}

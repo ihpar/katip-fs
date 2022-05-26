@@ -34,6 +34,21 @@
   background-color: variables.$font-color;
 }
 
+.dark {
+
+  .hamburger.is-active .hamburger-inner,
+  .hamburger.is-active .hamburger-inner::before,
+  .hamburger.is-active .hamburger-inner::after {
+    background-color: variables.$font-color-dark;
+  }
+
+  .hamburger-inner,
+  .hamburger-inner::before,
+  .hamburger-inner::after {
+    background-color: variables.$font-color-dark;
+  }
+}
+
 .hamburger-box {
   width: 40px;
   height: 24px;

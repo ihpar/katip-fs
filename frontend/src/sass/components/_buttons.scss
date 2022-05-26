@@ -19,3 +19,17 @@
     box-shadow: inset 0 0 16px variables.$pure-white;
   }
 }
+
+%button-base-dark {
+  background-color: variables.$paper-bg-color-dark;
+
+  &:hover {
+    background-color: variables.$active-fore-color-dark;
+    box-shadow: inset 0 0 12px variables.$lightest-color-dark;
+  }
+
+  &:focus {
+    background-color: variables.$lightest-color-dark;
+    box-shadow: inset 0 0 16px variables.$pure-white-dark;
+  }
+}

@@ -79,3 +79,22 @@
 .assistant-link {
   @extend %links;
 }
+
+.dark {
+  .assistant-title {
+    background-color: variables.$active-fore-color-dark;
+  }
+
+  .assistant-body {
+    padding: 12px;
+    background-color: variables.$paper-bg-color-dark;
+  }
+
+  .text-underline {
+    background-color: variables.$font-color-faded-dark;
+  }
+
+  .txt-input:focus~div.text-underline {
+    background-color: variables.$font-color-dark;
+  }
+}

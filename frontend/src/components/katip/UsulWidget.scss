@@ -25,3 +25,11 @@
   text-align: right;
   margin-right: 12px;
 }
+
+.dark {
+  .fraction {
+    &::before {
+      border-bottom: 1px solid variables.$font-color-faded-dark;
+    }
+  }
+}

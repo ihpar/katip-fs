@@ -49,6 +49,7 @@
   display: flex;
   align-items: center;
   padding: 6px 0;
+  color: inherit;
 }
 
 .accordion-active,
@@ -111,5 +112,53 @@
   &:focus {
     background-color: variables.$lightest-color;
     box-shadow: inset 0 0 16px variables.$pure-white;
+  }
+}
+
+.dark {
+  .widget-list-item {
+    border: 1px solid variables.$lightest-color-dark;
+    box-shadow: inset 0 0 16px variables.$lightest-color-dark;
+
+    &:hover {
+      box-shadow: inset 0 0 26px variables.$pure-white-dark;
+      border-color: variables.$pure-white-dark;
+      color: variables.$font-color-faded-dark;
+    }
+  }
+
+  .accordion-wrapper {
+    @extend %widget-shadow-dark;
+  }
+
+  .btn-accordion {
+    background-color: variables.$paper-bg-color-dark;
+  }
+
+  .accordion-active,
+  .btn-accordion:hover {
+    background-color: variables.$active-fore-color-dark;
+  }
+
+  .accordion-panel {
+    background-color: variables.$paper-bg-color-dark;
+  }
+
+  .accordion-buttons-wrap button,
+  .accordion-buttons-grid button {
+    color: variables.$font-color-dark;
+    background-color: variables.$paper-bg-color-dark;
+    background-color: variables.$active-fore-color-dark;
+    box-shadow: inset 0 0 12px variables.$lightest-color-dark;
+
+    &:hover {
+      background-color: variables.$active-fore-color-dark;
+      box-shadow: inset 0 0 14px variables.$pure-white-dark;
+    }
+
+    &:focus {
+      background-color: variables.$lightest-color-dark;
+      box-shadow: inset 0 0 16px variables.$pure-white-dark;
+    }
   }
 }

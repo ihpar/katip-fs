@@ -3,10 +3,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 
 import Modal from "../utils/Modal";
+import LanguageSelector from "../utils/LanguageSelector";
 
 import "./Navigation.scss";
 import "../../sass/vendors/hamburger.scss";
-import LanguageSelector from "../utils/LanguageSelector";
+import UserSettingsItems from "../user-menu/UserSettingsItems";
 
 const Navigation = () => {
   const [isNavVisible, setIsNavVisible] = useState(false);
@@ -111,24 +112,11 @@ const Navigation = () => {
                 </button>
               </li>
             </ul>
-            {/* User setting actions */}
-            <ul className="user-menu">
-              <li>
-                <button disabled>
-                  <span className="i-sharp md-36">dark_mode</span>
-                </button>
-              </li>
-              <li>
-                <button disabled>
-                  <span className="i-sharp md-36">light_mode</span>
-                </button>
-              </li>
-              <li>
-                <button onClick={languageSelectorClickHandler}>
-                  <img className="flag" alt={langCode} src={langFlag} />
-                </button>
-              </li>
-            </ul>
+            {/* Lang, theme settings */}
+            <UserSettingsItems
+              langCode={langCode}
+              langFlag={langFlag}
+              onSelectLanguage={languageSelectorClickHandler} />
             {/* User social actions */}
             <ul className="user-menu">
               <li>

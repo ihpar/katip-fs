@@ -69,3 +69,9 @@ button:disabled:hover {
 .flag {
   height: variables.$nav-icon-height;
 }
+
+.dark {
+  .i-sharp.md-36 {
+    color: variables.$font-color-dark;
+  }
+}

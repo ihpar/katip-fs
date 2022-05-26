@@ -2,3 +2,9 @@
   margin: 12px 24px;
   width: calc(100% - 48px);
 }
+
+.dark {
+  #svg-tmm-score {
+    filter: invert(100%);
+  }
+}
