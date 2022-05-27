@@ -1,9 +1,9 @@
 import { mParams } from "./mparams";
 import { notePositions, notePositionsRev, symbols } from "../constants";
-import { Note } from "./Note";
+import Note from "./Note";
 import { playNote, allowNewInsertion } from "./utils";
 
-function noteGClick(e, sender, stCol, selCol, note) {
+function noteGClick(e: any, sender: any, stCol: string, selCol: string, note: Note) {
   if (sender.attr("selected") === "yes") {
     sender.attr({ fill: stCol, selected: "no" });
     mParams.highElem = null;
@@ -18,70 +18,128 @@ function noteGClick(e, sender, stCol, selCol, note) {
   }
 }
 
-export function Measure(meter, accidentals) {
-  this.notes = [];
-  this.allYPos = [];
-  this.noteLefts = [];
-  this.arrIdx = 0;
-  this.parentSatir = null;
-  this.satirNo = null;
-  this.paper = null;
-  this.mainGroup = null;
-  this.accidentalsGroup = null;
-  this.meterGroup = null;
-  this.staffGroup = null;
-  this.guideGroup = null;
-  this.notesGroup = null;
-  this.clefObj = null;
+class Measure {
+  notes: Note[];
+  allYPos: number[];
+  noteLefts: number[];
+  arrIdx: number;
+  parentSatir: any;
+  satirNo = null;
+  paper: any;
+  mainGroup: any;
+  accidentalsGroup: any;
+  meterGroup: any;
+  staffGroup: any;
+  guideGroup: any;
+  notesGroup: any;
+  clefObj: any;
 
-  this.mAccJson = {};
-  this.mAccArr = [];
-  for (let accidental of accidentals) {
-    let note = new Note(accidental, "1/1");
-    this.mAccJson[note.noteRoot] = note.noteComma;
-    this.mAccArr.push(note);
+  mAccJson: { [key: string]: string; };
+  mAccArr: Note[];
+
+  meter: {
+    strVer: string,
+    num: number,
+    den: number,
+  };
+
+  lastDrawnWidth = 0;
+  compressedWidth = 0;
+
+  widthDiff = 0;
+  startPos = 0;
+  notesStartPos = 0;
+  endPos = 0;
+  satirEndPos = 0;
+  porteTop = 0;
+  box: {
+    top: number,
+    right: number,
+    bottom: number,
+    left: number,
+  };
+  ghostColor = null;
+  ghostLineColor = null;
+  mainColor = null;
+  ghostsVisible = false;
+  porteLiHe = 10;
+  maxSpace = 0;
+  minSpace = 0;
+  lineThickness = 0;
+  emptyMeasureWidth = 0;
+  highlightColor: string;
+  noteColor: string;
+  noteErrColor: string;
+  porteLineColor: string;
+
+  clefVisible = false;
+  meterVisible = false;
+  gAcciVisible = false;
+
+  constructor(meter: number[], accidentals: string[]) {
+    this.notes = [];
+    this.allYPos = [];
+    this.noteLefts = [];
+    this.arrIdx = 0;
+    this.parentSatir = null;
+    this.satirNo = null;
+    this.paper = null;
+    this.mainGroup = null;
+    this.accidentalsGroup = null;
+    this.meterGroup = null;
+    this.staffGroup = null;
+    this.guideGroup = null;
+    this.notesGroup = null;
+    this.clefObj = null;
+
+    this.mAccJson = {};
+    this.mAccArr = [];
+    for (let accidental of accidentals) {
+      let note = new Note(accidental, "1/1");
+      this.mAccJson[note.noteRoot] = note.noteComma;
+      this.mAccArr.push(note);
+    }
+    this.meter = {
+      strVer: meter[0] + "/" + meter[1],
+      num: meter[0],
+      den: meter[1],
+    };
+
+    this.lastDrawnWidth = 0;
+    this.compressedWidth = 0;
+
+    this.widthDiff = 0;
+    this.startPos = 0;
+    this.notesStartPos = 0;
+    this.endPos = 0;
+    this.satirEndPos = 0;
+    this.porteTop = 0;
+    this.box = {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    };
+    this.ghostColor = null;
+    this.ghostLineColor = null;
+    this.mainColor = null;
+    this.ghostsVisible = false;
+    this.porteLiHe = 10;
+    this.maxSpace = 0;
+    this.minSpace = 0;
+    this.lineThickness = 0;
+    this.emptyMeasureWidth = 0;
+    this.highlightColor = "";
+    this.noteColor = "";
+    this.noteErrColor = "";
+    this.porteLineColor = "";
+
+    this.clefVisible = false;
+    this.meterVisible = false;
+    this.gAcciVisible = false;
   }
-  this.meter = {
-    strVer: meter[0] + "/" + meter[1],
-    num: meter[0],
-    den: meter[1],
-  };
 
-  this.lastDrawnWidth = 0;
-  this.compressedWidth = 0;
-
-  this.widthDiff = 0;
-  this.startPos = 0;
-  this.notesStartPos = 0;
-  this.endPos = 0;
-  this.satirEndPos = 0;
-  this.porteTop = 0;
-  this.box = {
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-  };
-  this.ghostColor = null;
-  this.ghostLineColor = null;
-  this.mainColor = null;
-  this.ghostsVisible = false;
-  this.porteLiHe = 10;
-  this.maxSpace = 0;
-  this.minSpace = 0;
-  this.lineThickness = 0;
-  this.emptyMeasureWidth = 0;
-  this.highlightColor = null;
-  this.noteColor = null;
-  this.noteErrColor = null;
-  this.porteLineColor = null;
-
-  this.clefVisible = false;
-  this.meterVisible = false;
-  this.gAcciVisible = false;
-
-  // setters
-  this.setArrIdx = function (idx) {
+  setArrIdx(idx: number) {
     this.arrIdx = idx;
     if (this.notesGroup) {
       let noteIdx = 0;
@@ -90,9 +148,9 @@ export function Measure(meter, accidentals) {
         noteIdx += 1;
       }
     }
-  };
+  }
 
-  this.setBoundingBox = function (start, end) {
+  setBoundingBox(start: number, end: number) {
     this.endPos = this.startPos + end;
     this.box.top = this.porteTop - this.porteLiHe * 5;
     this.box.right = this.endPos;
@@ -102,17 +160,17 @@ export function Measure(meter, accidentals) {
     for (let i = -10; i <= 18; i++) {
       this.allYPos.push(this.porteTop + (this.porteLiHe / 2) * i);
     }
-  };
+  }
 
-  this.setClefVisibility = function (isVisible) {
+  setClefVisibility(isVisible: boolean) {
     this.clefVisible = isVisible;
-  };
+  }
 
-  this.setGAcciVisibility = function (isVisible) {
+  setGAcciVisibility(isVisible: boolean) {
     this.gAcciVisible = isVisible;
-  };
+  }
 
-  this.setMeasureAccidentals = function (accidentals) {
+  setMeasureAccidentals(accidentals: string[]) {
     this.mAccJson = {};
     this.mAccArr = [];
     for (let accidental of accidentals) {
@@ -120,20 +178,21 @@ export function Measure(meter, accidentals) {
       this.mAccJson[note.noteRoot] = note.noteComma;
       this.mAccArr.push(note);
     }
-  };
+  }
 
-  this.setMeasureMeter = function (strMeter) {
+  setMeasureMeter(strMeter: string) {
     this.meter.strVer = strMeter;
     let parts = strMeter.split("/");
     this.meter.num = parseInt(parts[0]);
     this.meter.den = parseInt(parts[1]);
-  };
+  }
 
-  this.setMeterVisibility = function (isVisible) {
+  setMeterVisibility(isVisible: boolean) {
     this.meterVisible = isVisible;
-  };
+  }
 
-  this.setSParams = function (sParams) {
+  // TODO: fix any
+  setSParams(sParams: any) {
     this.parentSatir = sParams.parentSatir;
     this.paper = sParams.paper;
     let sp = Object.assign({}, sParams);
@@ -154,30 +213,29 @@ export function Measure(meter, accidentals) {
     this.porteLineColor = sp.cfg.colorScheme.porteLineColor;
     this.maxSpace = 12;
     this.minSpace = 8;
-  };
+  }
 
-  this.setWidthDiff = function (diff) {
+  setWidthDiff(diff: number) {
     this.widthDiff = diff;
-  };
+  }
 
-  // getters
-  this.getAccidentalsStr = function () {
+  getAccidentalsStr() {
     let res = [];
     for (let note of this.mAccArr) {
       res.push(note.toNoteStr(true, false));
     }
     return res;
-  };
+  }
 
-  this.getMeter = function () {
+  getMeter() {
     return [this.meter.num, this.meter.den];
-  };
+  }
 
-  this.getNotes = function () {
+  getNotes() {
     return this.notes;
-  };
+  }
 
-  this.getReqAccidental = function (note, accidentals) {
+  getReqAccidental(note: Note, accidentals: { [key: string]: string; }) {
     let noteName = note.noteRoot;
     let noteAcc = note.noteComma;
     if (noteName in accidentals) {
@@ -196,15 +254,11 @@ export function Measure(meter, accidentals) {
       accidentals[noteName] = noteAcc;
     }
     return noteAcc;
-  };
+  }
 
-  this.getReqAccidentalAtPos = function (noteRoot, forcedAcci, pos) {
+  getReqAccidentalAtPos(noteRoot: string, forcedAcci: string, pos: number) {
     let accidentals = JSON.parse(JSON.stringify(this.mAccJson));
-    /* let acci;
-    for (let i = 0; i < pos; i++) {
-      let eNote = this.notes[i];
-      acci = this.getReqAccidental(eNote, accidentals);
-    } */
+
     let notePitch = noteRoot.slice(0, -1);
     if (notePitch in accidentals) {
       if (!forcedAcci) {
@@ -221,16 +275,15 @@ export function Measure(meter, accidentals) {
       }
       return forcedAcci;
     }
-  };
+  }
 
-  // methods
-  this.addNote = function (pitch, dur) {
+  addNote(pitch: string, dur: string) {
     let note = new Note(pitch, dur);
     this.notes.push(note);
     mParams.totalNoteCount += 1;
-  };
+  }
 
-  this.deleteNoteAt = function (noteIdx) {
+  deleteNoteAt(noteIdx: number) {
     this.notes.splice(noteIdx, 1);
     mParams.totalNoteCount -= 1;
     mParams.highElem = null;
@@ -243,34 +296,59 @@ export function Measure(meter, accidentals) {
       return;
     }
     this.refreshMeasure();
-  };
+  }
 
-  this.drawAccidentals = function (left) {
-    this.accidentalsGroup = this.paper.g();
-
-    for (let i = 0; i < this.mAccArr.length; i++) {
-      let note = this.mAccArr[i];
-      let notePos = notePositions[note.getNote()];
-
-      let accPath = symbols[note.getAcc()];
-      let accSymbol = this.paper.path(accPath);
-      let scaleFactor = parseFloat((this.porteLiHe / 3.25).toFixed(2));
-
-      let top = notePos * this.porteLiHe;
-
-      let translateStr = "t " + left + " " + top;
-      let scaleStr = "s" + scaleFactor + " 0 0";
-      accSymbol.transform(translateStr + " " + scaleStr);
-      accSymbol.attr({
-        fill: this.mainColor,
-      });
-      left += accSymbol.getBBox().width + this.porteLiHe / 2;
-      this.accidentalsGroup.add(accSymbol);
+  eraseMeasure() {
+    this.allYPos = [];
+    this.noteLefts = [];
+    if (this.mainGroup) {
+      this.mainGroup.remove();
+      this.mainGroup = null;
+      this.accidentalsGroup = null;
+      this.meterGroup = null;
+      this.staffGroup = null;
+      this.guideGroup = null;
+      this.notesGroup = null;
+      this.clefObj = null;
     }
-    return this.accidentalsGroup.getBBox().width + this.porteLiHe;
-  };
+  }
 
-  this.drawClef = function (left) {
+  refreshMeasure() {
+    this.eraseMeasure();
+    let previousWid = this.lastDrawnWidth;
+    this.drawMeasure();
+    let currentWid = this.lastDrawnWidth;
+    this.parentSatir.notifyWidthChange(this.arrIdx, currentWid - previousWid);
+    let symbol, symbolR;
+    if (mParams.ghostNote.symbol) {
+      symbol = mParams.ghostNote.symbol.attr("path");
+      mParams.ghostNote.symbol.remove();
+      mParams.ghostNote.symbol = this.paper.path(symbol);
+      mParams.ghostNote.symbol.attr({
+        fill: "transparent",
+      });
+      mParams.ghostNote.symbol.addClass("no-print");
+    }
+    if (mParams.ghostNote.symbolR) {
+      symbolR = mParams.ghostNote.symbolR.attr("path");
+      mParams.ghostNote.symbolR.remove();
+      mParams.ghostNote.symbolR = this.paper.path(symbolR);
+      mParams.ghostNote.symbolR.attr({
+        fill: "transparent",
+      });
+      mParams.ghostNote.symbolR.addClass("no-print");
+    }
+    if (mParams.ghostNote.symbolDot) {
+      mParams.ghostNote.symbolDot.remove();
+      mParams.ghostNote.symbolDot = this.paper.circle(-2, -2, 1);
+      mParams.ghostNote.symbolDot.attr({
+        fill: "transparent",
+      });
+      mParams.ghostNote.symbolDot.addClass("no-print");
+    }
+  }
+
+  drawClef(left: number) {
     this.clefObj = this.paper.path(symbols.gClef);
     let porteHeight = this.porteLiHe * 4;
     let scaleFactor = (porteHeight * (74 / 40)) / this.clefObj.getBBox().height;
@@ -283,30 +361,9 @@ export function Measure(meter, accidentals) {
       fill: this.mainColor,
     });
     return this.clefObj.getBBox().width + this.porteLiHe;
-  };
+  }
 
-  this.drawGuides = function (start, end) {
-    // draw upper & lower guide lines
-    let y;
-    this.guideGroup = this.paper.g();
-    for (let i = 1; i <= 5; i++) {
-      y = -i * this.porteLiHe;
-      let upperLine = this.paper.line(start, y, end, y);
-      this.guideGroup.add(upperLine);
-
-      y = (i + 4) * this.porteLiHe;
-      let lowerLine = this.paper.line(start, y, end, y);
-      this.guideGroup.add(lowerLine);
-    }
-    this.guideGroup.attr({
-      stroke: "transparent",
-      strokeWidth: this.lineThickness,
-    });
-
-    this.guideGroup.addClass("no-print");
-  };
-
-  this.drawMeasure = function () {
+  drawMeasure() {
     let left = 0;
     this.mainGroup = this.paper.g();
     this.mainGroup.addClass("main-group");
@@ -348,9 +405,34 @@ export function Measure(meter, accidentals) {
     this.lastDrawnWidth = left;
 
     return left;
-  };
+  }
 
-  this.drawMeter = function (left) {
+  drawAccidentals(left: number) {
+    this.accidentalsGroup = this.paper.g();
+
+    for (let i = 0; i < this.mAccArr.length; i++) {
+      let note = this.mAccArr[i];
+      let notePos = notePositions[note.getNote()];
+
+      let accPath = symbols[note.getAcc()];
+      let accSymbol = this.paper.path(accPath);
+      let scaleFactor = parseFloat((this.porteLiHe / 3.25).toFixed(2));
+
+      let top = notePos * this.porteLiHe;
+
+      let translateStr = "t " + left + " " + top;
+      let scaleStr = "s" + scaleFactor + " 0 0";
+      accSymbol.transform(translateStr + " " + scaleStr);
+      accSymbol.attr({
+        fill: this.mainColor,
+      });
+      left += accSymbol.getBBox().width + this.porteLiHe / 2;
+      this.accidentalsGroup.add(accSymbol);
+    }
+    return this.accidentalsGroup.getBBox().width + this.porteLiHe;
+  }
+
+  drawMeter(left: number) {
     this.meterGroup = this.paper.g();
     this.meterGroup.transform("t " + left + " " + 0);
 
@@ -360,7 +442,7 @@ export function Measure(meter, accidentals) {
     let numG = this.paper.g();
     let translateStr, scaleStr;
     for (let n of numElems) {
-      let numElem = this.paper.path(symbols.numbers[parseInt(n)]);
+      let numElem = this.paper.path((symbols.numbers as string[])[parseInt(n)]);
       numG.add(numElem);
       translateStr = "t " + locLeft + " 0";
       scaleStr = "s" + scaleFactor + " 0 0";
@@ -377,7 +459,7 @@ export function Measure(meter, accidentals) {
     let denG = this.paper.g();
     locLeft = 0;
     for (let n of denElems) {
-      let denElem = this.paper.path(symbols.numbers[parseInt(n)]);
+      let denElem = this.paper.path((symbols.numbers as string[])[parseInt(n)]);
       denG.add(denElem);
       translateStr = "t " + locLeft + " 0";
       scaleStr = "s" + scaleFactor + " 0 0";
@@ -394,9 +476,9 @@ export function Measure(meter, accidentals) {
     this.meterGroup.add(numG);
     this.meterGroup.add(denG);
     return this.meterGroup.getBBox().width + this.porteLiHe;
-  };
+  }
 
-  this.drawNotes = function (left) {
+  drawNotes(left: number) {
     this.notesGroup = this.paper.g();
     this.notesGroup.addClass("notes-group");
     this.notesGroup.transform("t " + left + " " + 0);
@@ -415,16 +497,14 @@ export function Measure(meter, accidentals) {
       let acci = this.getReqAccidental(note, accidentals);
       let noteG = note.drawNote(
         this.paper,
-        this.porteLiHe,
-        this.lineThickness,
         leftMargin,
         0,
         this.porteLineColor,
         acci
       );
       noteG.attr({ fill: color, smn: [this.satirNo, this.arrIdx, noteIdx].join(",") });
-      noteG.click(function (e) {
-        noteGClick(e, this, color, highColor, note);
+      noteG.click(function (e: any) {
+        noteGClick(e, noteG, color, highColor, note);
         e.stopPropagation();
       });
       this.notesGroup.add(noteG);
@@ -440,9 +520,30 @@ export function Measure(meter, accidentals) {
       leftMargin += space;
     }
     return leftMargin;
-  };
+  }
 
-  this.drawStaff = function (width) {
+  drawGuides(start: number, end: number) {
+    // draw upper & lower guide lines
+    let y;
+    this.guideGroup = this.paper.g();
+    for (let i = 1; i <= 5; i++) {
+      y = -i * this.porteLiHe;
+      let upperLine = this.paper.line(start, y, end, y);
+      this.guideGroup.add(upperLine);
+
+      y = (i + 4) * this.porteLiHe;
+      let lowerLine = this.paper.line(start, y, end, y);
+      this.guideGroup.add(lowerLine);
+    }
+    this.guideGroup.attr({
+      stroke: "transparent",
+      strokeWidth: this.lineThickness,
+    });
+
+    this.guideGroup.addClass("no-print");
+  }
+
+  drawStaff(width: number) {
     this.staffGroup = this.paper.g();
     this.staffGroup.addClass("staff-group");
     for (let i = 0; i < 5; i++) {
@@ -460,24 +561,9 @@ export function Measure(meter, accidentals) {
       strokeWidth: this.lineThickness,
     });
     this.staffGroup.add(meEndLine);
-  };
+  }
 
-  this.eraseMeasure = function () {
-    this.allYPos = [];
-    this.noteLefts = [];
-    if (this.mainGroup) {
-      this.mainGroup.remove();
-      this.mainGroup = null;
-      this.accidentalsGroup = null;
-      this.meterGroup = null;
-      this.staffGroup = null;
-      this.guideGroup = null;
-      this.notesGroup = null;
-      this.clefObj = null;
-    }
-  };
-
-  this.insertAndDrawAt = function (pos, note) {
+  insertAndDrawAt(pos: number, note: Note) {
     this.notes.splice(pos, 0, note);
     mParams.totalNoteCount += 1;
     this.refreshMeasure();
@@ -489,29 +575,29 @@ export function Measure(meter, accidentals) {
     }
 
     playNote(note);
-  };
+  }
 
-  this.isEmpty = function () {
+  isEmpty() {
     return this.notes.length === 0;
-  };
+  }
 
-  this.isExceeded = function () {
+  isExceeded() {
     let total = 0;
     for (let note of this.notes) {
       total += note.getDuration();
     }
     return total > this.meter.num / this.meter.den;
-  };
+  }
 
-  this.isFull = function () {
+  isFull() {
     let total = 0;
     for (let note of this.notes) {
       total += note.getDuration();
     }
     return total === this.meter.num / this.meter.den;
-  };
+  }
 
-  this.mouseOver = function (x, y) {
+  mouseOver(x: number, y: number) {
     if (!mParams.allowInsert) {
       return;
     }
@@ -693,9 +779,9 @@ export function Measure(meter, accidentals) {
         this.ghostsVisible = false;
       }
     }
-  };
+  }
 
-  this.mouseClick = function (x, y) {
+  mouseClick(x: number, y: number) {
     if (!mParams.allowInsert) {
       return;
     }
@@ -716,7 +802,7 @@ export function Measure(meter, accidentals) {
           let noteRoot = notePositionsRev[snapPos + ""];
           let noteAcci = mParams.acci ? mParams.acci : "";
           let isDotted = mParams.dot;
-          let durDen = parseInt(mParams.duration.replace("n", ""));
+          let durDen = parseInt(mParams.duration!.replace("n", ""));
           let durNum = isDotted ? 3 : 1;
           durDen = isDotted ? durDen * 2 : durDen;
           let fullDur = durNum + "/" + durDen;
@@ -736,7 +822,7 @@ export function Measure(meter, accidentals) {
           break;
         case "rest":
           let restBody = "Rest";
-          let restDur = mParams.duration;
+          let restDur = mParams.duration!;
           i = 0;
           for (let nl of this.noteLefts) {
             if (nl < x) {
@@ -752,45 +838,13 @@ export function Measure(meter, accidentals) {
           break;
       }
     }
-  };
+  }
 
-  this.refreshMeasure = function () {
-    this.eraseMeasure();
-    let previousWid = this.lastDrawnWidth;
-    this.drawMeasure();
-    let currentWid = this.lastDrawnWidth;
-    this.parentSatir.notifyWidthChange(this.arrIdx, currentWid - previousWid);
-    let symbol, symbolR;
-    if (mParams.ghostNote.symbol) {
-      symbol = mParams.ghostNote.symbol.attr("path");
-      mParams.ghostNote.symbol.remove();
-      mParams.ghostNote.symbol = this.paper.path(symbol);
-      mParams.ghostNote.symbol.attr({
-        fill: "transparent",
-      });
-      mParams.ghostNote.symbol.addClass("no-print");
-    }
-    if (mParams.ghostNote.symbolR) {
-      symbolR = mParams.ghostNote.symbolR.attr("path");
-      mParams.ghostNote.symbolR.remove();
-      mParams.ghostNote.symbolR = this.paper.path(symbolR);
-      mParams.ghostNote.symbolR.attr({
-        fill: "transparent",
-      });
-      mParams.ghostNote.symbolR.addClass("no-print");
-    }
-    if (mParams.ghostNote.symbolDot) {
-      mParams.ghostNote.symbolDot.remove();
-      mParams.ghostNote.symbolDot = this.paper.circle(-2, -2, 1);
-      mParams.ghostNote.symbolDot.attr({
-        fill: "transparent",
-      });
-      mParams.ghostNote.symbolDot.addClass("no-print");
-    }
-  };
-
-  this.shiftPosition = function (offset) {
+  shiftPosition(offset: number) {
     this.startPos += offset;
     this.mainGroup.transform("t " + this.startPos + " " + this.porteTop);
-  };
+  }
+
 }
+
+export default Measure;

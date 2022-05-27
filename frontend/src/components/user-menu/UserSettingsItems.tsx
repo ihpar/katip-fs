@@ -32,7 +32,7 @@ const UserSettingsItems: React.FC<propsType> = (props) => {
         dispatch(themeActions.setTheme("light"));
       }
       themeIconRef.current?.classList.remove("set");
-    }, 220);
+    }, 400);
   };
 
   useEffect(() => {

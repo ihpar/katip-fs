@@ -1,7 +1,7 @@
 import { mParams } from "./mparams";
 import { symbols, ALL_MAKAMS, ALL_USULS } from "./constants";
-import { Measure } from "./Measure";
-import { SatirObject } from "./SatirObject";
+import Measure from "./Measure";
+import SatirObject from "./SatirObject";
 import { setMakam, setUsul, playWhole, allowNewInsertion } from "./utils";
 
 const Snap = require("snapsvg-cjs");
@@ -19,12 +19,12 @@ class TmmScore {
 
   private darkTheme = {
     highColor: "#389edb",
-    noteColor: "#ddb974",
+    noteColor: "#00cdb2",
     noteErrColor: "#ff5f57",
-    mainColor: "#D4D4D4",
-    porteLineColor: "#66a7c1",
-    ghostColor: "#cfcfcf",
-    ghostLineColor: "#688996",
+    mainColor: "#8fb2c7",
+    porteLineColor: "#698a96",
+    ghostColor: "#288a7d",
+    ghostLineColor: "#4d5a5e",
   };
 
   private configs = {

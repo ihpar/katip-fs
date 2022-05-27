@@ -1,4 +1,4 @@
-import { Measure } from "./Measure";
+import Measure from "./Measure";
 
 export function SatirObject(satirNo, paper, configs, left, top, width, parentScore) {
   this.satirNo = satirNo;
