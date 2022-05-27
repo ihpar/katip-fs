@@ -11,15 +11,28 @@ export function TmmScore(containerSelector) {
     padding: { top: 0, right: 0, bottom: 0, left: 0 },
     lineThickness: 1,
     porteLineHeight: 10,
+
     highColor: "#46879E",
+    highColorDark: "#389edb",
+
     noteColor: "#243041",
+    noteColorDark: "#ddb974",
+
     noteErrColor: "#9B1800",
+    noteErrColorDark: "#ff5f57",
+
     mainColor: "#565345",
+    mainColorDark: "#D4D4D4",
+
     porteLineColor: "#BDA37E",
-    paperBgColor: "#F7F5EA",
-    paperBgColorDark: "#252526",
+    porteLineColorDark: "#66a7c1",
+
     ghostColor: "#998166",
+    ghostColorDark: "#cfcfcf",
+
     ghostLineColor: "#E5DCD0",
+    ghostLineColorDark: "#688996",
+
     maxPaperWidth: 1100,
     emptyMeasureLen: 4,
     emptyMeasureWidth: 0,
@@ -35,12 +48,7 @@ export function TmmScore(containerSelector) {
   this.svgElem = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   let svgID = "svg-tmm-score";
   this.svgElem.setAttribute("id", svgID);
-  this.svgElem.setAttribute("class", "shadowed-porte");
-  /*
-  this.svgElem.style.backgroundColor = this.configs.theme === "light" ?
-    this.configs.paperBgColor :
-    this.configs.paperBgColorDark;
-  */
+
   this.svgElem.style.backgroundColor = "transparent";
   this.svgElem.style.width = scorePaperWidth + "px";
 
@@ -333,10 +341,10 @@ export function TmmScore(containerSelector) {
     this.configs.theme = theme;
     if (this.svgElem) {
       if (theme === "dark") {
-        this.svgElem.style.filter = "invert(1)";
+        //this.svgElem.style.filter = "invert(1)";
       }
       else {
-        this.svgElem.style.filter = null;
+        //this.svgElem.style.filter = null;
       }
     }
   };

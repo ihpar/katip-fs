@@ -44,6 +44,7 @@
   background-color: transparent;
   padding: 0;
   transition: opacity 200ms;
+  display: flex;
 
   &:hover,
   &:focus {

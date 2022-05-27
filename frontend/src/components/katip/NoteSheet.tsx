@@ -3,11 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import Soundfont from "soundfont-player";
 import { RootState } from "../../store";
 import { playerActions } from "../../store/player";
-import { TmmScore } from "./sheet/sheet";
+import TmmScore from "./sheet/TmmScore";
 
 import "./NoteSheet.scss";
 
-let tmmEditor: any = null;
+let tmmEditor: TmmScore;
 
 const NoteSheet = () => {
   const isSoundOn = useSelector<RootState, boolean>((state) => state.player.soundOn);
@@ -25,20 +25,22 @@ const NoteSheet = () => {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (!tmmEditor) {
+      tmmEditor = new TmmScore("#sheet");
+    }
+  }, []);
+
   const songEndedHandler = useCallback(() => {
     dispatch(playerActions.stopPlaying());
   }, [dispatch]);
 
   useEffect(() => {
-    if (!tmmEditor) {
-      tmmEditor = new TmmScore("#sheet");
-      tmmEditor.setSongEndedHandler(songEndedHandler);
-    }
+    tmmEditor.setSongEndedHandler(songEndedHandler);
   }, [songEndedHandler]);
 
   useEffect(() => {
-    tmmEditor.setTheme(theme);
-    tmmEditor.begin();
+    tmmEditor.changeTheme(theme);
   }, [theme]);
 
   useEffect(() => {
@@ -74,6 +76,10 @@ const NoteSheet = () => {
       tmmEditor.setRest(restObj.value, restObj.duration);
     }
   }, [isRest, restObj]);
+
+  useEffect(() => {
+    tmmEditor.begin();
+  }, []);
 
   return <div id="sheet"></div>;
 };

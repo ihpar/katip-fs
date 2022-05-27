@@ -1,4 +1,24 @@
-export const mParams = {
+interface mParamsType {
+  makam: { name: string, accidentals: string[]; },
+  usul: { name: string, meter: number[], tempo: number; },
+  acci: null | string,
+  duration: null | string,
+  ghostNote: { symbol: any, symbolR: any, symbolDot: any, width: number, height: number; },
+  dot: boolean,
+  rest: null | string,
+  loc: null,
+  type: null | string,
+  highElem: any,
+  totalNoteCount: number,
+  allowInsert: boolean,
+  soundStarted: boolean,
+  soundActive: boolean,
+  instrument: null,
+  canUseSound: boolean,
+  lastStatus: null,
+}
+
+export const mParams: mParamsType = {
   makam: { name: "Hicaz", accidentals: ["B4b4", "F5#4", "C5#4"] },
   usul: { name: "Aksak", meter: [9, 8], tempo: 124 },
   acci: null,

@@ -1,0 +1,13 @@
+.btn-theme-switcher {
+  overflow: hidden;
+
+  .theme-icon {
+    position: relative;
+    top: 0;
+    transition: top 200ms ease-in;
+
+    &.set {
+      top: 80px;
+    }
+  }
+}

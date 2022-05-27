@@ -140,20 +140,20 @@ export function Measure(meter, accidentals) {
     this.satirNo = sp.satirNo;
     this.startPos = sp.startLeft;
     this.porteTop = sp.startTop;
-    this.porteLiHe = sp.cfg.porteLineHeight;
-    this.lineThickness = sp.cfg.lineThickness;
-    this.ghostColor = sp.cfg.ghostColor;
-    this.mainColor = sp.cfg.mainColor;
+    this.porteLiHe = 10;
+    this.lineThickness = 1;
+    this.ghostColor = sp.cfg.colorScheme.ghostColor;
+    this.mainColor = sp.cfg.colorScheme.mainColor;
 
-    this.ghostLineColor = sp.cfg.ghostLineColor;
+    this.ghostLineColor = sp.cfg.colorScheme.ghostLineColor;
     this.emptyMeasureWidth = sp.cfg.emptyMeasureWidth;
     this.satirEndPos = sp.endPos;
-    this.highlightColor = sp.cfg.highColor;
-    this.noteColor = sp.cfg.noteColor;
-    this.noteErrColor = sp.cfg.noteErrColor;
-    this.porteLineColor = sp.cfg.porteLineColor;
-    this.maxSpace = this.porteLiHe * 1.2;
-    this.minSpace = this.porteLiHe * 0.8;
+    this.highlightColor = sp.cfg.colorScheme.highColor;
+    this.noteColor = sp.cfg.colorScheme.noteColor;
+    this.noteErrColor = sp.cfg.colorScheme.noteErrColor;
+    this.porteLineColor = sp.cfg.colorScheme.porteLineColor;
+    this.maxSpace = 12;
+    this.minSpace = 8;
   };
 
   this.setWidthDiff = function (diff) {
