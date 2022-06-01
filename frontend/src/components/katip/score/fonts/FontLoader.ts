@@ -7,11 +7,11 @@ export class FontLoader {
     this.font = font;
   }
 
-  getPath(symbolKey: string) {
+  getPath(symbolKey: string): string {
     return this.font.glyphs[symbolKey].path || this.font.glyphs[symbolKey].original;
   }
 
-  getDims(symbolKey: string) {
+  getDims(symbolKey: string): number[] {
     return [
       this.font.glyphs[symbolKey].width,
       this.font.glyphs[symbolKey].height,
