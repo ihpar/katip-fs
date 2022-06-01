@@ -1,13 +1,16 @@
-import "./NoteSheetArea.scss";
+import { Route, Routes } from "react-router-dom";
 import Sheets from "./Sheets";
+import NoteSheet from "./NoteSheet";
 
-// import NoteSheet from "./NoteSheet";
+import "./NoteSheetArea.scss";
 
 const NoteSheetArea = () => {
   return (
     <div className="A4">
-      {/*<NoteSheet />*/}
-      <Sheets />
+      <Routes>
+        <Route path="/" element={<Sheets />} />
+        <Route path="/old" element={<NoteSheet />} />
+      </Routes>
     </div>
   );
 };

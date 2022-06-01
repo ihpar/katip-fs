@@ -182,11 +182,16 @@ class Measure {
     }
   }
 
-  setMeasureMeter(strMeter: string) {
+  setMeasureMeter(strMeter: number[]) {
+    /*
+    console.log("strMeter:", strMeter);
     this.meter.strVer = strMeter;
     let parts = strMeter.split("/");
     this.meter.num = parseInt(parts[0]);
     this.meter.den = parseInt(parts[1]);
+    */
+    this.meter.num = strMeter[0];
+    this.meter.den = strMeter[1];
   }
 
   setMeterVisibility(isVisible: boolean) {

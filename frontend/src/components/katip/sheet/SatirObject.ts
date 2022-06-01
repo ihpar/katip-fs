@@ -65,7 +65,7 @@ class SatirObject {
     }
   }
 
-  changeMakamAndMeter(makam: any, accidentals: string[], usul: any, meter: string) {
+  changeMakamAndMeter(makam: any, accidentals: string[], usul: any, meter: number[]) {
     for (let measure of this.measures) {
       measure.setMeasureMeter(meter);
       measure.setMeasureAccidentals(accidentals);
