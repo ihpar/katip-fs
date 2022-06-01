@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
+import { Theme } from "../../../store/theme";
 
 import AccidentalsController from "./AccidentalsController";
 import DurationsController from "./DurationsController";
@@ -12,7 +13,7 @@ import "./ActionsMenu.scss";
 const ActionsMenu = () => {
 
   const theme = useSelector<RootState, string>(state => state.theme.theme);
-  const isDark = theme === "dark";
+  const isDark = theme === Theme.Dark;
 
   return (
     <div className="top-menu no-print">

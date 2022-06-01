@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+import { Theme } from "../../store/theme";
 
 import "./Footer.scss";
 
@@ -14,7 +15,7 @@ import twitterImgDark from "../../images/social/twitter_dark.svg";
 const Footer = () => {
 
   const theme = useSelector<RootState, string>(state => state.theme.theme);
-  const isDark = theme === "dark";
+  const isDark = theme === Theme.Dark;
 
   return (
     <Fragment>

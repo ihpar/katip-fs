@@ -1,4 +1,5 @@
 import { ALL_MAKAMS } from "./sheet/constants";
+import { Theme } from "../../store/theme";
 
 import "./MakamWidget.scss";
 
@@ -9,7 +10,7 @@ const MakamWidget: React.FC<{ height: number; theme: string; }> = (props) => {
     event.dataTransfer.setData("text/plain", "makam:" + makam);
   };
 
-  const isDark = props.theme === "dark";
+  const isDark = props.theme === Theme.Dark;
 
   return (
     <div className="content-scroller" style={{ height: props.height }}>

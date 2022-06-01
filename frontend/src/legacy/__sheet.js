@@ -3,6 +3,7 @@ import { symbols, ALL_MAKAMS, ALL_USULS } from "./constants";
 import { Measure } from "./Measure";
 import { SatirObject } from "./SatirObject";
 import { setMakam, setUsul, playWhole, allowNewInsertion } from "./utils";
+import { Theme } from "../store/theme";
 
 const Snap = require("snapsvg-cjs");
 
@@ -36,7 +37,7 @@ export function TmmScore(containerSelector) {
     maxPaperWidth: 1100,
     emptyMeasureLen: 4,
     emptyMeasureWidth: 0,
-    theme: "light"
+    theme: Theme.Light
   };
   let porLiHe = this.configs.porteLineHeight;
   this.configs.emptyMeasureWidth = this.configs.emptyMeasureLen * porLiHe * 1.5;
@@ -340,7 +341,7 @@ export function TmmScore(containerSelector) {
   this.setTheme = function (theme) {
     this.configs.theme = theme;
     if (this.svgElem) {
-      if (theme === "dark") {
+      if (theme === Theme.Dark) {
         //this.svgElem.style.filter = "invert(1)";
       }
       else {

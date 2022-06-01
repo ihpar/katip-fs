@@ -3,8 +3,10 @@
 
 .A4 {
   width: variables.$paper-width;
-  height: 297mm;
+  min-height: 297mm;
   margin: 24px auto;
+  padding: 24px;
+  box-sizing: border-box;
   background-color: variables.$paper-bg-color;
   box-shadow: 0 0 24px -20px variables.$dark-shadow-color;
   overflow: hidden;

@@ -74,6 +74,12 @@ class SatirObject {
     this.drawSatir();
   }
 
+  updateColorScheme(colorScheme: { [key: string]: string; }) {
+    for (let measure of this.measures) {
+      measure.updateColorScheme(colorScheme);
+    }
+  }
+
   deleteSatirNote(measureIdx: number, noteIdx: number) {
     this.measures[measureIdx].deleteNoteAt(noteIdx);
   }

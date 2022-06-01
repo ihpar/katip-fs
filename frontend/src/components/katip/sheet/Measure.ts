@@ -43,30 +43,31 @@ class Measure {
     den: number,
   };
 
-  lastDrawnWidth = 0;
-  compressedWidth = 0;
+  lastDrawnWidth: number;
+  compressedWidth: number;
 
-  widthDiff = 0;
-  startPos = 0;
-  notesStartPos = 0;
-  endPos = 0;
-  satirEndPos = 0;
-  porteTop = 0;
+  widthDiff: number;
+  startPos: number;
+  notesStartPos: number;
+  endPos: number;
+  satirEndPos: number;
+  porteTop: number;
   box: {
     top: number,
     right: number,
     bottom: number,
     left: number,
   };
-  ghostColor = null;
-  ghostLineColor = null;
-  mainColor = null;
-  ghostsVisible = false;
-  porteLiHe = 10;
-  maxSpace = 0;
-  minSpace = 0;
-  lineThickness = 0;
-  emptyMeasureWidth = 0;
+  ghostColor: string;
+  ghostLineColor: string;
+  mainColor: string;
+  highColor: string;
+  ghostsVisible: boolean;
+  porteLiHe: number;
+  maxSpace: number;
+  minSpace: number;
+  lineThickness: number;
+  emptyMeasureWidth: number;
   highlightColor: string;
   noteColor: string;
   noteErrColor: string;
@@ -120,9 +121,10 @@ class Measure {
       bottom: 0,
       left: 0,
     };
-    this.ghostColor = null;
-    this.ghostLineColor = null;
-    this.mainColor = null;
+    this.ghostColor = "";
+    this.ghostLineColor = "";
+    this.mainColor = "";
+    this.highColor = "";
     this.ghostsVisible = false;
     this.porteLiHe = 10;
     this.maxSpace = 0;
@@ -843,6 +845,24 @@ class Measure {
   shiftPosition(offset: number) {
     this.startPos += offset;
     this.mainGroup.transform("t " + this.startPos + " " + this.porteTop);
+  }
+
+  updateColorScheme(colorScheme: { [key: string]: string; }) {
+    this.mainColor = colorScheme.mainColor;
+    this.ghostColor = colorScheme.ghostColor;
+    this.ghostLineColor = colorScheme.ghostLineColor;
+    this.highColor = colorScheme.highColor;
+    this.mainColor = colorScheme.mainColor;
+    this.noteColor = colorScheme.noteColor;
+    this.noteErrColor = colorScheme.noteErrColor;
+    this.porteLineColor = colorScheme.porteLineColor;
+
+    if (this.clefObj) {
+      this.clefObj.attr({
+        fill: this.mainColor
+      });
+    }
+
   }
 
 }

@@ -1,7 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export enum Theme {
+  Light = "light",
+  Dark = "dark",
+}
+
 const initialState = {
-  theme: localStorage.getItem("tmmTheme") || "light"
+  theme: localStorage.getItem("tmmTheme") as Theme || Theme.Light
 };
 
 const themeSlice = createSlice({

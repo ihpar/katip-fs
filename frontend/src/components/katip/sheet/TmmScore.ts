@@ -3,6 +3,7 @@ import { symbols, ALL_MAKAMS, ALL_USULS } from "./constants";
 import Measure from "./Measure";
 import SatirObject from "./SatirObject";
 import { setMakam, setUsul, playWhole, allowNewInsertion } from "./utils";
+import { Theme } from "../../../store/theme";
 
 const Snap = require("snapsvg-cjs");
 
@@ -44,7 +45,7 @@ class TmmScore {
   private scorePaperWidth: number;
 
   // Configuration section
-  constructor(containerSelector: string, themeCode = "light") {
+  constructor(containerSelector: string, themeCode = Theme.Light) {
     this.containerSelector = containerSelector;
     this.configs.themeCode = themeCode;
     this.svgElem = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -64,7 +65,7 @@ class TmmScore {
     parentElem?.append(this.svgElem);
     this.paper = Snap("#" + this.svgId);
 
-    if (this.configs.themeCode === "light") {
+    if (this.configs.themeCode === Theme.Light) {
       this.configs.colorScheme = this.lightTheme;
     }
     else {
@@ -106,11 +107,15 @@ class TmmScore {
 
   changeTheme(themeCode: string) {
     this.configs.themeCode = themeCode;
-    if (this.configs.themeCode === "light") {
+    if (this.configs.themeCode === Theme.Light) {
       this.configs.colorScheme = this.lightTheme;
     }
     else {
       this.configs.colorScheme = this.darkTheme;
+    }
+
+    for (let satir of this.satirlar) {
+      satir.updateColorScheme(this.configs.colorScheme);
     }
   }
 

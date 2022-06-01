@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useLanguage from "../../hooks/use-language";
 import { RootState } from "../../store";
-import { themeActions } from "../../store/theme";
+import { themeActions, Theme } from "../../store/theme";
 
 import "./UserSettingsItems.scss";
 
@@ -19,28 +19,28 @@ const UserSettingsItems: React.FC<propsType> = (props) => {
   const dispatch = useDispatch();
   const { t } = useLanguage("nav-titles");
 
-  const nextMode = currTheme === "light" ? "light_mode" : "dark_mode";
-  const themeSwitcherTitle = currTheme === "light" ? t.dark_mode : t.light_mode;
+  const nextMode = currTheme === Theme.Light ? "light_mode" : "dark_mode";
+  const themeSwitcherTitle = currTheme === Theme.Light ? t.dark_mode : t.light_mode;
 
   const switchThemeButtonClickHandler = () => {
     themeIconRef.current?.classList.add("set");
     setTimeout(() => {
-      if (currTheme === "light") {
-        dispatch(themeActions.setTheme("dark"));
+      if (currTheme === Theme.Light) {
+        dispatch(themeActions.setTheme(Theme.Dark));
       }
       else {
-        dispatch(themeActions.setTheme("light"));
+        dispatch(themeActions.setTheme(Theme.Light));
       }
       themeIconRef.current?.classList.remove("set");
     }, 400);
   };
 
   useEffect(() => {
-    if (currTheme === "light") {
-      document.body.classList.remove("dark");
+    if (currTheme === Theme.Light) {
+      document.body.classList.remove(Theme.Dark);
     }
     else {
-      document.body.classList.add("dark");
+      document.body.classList.add(Theme.Dark);
     }
   }, [currTheme]);
 

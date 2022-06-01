@@ -1,0 +1,127 @@
+import { Svg, SVG } from "@svgdotjs/svg.js";
+import { FontLoader } from "./fonts/FontLoader";
+import { BravuraFont } from "./fonts/bravura";
+import { Theme } from "../../../store/theme";
+
+export default class Score {
+  painter: Svg;
+  fontLoader: FontLoader;
+  colorSchemes = {
+    [Theme.Light]: {
+      highColor: "#46879E",
+      noteColor: "#243041",
+      noteErrColor: "#9B1800",
+      mainColor: "#565345",
+      porteLineColor: "#BDA37E",
+      ghostColor: "#998166",
+      ghostLineColor: "#E5DCD0",
+    },
+    [Theme.Dark]: {
+      highColor: "#389edb",
+      noteColor: "#38c9a9",
+      noteErrColor: "#ff5f57",
+      mainColor: "#8fb2c7",
+      porteLineColor: "#698a96",
+      ghostColor: "#288a7d",
+      ghostLineColor: "#4d5a5e",
+    }
+  };
+  activeColorScheme;
+
+  constructor(svgRoot: string) {
+    this.painter = SVG().addTo("#svg-root").size(745, 600);
+    this.fontLoader = new FontLoader(BravuraFont);
+    this.activeColorScheme = this.colorSchemes[Theme.Light];
+  }
+
+  setTheme(theme: Theme) {
+    if (theme === Theme.Dark) {
+      this.activeColorScheme = this.colorSchemes[Theme.Dark];
+    }
+    else {
+      this.activeColorScheme = this.colorSchemes[Theme.Light];
+    }
+  }
+
+  drawRect() {
+
+    const symbols = this.fontLoader;
+    const painter = this.painter;
+    painter.clear();
+
+    const porteLineColor = this.activeColorScheme.porteLineColor;
+    const mainColor = this.activeColorScheme.mainColor;
+    const noteColor = this.activeColorScheme.noteColor;
+
+    const staveTop = 54;
+
+    for (let i = 0; i < 5; i++) {
+      this.painter.rect(745, 1).y(i * 9 + staveTop).fill(porteLineColor);
+    }
+
+    painter.path(symbols.getPath("gClef")).center(15, 72).fill(mainColor);
+
+    painter.path(symbols.getPath("timeSig9")).move(40, 54 + 1).fill(mainColor);
+    painter.path(symbols.getPath("timeSig8")).move(40, 72 + 1).fill(mainColor);
+
+    // acci
+    painter.path(symbols.getPath("accidentalNatural")).move(60, 75).fill(noteColor);
+    painter.path(symbols.getPath("accidentalDoubleSharp")).move(70, 76.5).fill(noteColor);
+    painter.path(symbols.getPath("accidentalDoubleFlat")).move(85, 61).fill(noteColor);
+    painter.path(symbols.getPath("accidentalBuyukMucennebFlat")).move(100, 56.5).fill(noteColor);
+    painter.path(symbols.getPath("accidentalKucukMucennebFlat")).move(115, 52).fill(noteColor);
+    painter.path(symbols.getPath("accidentalBakiyeFlat")).move(125, 47.5).fill(noteColor);
+    painter.path(symbols.getPath("accidentalKomaFlat")).move(137, 43).fill(noteColor);
+    painter.path(symbols.getPath("accidentalKomaSharp")).move(150, 43.5).fill(noteColor);
+    painter.path(symbols.getPath("accidentalBakiyeSharp")).move(160, 48).fill(noteColor);
+    painter.path(symbols.getPath("accidentalKucukMucennebSharp")).move(170, 52.5).fill(noteColor);
+    painter.path(symbols.getPath("accidentalBuyukMucennebSharp")).move(185, 57).fill(noteColor);
+
+    // 1st note
+    let noteLeft = 210, noteTop = 81;
+    let group = painter.group();
+    group.path(symbols.getPath("noteheadBlackUp")).move(noteLeft, noteTop).fill(noteColor);
+    let [nw] = symbols.getDims("noteheadBlackUp");
+    let rw = 1.3, rh = 29;
+    group.rect(rw, rh).radius(0.5).move(noteLeft + nw - rw, noteTop - rh + 2).fill(noteColor);
+    group.path(symbols.getPath("flag8thUp")).move(noteLeft + nw - rw, noteTop - rh + 2).fill(noteColor);
+
+    // 2nd note
+    noteTop = 54;
+    noteLeft += 30;
+    painter.path(symbols.getPath("noteheadBlackDown")).move(noteLeft, noteTop).fill(noteColor);
+    [nw] = symbols.getDims("noteheadBlackDown");
+    painter.rect(rw, rh).radius(0.5).move(noteLeft, noteTop + 8).fill(noteColor);
+    painter.path(symbols.getPath("flag8thDown")).move(noteLeft, noteTop + 7).fill(noteColor);
+
+    // 3rd note
+    noteTop = 76.5;
+    noteLeft += 30;
+    painter.path(symbols.getPath("noteheadBlackUp")).move(noteLeft, noteTop).fill(noteColor);
+    [nw] = symbols.getDims("noteheadBlackUp");
+    painter.rect(rw, rh).radius(0.5).move(noteLeft + nw - rw, noteTop - rh + 2).fill(noteColor);
+
+    // 4th note
+    noteTop = 72;
+    noteLeft += 30;
+    painter.path(symbols.getPath("noteheadBlackUp")).move(noteLeft, noteTop).fill(noteColor);
+    [nw] = symbols.getDims("noteheadBlackUp");
+    painter.rect(rw, rh).radius(0.5).move(noteLeft + nw - rw, noteTop - rh + 2).fill(noteColor);
+
+    // 5th note
+    noteTop = 81;
+    noteLeft += 30;
+    painter.path(symbols.getPath("noteheadBlackUp")).move(noteLeft, noteTop).fill(noteColor);
+    [nw] = symbols.getDims("noteheadBlackUp");
+    painter.rect(rw, rh).radius(0.5).move(noteLeft + nw - rw, noteTop - rh + 2).fill(noteColor);
+    painter.path(symbols.getPath("flag16thUp")).move(noteLeft + nw - rw, noteTop - rh + 2).fill(noteColor);
+
+    // 6th note
+    noteTop = 54;
+    noteLeft += 30;
+    painter.path(symbols.getPath("noteheadBlackDown")).move(noteLeft, noteTop).fill(noteColor);
+    [nw] = symbols.getDims("noteheadBlackDown");
+    painter.rect(rw, rh).radius(0.5).move(noteLeft, noteTop + 8).fill(noteColor);
+    painter.path(symbols.getPath("flag16thDown")).move(noteLeft, noteTop + 7).fill(noteColor);
+  }
+}
