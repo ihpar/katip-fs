@@ -71,6 +71,8 @@ export default class Score {
 
     // acci
     let noteLeft = 70;
+
+    // accidentals
     painter.path(symbols.getPath("accidentalNatural")).move(noteLeft, 75).fill(noteColor);
     noteLeft += 15;
     painter.path(symbols.getPath("accidentalDoubleSharp")).move(noteLeft, 76.5).fill(noteColor);
@@ -93,17 +95,31 @@ export default class Score {
     noteLeft += 15;
     painter.path(symbols.getPath("accidentalBuyukMucennebSharp")).move(noteLeft, 57).fill(noteColor);
 
-    // 1st note 8
     noteLeft = 250;
-    let noteTop = 81;
+
+    // quarters
+    let noteTop = 76.5;
+    let rw = 1.3, rh = 29;
+    painter.path(symbols.getPath("noteheadBlackUp")).move(noteLeft, noteTop).fill(noteColor);
+    let [nw] = symbols.getDims("noteheadBlackUp");
+    painter.rect(rw, rh).radius(0.5).move(noteLeft + nw - rw, noteTop - rh + 2).fill(noteColor);
+
+    noteTop = 63;
+    noteLeft += 30;
+    painter.path(symbols.getPath("noteheadBlackDown")).move(noteLeft, noteTop).fill(noteColor);
+    [nw] = symbols.getDims("noteheadBlackDown");
+    painter.rect(rw, rh).radius(0.5).move(noteLeft, noteTop + 7).fill(noteColor);
+
+    // 8ths
+    noteTop = 81;
+    noteLeft += 30;
     let group = painter.group();
     group.path(symbols.getPath("noteheadBlackUp")).move(noteLeft, noteTop).fill(noteColor);
-    let [nw] = symbols.getDims("noteheadBlackUp");
-    let rw = 1.3, rh = 29;
+    [nw] = symbols.getDims("noteheadBlackUp");
+
     group.rect(rw, rh).radius(0.5).move(noteLeft + nw - rw, noteTop - rh + 2).fill(noteColor);
     group.path(symbols.getPath("flag8thUp")).move(noteLeft + nw - rw, noteTop - rh + 2).fill(noteColor);
 
-    // 2nd note 8
     noteTop = 54;
     noteLeft += 30;
     painter.path(symbols.getPath("noteheadBlackDown")).move(noteLeft, noteTop).fill(noteColor);
@@ -111,21 +127,7 @@ export default class Score {
     painter.rect(rw, rh).radius(0.5).move(noteLeft, noteTop + 8).fill(noteColor);
     painter.path(symbols.getPath("flag8thDown")).move(noteLeft, noteTop + 7).fill(noteColor);
 
-    // 3rd note 4
-    noteTop = 76.5;
-    noteLeft += 30;
-    painter.path(symbols.getPath("noteheadBlackUp")).move(noteLeft, noteTop).fill(noteColor);
-    [nw] = symbols.getDims("noteheadBlackUp");
-    painter.rect(rw, rh).radius(0.5).move(noteLeft + nw - rw, noteTop - rh + 2).fill(noteColor);
-
-    // 4th note 4
-    noteTop = 72;
-    noteLeft += 30;
-    painter.path(symbols.getPath("noteheadBlackUp")).move(noteLeft, noteTop).fill(noteColor);
-    [nw] = symbols.getDims("noteheadBlackUp");
-    painter.rect(rw, rh).radius(0.5).move(noteLeft + nw - rw, noteTop - rh + 2).fill(noteColor);
-
-    // 5th note 16
+    // 16ths
     noteTop = 81;
     noteLeft += 30;
     painter.path(symbols.getPath("noteheadBlackUp")).move(noteLeft, noteTop).fill(noteColor);
@@ -133,7 +135,6 @@ export default class Score {
     painter.rect(rw, rh).radius(0.5).move(noteLeft + nw - rw, noteTop - rh + 2).fill(noteColor);
     painter.path(symbols.getPath("flag16thUp")).move(noteLeft + nw - rw, noteTop - rh + 2).fill(noteColor);
 
-    // 6th note 16
     noteTop = 54;
     noteLeft += 30;
     painter.path(symbols.getPath("noteheadBlackDown")).move(noteLeft, noteTop).fill(noteColor);
@@ -141,7 +142,7 @@ export default class Score {
     painter.rect(rw, rh).radius(0.5).move(noteLeft, noteTop + 8).fill(noteColor);
     painter.path(symbols.getPath("flag16thDown")).move(noteLeft, noteTop + 7).fill(noteColor);
 
-    // 7th note 32 up
+    // 32nds
     noteTop = 85.5;
     noteLeft += 30;
     painter.path(symbols.getPath("noteheadBlackUp")).move(noteLeft, noteTop).fill(noteColor);
@@ -150,7 +151,6 @@ export default class Score {
     painter.rect(rw, rh).radius(0.5).move(noteLeft + nw - rw, noteTop - rh + 2).fill(noteColor);
     painter.path(symbols.getPath("flag32ndUp")).move(noteLeft + nw - rw, noteTop - rh + 2).fill(noteColor);
 
-    // 8th note 32 down
     noteTop = 49.5;
     noteLeft += 30;
     painter.path(symbols.getPath("noteheadBlackDown")).move(noteLeft, noteTop).fill(noteColor);
@@ -158,7 +158,7 @@ export default class Score {
     painter.rect(rw, rh).radius(0.5).move(noteLeft, noteTop + 8).fill(noteColor);
     painter.path(symbols.getPath("flag32ndDown")).move(noteLeft, noteTop + 7).fill(noteColor);
 
-    // 9th note 64 up
+    // 64ths
     noteTop = 90;
     noteLeft += 30;
     painter.path(symbols.getPath("noteheadBlackUp")).move(noteLeft, noteTop).fill(noteColor);
@@ -167,13 +167,21 @@ export default class Score {
     painter.rect(rw, rh).radius(0.5).move(noteLeft + nw - rw, noteTop - rh + 2).fill(noteColor);
     painter.path(symbols.getPath("flag64thUp")).move(noteLeft + nw - rw, noteTop - rh + 2).fill(noteColor);
 
-    // 10th note 64 down
     noteTop = 45;
     noteLeft += 30;
     painter.path(symbols.getPath("noteheadBlackDown")).move(noteLeft, noteTop).fill(noteColor);
     [nw] = symbols.getDims("noteheadBlackDown");
     painter.rect(rw, rh).radius(0.5).move(noteLeft, noteTop + 8).fill(noteColor);
     painter.path(symbols.getPath("flag64thDown")).move(noteLeft, noteTop + 7).fill(noteColor);
+
+    // half
+    noteTop = 72;
+    noteLeft += 20;
+    painter.path(symbols.getPath("noteheadHalf")).move(noteLeft, noteTop).fill(noteColor);
+
+    // whole
+    noteLeft += 20;
+    painter.path(symbols.getPath("noteheadWhole")).move(noteLeft, noteTop).fill(noteColor);
 
     // rests
     noteLeft += 50;
