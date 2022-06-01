@@ -70,20 +70,32 @@ export default class Score {
     // painter.path(symbols.getPath("rest32nd")).size(undefined, 35);
 
     // acci
-    painter.path(symbols.getPath("accidentalNatural")).move(60, 75).fill(noteColor);
-    painter.path(symbols.getPath("accidentalDoubleSharp")).move(70, 76.5).fill(noteColor);
-    painter.path(symbols.getPath("accidentalDoubleFlat")).move(85, 61).fill(noteColor);
-    painter.path(symbols.getPath("accidentalBuyukMucennebFlat")).move(100, 56.5).fill(noteColor);
-    painter.path(symbols.getPath("accidentalKucukMucennebFlat")).move(115, 52).fill(noteColor);
-    painter.path(symbols.getPath("accidentalBakiyeFlat")).move(125, 47.5).fill(noteColor);
-    painter.path(symbols.getPath("accidentalKomaFlat")).move(137, 43).fill(noteColor);
-    painter.path(symbols.getPath("accidentalKomaSharp")).move(150, 43.5).fill(noteColor);
-    painter.path(symbols.getPath("accidentalBakiyeSharp")).move(160, 48).fill(noteColor);
-    painter.path(symbols.getPath("accidentalKucukMucennebSharp")).move(170, 52.5).fill(noteColor);
-    painter.path(symbols.getPath("accidentalBuyukMucennebSharp")).move(185, 57).fill(noteColor);
+    let noteLeft = 70;
+    painter.path(symbols.getPath("accidentalNatural")).move(noteLeft, 75).fill(noteColor);
+    noteLeft += 15;
+    painter.path(symbols.getPath("accidentalDoubleSharp")).move(noteLeft, 76.5).fill(noteColor);
+    noteLeft += 15;
+    painter.path(symbols.getPath("accidentalDoubleFlat")).move(noteLeft, 61).fill(noteColor);
+    noteLeft += 15;
+    painter.path(symbols.getPath("accidentalBuyukMucennebFlat")).move(noteLeft, 56.5).fill(noteColor);
+    noteLeft += 15;
+    painter.path(symbols.getPath("accidentalKucukMucennebFlat")).move(noteLeft, 52).fill(noteColor);
+    noteLeft += 15;
+    painter.path(symbols.getPath("accidentalBakiyeFlat")).move(noteLeft, 47.5).fill(noteColor);
+    noteLeft += 15;
+    painter.path(symbols.getPath("accidentalKomaFlat")).move(noteLeft, 43).fill(noteColor);
+    noteLeft += 15;
+    painter.path(symbols.getPath("accidentalKomaSharp")).move(noteLeft, 43.5).fill(noteColor);
+    noteLeft += 15;
+    painter.path(symbols.getPath("accidentalBakiyeSharp")).move(noteLeft, 48).fill(noteColor);
+    noteLeft += 15;
+    painter.path(symbols.getPath("accidentalKucukMucennebSharp")).move(noteLeft, 52.5).fill(noteColor);
+    noteLeft += 15;
+    painter.path(symbols.getPath("accidentalBuyukMucennebSharp")).move(noteLeft, 57).fill(noteColor);
 
     // 1st note 8
-    let noteLeft = 240, noteTop = 81;
+    noteLeft = 250;
+    let noteTop = 81;
     let group = painter.group();
     group.path(symbols.getPath("noteheadBlackUp")).move(noteLeft, noteTop).fill(noteColor);
     let [nw] = symbols.getDims("noteheadBlackUp");
