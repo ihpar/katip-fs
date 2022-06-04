@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import flagTr from "../images/flags/tr.svg";
-import flagEn from "../images/flags/en.svg";
+import flagTr from "../../static/images/flags/tr.svg";
+import flagEn from "../../static/images/flags/en.svg";
 
 const LANGUAGES = [
   { code: "tr", flag: flagTr },
@@ -10,7 +10,7 @@ const LANGUAGES = [
 
 const initialState = {
   code: localStorage.getItem("tmmLang") || "en",
-  flag: localStorage.getItem("tmmLang") === "tr" ? flagTr : flagEn
+  flag: localStorage.getItem("tmmLang") === "tr" ? flagTr : flagEn,
 };
 
 const languageSlice = createSlice({
@@ -19,10 +19,10 @@ const languageSlice = createSlice({
   reducers: {
     setLenguage(state, action) {
       state.code = action.payload;
-      state.flag = LANGUAGES.find(lang => lang.code === action.payload)!.flag;
+      state.flag = LANGUAGES.find((lang) => lang.code === action.payload)!.flag;
       localStorage.setItem("tmmLang", action.payload);
-    }
-  }
+    },
+  },
 });
 
 export const languageActions = languageSlice.actions;

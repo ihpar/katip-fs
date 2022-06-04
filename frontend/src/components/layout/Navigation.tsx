@@ -6,7 +6,7 @@ import Modal from "../utils/Modal";
 import LanguageSelector from "../utils/LanguageSelector";
 
 import "./Navigation.scss";
-import "../../sass/vendors/hamburger.scss";
+import "../../static/styles/vendors/hamburger.scss";
 import UserSettingsItems from "../user-menu/UserSettingsItems";
 import UserFileActions from "../user-menu/UserFileActions";
 

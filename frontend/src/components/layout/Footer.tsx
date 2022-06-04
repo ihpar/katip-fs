@@ -1,16 +1,16 @@
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { Theme } from "../../store/theme";
+import { Theme } from "../../store/slices/theme";
 
 import "./Footer.scss";
 
-import githubImg from "../../images/social/github.svg";
-import githubImgDark from "../../images/social/github_dark.svg";
-import instagramImg from "../../images/social/instagram.svg";
-import instagramImgDark from "../../images/social/instagram_dark.svg";
-import twitterImg from "../../images/social/twitter.svg";
-import twitterImgDark from "../../images/social/twitter_dark.svg";
+import githubImg from "../../static/images/social/github.svg";
+import githubImgDark from "../../static/images/social/github_dark.svg";
+import instagramImg from "../../static/images/social/instagram.svg";
+import instagramImgDark from "../../static/images/social/instagram_dark.svg";
+import twitterImg from "../../static/images/social/twitter.svg";
+import twitterImgDark from "../../static/images/social/twitter_dark.svg";
 
 const Footer = () => {
 

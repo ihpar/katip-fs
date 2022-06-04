@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
-import { Theme } from "../../../store/theme";
+import { Theme } from "../../../store/slices/theme";
 
 import AccidentalsController from "./AccidentalsController";
 import DurationsController from "./DurationsController";

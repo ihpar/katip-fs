@@ -1,15 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import playerReducer from "./player";
-import noteModifierReducer from "./note-modifiers";
-import languageReducer from "./language";
-import themeReducer from "./theme";
+import playerReducer from "./slices/player";
+import noteModifierReducer from "./slices/note-modifiers";
+import languageReducer from "./slices/language";
+import themeReducer from "./slices/theme";
 
 const store = configureStore({
   reducer: {
     player: playerReducer,
     noteModifier: noteModifierReducer,
     language: languageReducer,
-    theme: themeReducer
+    theme: themeReducer,
   },
 });
 

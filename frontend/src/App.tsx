@@ -1,4 +1,4 @@
-import "./sass/pages/App.scss";
+import "./static/styles/pages/App.scss";
 
 import Katip from "./components/katip/Katip";
 

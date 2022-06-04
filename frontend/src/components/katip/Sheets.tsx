@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { Theme } from "../../store/theme";
+import { Theme } from "../../store/slices/theme";
 
 import Score from "./score/Score";
 
