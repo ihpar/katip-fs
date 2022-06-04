@@ -1,8 +1,8 @@
 import { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Soundfont from "soundfont-player";
-import { RootState } from "../../store";
-import { playerActions } from "../../store/slices/player";
+import { RootState } from "@/store/index";
+import { playerActions } from "@/store/slices/player";
 import TmmScore from "./sheet/TmmScore";
 
 import "./NoteSheet.scss";

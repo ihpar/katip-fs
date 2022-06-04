@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { noteModifierActions } from "../../../store/slices/note-modifiers";
+import { noteModifierActions } from "@/store/slices/note-modifiers";
 
 import "./RestsController.scss";
 
-import rest_4 from "../../../static/images/controls/rest_4.svg";
-import rest_4_Dark from "../../../static/images/controls/rest_4_dark.svg";
-import rest_8 from "../../../static/images/controls/rest_8.svg";
-import rest_8_Dark from "../../../static/images/controls/rest_8_dark.svg";
-import rest_16 from "../../../static/images/controls/rest_16.svg";
-import rest_16_Dark from "../../../static/images/controls/rest_16_dark.svg";
-import rest_32 from "../../../static/images/controls/rest_32.svg";
-import rest_32_Dark from "../../../static/images/controls/rest_32_dark.svg";
+import rest_4 from "@/static/images/controls/rest_4.svg";
+import rest_4_Dark from "@/static/images/controls/rest_4_dark.svg";
+import rest_8 from "@/static/images/controls/rest_8.svg";
+import rest_8_Dark from "@/static/images/controls/rest_8_dark.svg";
+import rest_16 from "@/static/images/controls/rest_16.svg";
+import rest_16_Dark from "@/static/images/controls/rest_16_dark.svg";
+import rest_32 from "@/static/images/controls/rest_32.svg";
+import rest_32_Dark from "@/static/images/controls/rest_32_dark.svg";
 
 const rests = [
   { value: "r4", durValue: "1/4", img: rest_4, imgDark: rest_4_Dark },

@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { noteModifierActions } from "../../../store/slices/note-modifiers";
+import { noteModifierActions } from "@/store/slices/note-modifiers";
+
 
 const durations = [
   { name: "whole", value: "n1" },
