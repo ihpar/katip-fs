@@ -1,5 +1,5 @@
 import { ALL_MAKAMS } from "./sheet/constants";
-import { Theme } from "@/store/slices/theme";
+import { Theme } from "store/slices/theme";
 
 import "./MakamWidget.scss";
 
@@ -28,8 +28,8 @@ const MakamWidget: React.FC<{ height: number; theme: string; }> = (props) => {
                 alt={makam.name}
                 src={
                   isDark ?
-                    require(`@/static/images/makamlar/${makam.iconDark}`) :
-                    require(`@/static/images/makamlar/${makam.icon}`)
+                    require(`static/images/makamlar/${makam.iconDark}`) :
+                    require(`static/images/makamlar/${makam.icon}`)
                 } />
             </div>
             <div className="widget-makam-name">{makam.name}</div>

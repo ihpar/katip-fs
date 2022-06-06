@@ -1,7 +1,7 @@
 import { Svg, SVG } from "@svgdotjs/svg.js";
 import { FontLoader } from "./fonts/FontLoader";
 import { BravuraFont } from "./fonts/bravura";
-import { Theme } from "@/store/slices/theme";
+import { Theme } from "store/slices/theme";
 
 export default class Score {
   painter: Svg;

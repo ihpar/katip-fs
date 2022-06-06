@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import flagTr from "@/static/images/flags/tr.svg";
-import flagEn from "@/static/images/flags/en.svg";
+import flagTr from "static/images/flags/tr.svg";
+import flagEn from "static/images/flags/en.svg";
 
 const LANGUAGES = [
   { code: "tr", flag: flagTr },

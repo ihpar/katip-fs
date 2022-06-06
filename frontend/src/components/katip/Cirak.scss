@@ -1,5 +1,5 @@
-@use "@/static/styles/abstracts/variables";
-@use "@/static/styles/components/widgets";
+@use "static/styles/abstracts/variables";
+@use "static/styles/components/widgets";
 
 .assistant.accordion-wrapper {
   @extend %sticking;

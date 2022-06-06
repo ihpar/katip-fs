@@ -1,6 +1,6 @@
-@use "@/static/styles/abstracts/variables";
-@use "@/static/styles//abstracts/placeholders";
-@use "@/static/styles//components/buttons";
+@use "static/styles/abstracts/variables";
+@use "static/styles/abstracts/placeholders";
+@use "static/styles/components/buttons";
 
 .top-menu {
   @extend %sticking;
@@ -67,7 +67,7 @@
         height: 100%;
         margin: 0;
         display: inline-block;
-        background-image: url("@/static/images/sprites/accidentals-sprite-6.svg");
+        background-image: url("../../../static/images/sprites/accidentals-sprite-6.svg");
         width: 20px;
         background-repeat: no-repeat;
         background-size: cover;
@@ -142,7 +142,7 @@
         height: 100%;
         margin: 0;
         display: inline-block;
-        background-image: url("@/static/images/sprites/duration-sprite.svg");
+        background-image: url("../../../static/images/sprites/duration-sprite.svg");
         background-repeat: no-repeat;
         background-size: cover;
 
@@ -221,7 +221,7 @@
     &.accidental-controls {
       button {
         span {
-          background-image: url("@/static/images/sprites/accidentals-sprite-6_dark.svg");
+          background-image: url("../../../static/images/sprites/accidentals-sprite-6_dark.svg");
         }
       }
     }
@@ -229,7 +229,7 @@
     &.duration-controls {
       button {
         span {
-          background-image: url("@/static/images/sprites/duration-sprite_dark.svg");
+          background-image: url("../../../static/images/sprites/duration-sprite_dark.svg");
         }
       }
     }

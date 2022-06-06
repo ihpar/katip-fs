@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/index";
+import { RootState } from "store/index";
 
 
 import Modal from "../utils/Modal";
 import LanguageSelector from "../utils/LanguageSelector";
 
 import "./Navigation.scss";
-import "@/static/styles/vendors/hamburger.scss";
+import "static/styles/vendors/hamburger.scss";
 import UserSettingsItems from "../user-menu/UserSettingsItems";
 import UserFileActions from "../user-menu/UserFileActions";
 

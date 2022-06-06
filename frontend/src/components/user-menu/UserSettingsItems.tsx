@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useLanguage from "../../hooks/use-language";
-import { RootState } from "@/store/index";
-import { themeActions, Theme } from "@/store/slices/theme";
+import { RootState } from "store/index";
+import { themeActions, Theme } from "store/slices/theme";
 
 import "./UserSettingsItems.scss";
 

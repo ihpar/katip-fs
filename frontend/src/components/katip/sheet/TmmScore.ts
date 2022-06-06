@@ -3,7 +3,7 @@ import { symbols, ALL_MAKAMS, ALL_USULS } from "./constants";
 import Measure from "./Measure";
 import SatirObject from "./SatirObject";
 import { setMakam, setUsul, playWhole, allowNewInsertion } from "./utils";
-import { Theme } from "@/store/slices/theme";
+import { Theme } from "store/slices/theme";
 
 const Snap = require("snapsvg-cjs");
 

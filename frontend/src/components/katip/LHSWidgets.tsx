@@ -8,7 +8,7 @@ import FlowModifierWidget from "./FlowModifiersWidget";
 import useLanguage from "../../hooks/use-language";
 
 import "./LHSWidgets.scss";
-import { RootState } from "@/store/index";
+import { RootState } from "store/index";
 
 const LHSWidgets = () => {
 

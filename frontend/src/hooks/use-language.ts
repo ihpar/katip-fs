@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/index";
+import { RootState } from "store/index";
 
 const useLanguage = (fileName: string) => {
   const langCode = useSelector<RootState, string>(
