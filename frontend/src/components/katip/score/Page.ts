@@ -52,6 +52,7 @@ export default class Page {
     root?.appendChild(A4);
 
     this.painter.addTo(svgRoot).size(this.width, this.height);
+
   }
 
   testRender() {

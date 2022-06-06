@@ -21,7 +21,7 @@ const Sheets = () => {
   }, [theme]);
 
   useEffect(() => {
-    // score.drawTests();
+    score.drawTests();
   }, []);
 
   return (
