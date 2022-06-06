@@ -6,12 +6,10 @@ import "./NoteSheetArea.scss";
 
 const NoteSheetArea = () => {
   return (
-    <div className="A4">
-      <Routes>
-        <Route path="/" element={<Sheets />} />
-        <Route path="/old" element={<NoteSheet />} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/" element={<Sheets />} />
+      <Route path="/old" element={<NoteSheet />} />
+    </Routes>
   );
 };
 

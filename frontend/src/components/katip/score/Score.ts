@@ -15,6 +15,7 @@ export interface ColorScheme {
 }
 
 export default class Score {
+  readonly width = 836;
   painter: Svg;
   fontLoader: FontLoader;
   colorSchemes = {
@@ -41,7 +42,7 @@ export default class Score {
   activeColorScheme: ColorScheme;
 
   constructor(svgRoot: string) {
-    this.painter = SVG().addTo("#svg-root").size(745, 600);
+    this.painter = SVG().addTo("#svg-root").size(this.width, 600);
     this.fontLoader = new FontLoader(BravuraFont);
     this.activeColorScheme = this.colorSchemes[Theme.Light];
   }
@@ -55,15 +56,13 @@ export default class Score {
     }
   }
 
-
-
   drawTests() {
 
     const symbols = this.fontLoader;
     const painter = this.painter;
     painter.clear();
 
-    let staff = new Staff(0, 745, this.painter, this.fontLoader, this.activeColorScheme, true);
+    let staff = new Staff(0, this.width, this.painter, this.fontLoader, this.activeColorScheme, true);
     staff.render();
 
     const mainColor = this.activeColorScheme.mainColor;
@@ -197,7 +196,7 @@ export default class Score {
     noteLeft += 15;
     painter.path(symbols.getPath("rest32nd")).move(noteLeft, 56).fill(noteColor);
 
-    staff = new Staff(1, 745, this.painter, this.fontLoader, this.activeColorScheme, true);
+    staff = new Staff(1, this.width, this.painter, this.fontLoader, this.activeColorScheme, true);
     staff.render();
 
   }

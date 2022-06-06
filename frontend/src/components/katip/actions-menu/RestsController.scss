@@ -1,46 +1,11 @@
-.btn-selected-rest {
-  width: 32px;
-  justify-content: center;
+.rest-controls {
+  li {
+    button {
+      height: 36px;
 
-  img {
-    height: 30px;
-  }
-}
-
-.rests-li {
-  position: relative;
-}
-
-div.rests-wrapper.hidden {
-  opacity: 0;
-  height: 0;
-}
-
-div.rests-wrapper.visible {
-  opacity: 1;
-  height: 36px;
-}
-
-div.rests-wrapper {
-  position: absolute;
-  left: -25px;
-  top: 0;
-  box-shadow: 0 0 18px -6px #141414;
-  z-index: 3;
-  overflow: hidden;
-  width: max-content;
-  transition: height, opacity 100ms;
-
-  ul {
-    display: flex;
-  }
-
-  button {
-    margin: 0;
-    padding: 3px 5px;
-
-    img {
-      height: 30px;
+      img {
+        height: 100%;
+      }
     }
   }
 }

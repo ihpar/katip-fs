@@ -81,7 +81,11 @@ const NoteSheet = () => {
     tmmEditor.begin();
   }, []);
 
-  return <div id="sheet"></div>;
+  return (
+    <div className="A4">
+      <div id="sheet"></div>
+    </div>
+  );
 };
 
 export default NoteSheet;

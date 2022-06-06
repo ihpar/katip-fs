@@ -3,9 +3,9 @@
 .page-grid {
   display: grid;
   min-height: 100vh;
-  grid-template-columns: 1fr 222mm 1fr;
+  grid-template-columns: 1fr 884px 1fr;
   grid-template-rows: min-content 1fr min-content;
-  gap: 6px 6px;
+  gap: 18px 18px;
   grid-template-areas:
     ". . ."
     ". . ."

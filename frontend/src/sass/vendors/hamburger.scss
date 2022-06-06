@@ -5,8 +5,8 @@
  */
 
 .hamburger {
+  display: flex;
   padding: 15px 0;
-  display: inline-block;
   cursor: pointer;
   transition-property: opacity, filter;
   transition-duration: 0.15s;

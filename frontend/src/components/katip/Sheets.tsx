@@ -5,7 +5,7 @@ import { Theme } from "../../store/theme";
 
 import Score from "./score/Score";
 
-import "./Sheet.scss";
+import "./Sheets.scss";
 
 let score: Score;
 const Sheets = () => {
@@ -25,7 +25,7 @@ const Sheets = () => {
   }, []);
 
   return (
-    <div>
+    <div className="A4">
       <div id="svg-root"></div>
     </div>
   );
