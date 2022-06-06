@@ -3,7 +3,7 @@ import { symbols, ALL_MAKAMS, ALL_USULS } from "./constants";
 import Measure from "./Measure";
 import SatirObject from "./SatirObject";
 import { setMakam, setUsul, playWhole, allowNewInsertion } from "./utils";
-import { Theme } from "../../../store/theme";
+import { Theme } from "store/slices/theme";
 
 const Snap = require("snapsvg-cjs");
 
@@ -33,7 +33,7 @@ class TmmScore {
     emptyMeasureLen: 4,
     emptyMeasureWidth: 60,
     themeCode: "",
-    colorScheme: {}
+    colorScheme: {},
   };
 
   private containerSelector: string;
@@ -48,10 +48,13 @@ class TmmScore {
   constructor(containerSelector: string, themeCode = Theme.Light) {
     this.containerSelector = containerSelector;
     this.configs.themeCode = themeCode;
-    this.svgElem = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    this.svgElem = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "svg"
+    );
     this.satirlar = [];
     this.scorePaperWidth = 0;
-    this.songEndedHandler = () => { };
+    this.songEndedHandler = () => {};
     this.configure();
   }
 
@@ -67,8 +70,7 @@ class TmmScore {
 
     if (this.configs.themeCode === Theme.Light) {
       this.configs.colorScheme = this.lightTheme;
-    }
-    else {
+    } else {
       this.configs.colorScheme = this.darkTheme;
     }
   }
@@ -83,7 +85,15 @@ class TmmScore {
     setMakam(makam, accidentals);
     setUsul(usul, meter, tempo);
 
-    const satir = new SatirObject(0, this.paper, this.configs, 0, 60, this.scorePaperWidth, this);
+    const satir = new SatirObject(
+      0,
+      this.paper,
+      this.configs,
+      0,
+      60,
+      this.scorePaperWidth,
+      this
+    );
     const measure = new Measure(meter, accidentals);
     satir.addMeasure(measure);
 
@@ -109,8 +119,7 @@ class TmmScore {
     this.configs.themeCode = themeCode;
     if (this.configs.themeCode === Theme.Light) {
       this.configs.colorScheme = this.lightTheme;
-    }
-    else {
+    } else {
       this.configs.colorScheme = this.darkTheme;
     }
 
@@ -165,12 +174,20 @@ class TmmScore {
 
         if (parts[0] === "makam") {
           const droppedMakamId = parts[1];
-          const droppedMakam = ALL_MAKAMS.find((makam) => makam.id === droppedMakamId)!;
+          const droppedMakam = ALL_MAKAMS.find(
+            (makam) => makam.id === droppedMakamId
+          )!;
           setMakam(droppedMakam.name, droppedMakam.accidentals);
         } else if (parts[0] === "usul") {
           const droppedUsulId = parts[1];
-          const droppedUsul = ALL_USULS.find((usul) => usul.id === droppedUsulId)!;
-          setUsul(droppedUsul.name, [droppedUsul.numerator, droppedUsul.denominator], mParams.usul.tempo);
+          const droppedUsul = ALL_USULS.find(
+            (usul) => usul.id === droppedUsulId
+          )!;
+          setUsul(
+            droppedUsul.name,
+            [droppedUsul.numerator, droppedUsul.denominator],
+            mParams.usul.tempo
+          );
         }
 
         that.changeScoreMakamAndMeter(
@@ -201,12 +218,15 @@ class TmmScore {
     );
 
     document.addEventListener("keydown", function (evt) {
-      if (mParams.highElem && (evt.key === "Delete" || evt.key === "Backspace")) {
+      if (
+        mParams.highElem &&
+        (evt.key === "Delete" || evt.key === "Backspace")
+      ) {
         let smn = mParams.highElem.attr("smn").split(",");
         that.satirlar[smn[0]].deleteSatirNote(smn[1], smn[2]);
       }
     });
-  };
+  }
 
   private setInitialMParams() {
     // deactivate rest
@@ -224,7 +244,9 @@ class TmmScore {
     }
 
     mParams.ghostNote.symbol = this.paper.path(symbols[mParams.duration]);
-    mParams.ghostNote.symbolR = this.paper.path(symbols[mParams.duration + "r"]);
+    mParams.ghostNote.symbolR = this.paper.path(
+      symbols[mParams.duration + "r"]
+    );
     mParams.ghostNote.symbol.attr({
       fill: "transparent",
     });
@@ -281,7 +303,9 @@ class TmmScore {
     }
 
     mParams.ghostNote.symbol = this.paper.path(symbols[mParams.duration]);
-    mParams.ghostNote.symbolR = this.paper.path(symbols[mParams.duration + "r"]);
+    mParams.ghostNote.symbolR = this.paper.path(
+      symbols[mParams.duration + "r"]
+    );
     mParams.ghostNote.symbol.attr({
       fill: "transparent",
     });
@@ -340,11 +364,16 @@ class TmmScore {
 
   // Major methods section
   // TODO: fix any types
-  changeScoreMakamAndMeter(makam: any, accidentals: any, usul: any, meter: any) {
+  changeScoreMakamAndMeter(
+    makam: any,
+    accidentals: any,
+    usul: any,
+    meter: any
+  ) {
     for (let satir of this.satirlar) {
       satir.changeMakamAndMeter(makam, accidentals, usul, meter);
     }
-  };
+  }
 
   // TODO: fix any types
   private getWholePlayableObject() {
@@ -357,7 +386,7 @@ class TmmScore {
       song = song.concat(measure.getNotes());
     }
     return song;
-  };
+  }
   // EOF Major methods section
 
   begin() {

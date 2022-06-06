@@ -1,6 +1,5 @@
-import "./sass/pages/App.scss";
-
-import Katip from "./components/katip/Katip";
+import "static/styles/pages/App.scss";
+import Katip from "components/katip/Katip";
 
 function App() {
   return <Katip />;

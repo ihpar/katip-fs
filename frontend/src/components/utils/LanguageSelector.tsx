@@ -1,6 +1,6 @@
-import { languageActions } from "../../store/language";
-import flagTr from "../../images/flags/tr.svg";
-import flagEn from "../../images/flags/en.svg";
+import { languageActions } from "store/slices/language";
+import flagTr from "static/images/flags/tr.svg";
+import flagEn from "static/images/flags/en.svg";
 
 import "./LanguageSelector.scss";
 import { useDispatch } from "react-redux";

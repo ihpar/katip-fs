@@ -3,7 +3,7 @@ import { symbols, ALL_MAKAMS, ALL_USULS } from "./constants";
 import { Measure } from "./Measure";
 import { SatirObject } from "./SatirObject";
 import { setMakam, setUsul, playWhole, allowNewInsertion } from "./utils";
-import { Theme } from "../store/theme";
+import { Theme } from "@/store/theme";
 
 const Snap = require("snapsvg-cjs");
 
@@ -37,7 +37,7 @@ export function TmmScore(containerSelector) {
     maxPaperWidth: 1100,
     emptyMeasureLen: 4,
     emptyMeasureWidth: 0,
-    theme: Theme.Light
+    theme: Theme.Light,
   };
   let porLiHe = this.configs.porteLineHeight;
   this.configs.emptyMeasureWidth = this.configs.emptyMeasureLen * porLiHe * 1.5;
@@ -86,13 +86,22 @@ export function TmmScore(containerSelector) {
 
     this.satirlar = [];
 
-    let satir = new SatirObject(satirNo, this.paper, this.configs, pLeft, offsetTop, satirWidth, this);
+    let satir = new SatirObject(
+      satirNo,
+      this.paper,
+      this.configs,
+      pLeft,
+      offsetTop,
+      satirWidth,
+      this
+    );
     let measure = new Measure(meter, accidentals);
     satir.addMeasure(measure);
 
     this.satirlar.push(satir);
 
-    this.svgElem.style.height = pTop + pBot + numOfReqLines * 17 * porLiHe + "px";
+    this.svgElem.style.height =
+      pTop + pBot + numOfReqLines * 17 * porLiHe + "px";
 
     for (let satir of this.satirlar) {
       satir.drawSatir();
@@ -157,12 +166,20 @@ export function TmmScore(containerSelector) {
 
         if (parts[0] === "makam") {
           const droppedMakamId = parts[1];
-          const droppedMakam = ALL_MAKAMS.find((makam) => makam.id === droppedMakamId);
+          const droppedMakam = ALL_MAKAMS.find(
+            (makam) => makam.id === droppedMakamId
+          );
           setMakam(droppedMakam.name, droppedMakam.accidentals);
         } else if (parts[0] === "usul") {
           const droppedUsulId = parts[1];
-          const droppedUsul = ALL_USULS.find((usul) => usul.id === droppedUsulId);
-          setUsul(droppedUsul.name, [droppedUsul.numerator, droppedUsul.denominator], mParams.tempo);
+          const droppedUsul = ALL_USULS.find(
+            (usul) => usul.id === droppedUsulId
+          );
+          setUsul(
+            droppedUsul.name,
+            [droppedUsul.numerator, droppedUsul.denominator],
+            mParams.tempo
+          );
         }
 
         that.changeScoreMakamAndMeter(
@@ -193,7 +210,10 @@ export function TmmScore(containerSelector) {
     );
 
     document.addEventListener("keydown", function (evt) {
-      if (mParams.highElem && (evt.key === "Delete" || evt.key === "Backspace")) {
+      if (
+        mParams.highElem &&
+        (evt.key === "Delete" || evt.key === "Backspace")
+      ) {
         let smn = mParams.highElem.attr("smn").split(",");
         that.satirlar[smn[0]].deleteSatirNote(smn[1], smn[2]);
       }
@@ -218,7 +238,9 @@ export function TmmScore(containerSelector) {
     }
 
     mParams.ghostNote.symbol = this.paper.path(symbols[mParams.duration]);
-    mParams.ghostNote.symbolR = this.paper.path(symbols[mParams.duration + "r"]);
+    mParams.ghostNote.symbolR = this.paper.path(
+      symbols[mParams.duration + "r"]
+    );
     mParams.ghostNote.symbol.attr({
       fill: "transparent",
     });
@@ -282,7 +304,9 @@ export function TmmScore(containerSelector) {
     }
 
     mParams.ghostNote.symbol = this.paper.path(symbols[mParams.duration]);
-    mParams.ghostNote.symbolR = this.paper.path(symbols[mParams.duration + "r"]);
+    mParams.ghostNote.symbolR = this.paper.path(
+      symbols[mParams.duration + "r"]
+    );
     mParams.ghostNote.symbol.attr({
       fill: "transparent",
     });
@@ -343,8 +367,7 @@ export function TmmScore(containerSelector) {
     if (this.svgElem) {
       if (theme === Theme.Dark) {
         //this.svgElem.style.filter = "invert(1)";
-      }
-      else {
+      } else {
         //this.svgElem.style.filter = null;
       }
     }

@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { noteModifierActions } from "../../../store/note-modifiers";
+import { noteModifierActions } from "store/slices/note-modifiers";
 
 const accidentals = [
   { name: "bekar", value: "n" },

@@ -1,6 +1,6 @@
 import { FontLoader } from "./fonts/FontLoader";
 import { BravuraFont } from "./fonts/bravura";
-import { Theme } from "../../../store/theme";
+import { Theme } from "store/slices/theme";
 import Page from "./Page";
 
 export interface ColorScheme {
@@ -38,7 +38,7 @@ export default class Score {
       porteLineColor: "#698a96",
       ghostColor: "#288a7d",
       ghostLineColor: "#4d5a5e",
-    }
+    },
   };
 
   activeColorScheme: ColorScheme;
@@ -63,8 +63,7 @@ export default class Score {
   setTheme(theme: Theme) {
     if (theme === Theme.Dark) {
       this.activeColorScheme = this.colorSchemes[Theme.Dark];
-    }
-    else {
+    } else {
       this.activeColorScheme = this.colorSchemes[Theme.Light];
     }
 
