@@ -73,7 +73,9 @@ export default class Score {
   }
 
   drawTests() {
-
+    for (let page of this.pages) {
+      page.testRender();
+    }
     /*
         const symbols = this.fontLoader;
         const painter = this.painter;

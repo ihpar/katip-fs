@@ -56,8 +56,10 @@ export default class Page {
   }
 
   testRender() {
-    let staff = new Staff(0, this.width, this.painter, this.fontLoader, this.colorScheme, true);
-    staff.render();
+    for (let i = 0; i < 8; i++) {
+      let staff = new Staff(i, this.width, this.painter, this.fontLoader, this.colorScheme, true);
+      staff.render();
+    }
   }
 
   setColorScheme(colorScheme: ColorScheme) {
