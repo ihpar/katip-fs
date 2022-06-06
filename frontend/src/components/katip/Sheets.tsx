@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { Theme } from "../../store/theme";
@@ -12,22 +12,20 @@ const Sheets = () => {
   const theme = useSelector<RootState, Theme>(state => state.theme.theme);
 
   useEffect(() => {
-    score = new Score("svg-root");
+    score = new Score("score-root", 2);
   }, []);
 
   useEffect(() => {
     score.setTheme(theme);
-    score.drawTests();
+    // score.drawTests();
   }, [theme]);
 
   useEffect(() => {
-    score.drawTests();
+    // score.drawTests();
   }, []);
 
   return (
-    <div className="A4">
-      <div id="svg-root"></div>
-    </div>
+    <div id="score-root"></div>
   );
 };
 
