@@ -2,6 +2,17 @@ import { Svg, SVG } from "@svgdotjs/svg.js";
 import { FontLoader } from "./fonts/FontLoader";
 import { BravuraFont } from "./fonts/bravura";
 import { Theme } from "../../../store/theme";
+import Staff from "./Staff";
+
+export interface ColorScheme {
+  highColor: string,
+  noteColor: string,
+  noteErrColor: string,
+  mainColor: string,
+  porteLineColor: string,
+  ghostColor: string,
+  ghostLineColor: string,
+}
 
 export default class Score {
   painter: Svg;
@@ -26,7 +37,8 @@ export default class Score {
       ghostLineColor: "#4d5a5e",
     }
   };
-  activeColorScheme;
+
+  activeColorScheme: ColorScheme;
 
   constructor(svgRoot: string) {
     this.painter = SVG().addTo("#svg-root").size(745, 600);
@@ -43,31 +55,23 @@ export default class Score {
     }
   }
 
-  drawRect() {
+
+
+  drawTests() {
 
     const symbols = this.fontLoader;
     const painter = this.painter;
     painter.clear();
 
-    const porteLineColor = this.activeColorScheme.porteLineColor;
+    let staff = new Staff(0, 745, this.painter, this.fontLoader, this.activeColorScheme, true);
+    staff.render();
+
     const mainColor = this.activeColorScheme.mainColor;
     const noteColor = this.activeColorScheme.noteColor;
-
-    const staveTop = 54;
-
-    for (let i = 0; i < 5; i++) {
-      this.painter.rect(745, 1).y(i * 9 + staveTop).fill(porteLineColor);
-    }
-
-    // clef
-    painter.path(symbols.getPath("gClef")).center(15, 72).fill(mainColor);
 
     // time sig
     painter.path(symbols.getPath("timeSig9")).move(40, 54 + 1).fill(mainColor);
     painter.path(symbols.getPath("timeSig8")).move(40, 72 + 1).fill(mainColor);
-
-    // tmp
-    // painter.path(symbols.getPath("rest32nd")).size(undefined, 35);
 
     // acci
     let noteLeft = 70;
@@ -192,6 +196,9 @@ export default class Score {
     painter.path(symbols.getPath("rest16th")).move(noteLeft, 65).fill(noteColor);
     noteLeft += 15;
     painter.path(symbols.getPath("rest32nd")).move(noteLeft, 56).fill(noteColor);
+
+    staff = new Staff(1, 745, this.painter, this.fontLoader, this.activeColorScheme, true);
+    staff.render();
 
   }
 }

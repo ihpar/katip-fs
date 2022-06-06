@@ -17,11 +17,11 @@ const Sheets = () => {
 
   useEffect(() => {
     score.setTheme(theme);
-    score.drawRect();
+    score.drawTests();
   }, [theme]);
 
   useEffect(() => {
-    score.drawRect();
+    score.drawTests();
   }, []);
 
   return (
