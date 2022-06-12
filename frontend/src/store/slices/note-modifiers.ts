@@ -1,6 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export enum Mode {
+  InsertNote,
+  InsertRest,
+  Select
+}
+
 const initialState = {
+  mode: Mode.InsertNote,
   accidental: null as null | string,
   duration: "n8",
   isDotted: false,
@@ -34,6 +41,9 @@ const noteModifierSlice = createSlice({
       state.restParams.value = action.payload.value;
       state.restParams.duration = action.payload.duration;
     },
+    setMode(state, action) {
+      state.mode = action.payload;
+    }
   },
 });
 
