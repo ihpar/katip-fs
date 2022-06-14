@@ -37,18 +37,18 @@ const PlayerActions: React.FC<{ isDark: boolean; }> = ({ isDark }) => {
     <ul className="top-menu-list player-controls">
       <li>
         <button onClick={soundButtonClickHandler} data-sound-status={isSoundOn}>
-          <img alt="filler" className="img-ht on" src={isDark ? soundOnDark : soundOn} />
-          <img alt="filler" className="img-ht off" src={isDark ? soundOffDark : soundOff} />
+          <img alt="sound on" className="img-ht on" src={isDark ? soundOnDark : soundOn} />
+          <img alt="sound off" className="img-ht off" src={isDark ? soundOffDark : soundOff} />
         </button>
       </li>
       <li>
         <button>
-          <img alt="filler" className="img-ht" src={isDark ? rewindDark : rewind} />
+          <img alt="rewind" className="img-ht" src={isDark ? rewindDark : rewind} />
         </button>
       </li>
       <li>
         <button onClick={playButtonClickHandler}>
-          <img alt="filler" className="img-ht" src={
+          <img alt="play pause" className="img-ht" src={
             isPlaying ?
               (isDark ? pauseDark : pause) :
               (isDark ? playDark : play)
@@ -57,17 +57,17 @@ const PlayerActions: React.FC<{ isDark: boolean; }> = ({ isDark }) => {
       </li>
       <li>
         <button>
-          <img alt="filler" className="img-ht" src={isDark ? repeatDark : repeat} />
+          <img alt="loop" className="img-ht" src={isDark ? repeatDark : repeat} />
         </button>
       </li>
       <li>
         <button>
-          <img alt="filler" className="img-ht" src={isDark ? metronomeDark : metronome} />
+          <img alt="metronome" className="img-ht" src={isDark ? metronomeDark : metronome} />
         </button>
       </li>
       <li>
         <button>
-          <img alt="filler" className="img-ht" src={isDark ? tuningForkDark : tuningFork} />
+          <img alt="tuning fork" className="img-ht" src={isDark ? tuningForkDark : tuningFork} />
         </button>
       </li>
     </ul>

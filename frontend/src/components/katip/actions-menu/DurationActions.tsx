@@ -7,39 +7,42 @@ import { ActionMode } from "store/slices/note-modifiers";
 import "./DurationActions.scss";
 
 const durations = [
-  { name: "whole", value: "n1" },
-  { name: "half", value: "n2" },
-  { name: "fourth", value: "n4" },
-  { name: "eighth", value: "n8" },
-  { name: "sixteenth", value: "n16" },
-  { name: "thirtysecond", value: "n32" },
-  { name: "sixtyfourth", value: "n64" },
-  { name: "dotted", value: "bd" },
+  { name: "whole", value: "1/1" },
+  { name: "half", value: "1/2" },
+  { name: "fourth", value: "1/4" },
+  { name: "eighth", value: "1/8" },
+  { name: "sixteenth", value: "1/16" },
+  { name: "thirtysecond", value: "1/32" },
+  { name: "sixtyfourth", value: "1/64" },
 ];
 
 const DurationActions = () => {
   const actionMode = useSelector<RootState, ActionMode>(state => state.noteModifier.mode);
+  const actionDuration = useSelector<RootState, string>(state => state.noteModifier.duration);
+
   const dispatch = useDispatch();
 
   const durationButtonClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    // TODO: fix here
-    const noteDuration = event.currentTarget.dataset.durVal;
-    event.currentTarget.classList.toggle("active");
-    if (noteDuration === "bd") {
-      if (actionMode === ActionMode.InsertNote) {
-        dispatch(noteModifierActions.toggleDotted());
-        return;
-      }
+    const noteDuration = event.currentTarget.dataset.value;
+
+    if (actionMode === ActionMode.InsertNote && noteDuration === actionDuration) {
+      dispatch(noteModifierActions.setMode(ActionMode.Select));
+      dispatch(noteModifierActions.changeDuration(""));
     }
-    dispatch(noteModifierActions.changeDuration(noteDuration));
-    dispatch(noteModifierActions.setMode(ActionMode.InsertNote));
+    else {
+      dispatch(noteModifierActions.setMode(ActionMode.InsertNote));
+      dispatch(noteModifierActions.changeDuration(noteDuration));
+    }
   };
 
   return (
     <ul className="top-menu-list duration-controls">
       {durations.map((duration) => (
         <li key={duration.name}>
-          <button data-dur-val={duration.value} onClick={durationButtonClickHandler}>
+          <button
+            data-value={duration.value}
+            onClick={durationButtonClickHandler}
+            className={actionMode === ActionMode.InsertNote && actionDuration === duration.value ? "active" : ""}>
             <span className={`durs ${duration.name}`}></span>
           </button>
         </li>

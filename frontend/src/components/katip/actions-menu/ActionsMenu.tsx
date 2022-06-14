@@ -3,14 +3,11 @@ import { RootState } from "store/index";
 import { Routes, Route } from "react-router-dom";
 import { Theme } from "store/slices/theme";
 
-import AccidentalsController from "./old/AccidentalsController";
-import DurationsController from "./old/DurationsController";
-import RestsController from "./old/RestsController";
-import PlayerController from "./old/PlayerController";
-
 import AccidentalActions from "./AccidentalActions";
 import DurationActions from "./DurationActions";
+import Dot from "./Dot";
 import PlayerActions from "./PlayerActions";
+import RestActions from "./RestActions";
 
 import "./ActionsMenu.scss";
 
@@ -22,19 +19,6 @@ const ActionsMenu = () => {
   return (
     <div className="top-menu no-print">
       <Routes>
-        <Route path="/old" element={
-          <>
-            {/* Player controls */}
-            <PlayerController isDark={isDark} />
-            {/* Accidental controls */}
-            <AccidentalsController />
-            {/*  Duration controls */}
-            <DurationsController />
-            {/* Rest controls */}
-            <RestsController isDark={isDark} />
-          </>
-        } />
-
         <Route path="/" element={
           <>
             {/* Player controls */}
@@ -43,8 +27,10 @@ const ActionsMenu = () => {
             <AccidentalActions />
             {/*  Duration controls */}
             <DurationActions />
+            {/* Dot */}
+            <Dot />
             {/* Rest controls */}
-            <RestsController isDark={isDark} />
+            <RestActions isDark={isDark} />
           </>
         } />
       </Routes>
