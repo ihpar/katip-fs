@@ -4,8 +4,6 @@ import { RootState } from "store";
 import { noteModifierActions } from "store/slices/note-modifiers";
 import { ActionMode } from "store/slices/note-modifiers";
 
-import "./DurationActions.scss";
-
 const durations = [
   { name: "whole", value: "1/1" },
   { name: "half", value: "1/2" },

@@ -1,6 +1,8 @@
 import { FontLoader } from "./fonts/FontLoader";
 import { BravuraFont } from "./fonts/bravura";
 import { Theme } from "store/slices/theme";
+import { ActionMode } from "store/slices/note-modifiers";
+
 import Page from "./Page";
 
 export interface ColorScheme {
@@ -70,6 +72,10 @@ export default class Score {
     for (let page of this.pages) {
       page.setColorScheme(this.activeColorScheme);
     }
+  }
+
+  setHasSound(hasSound: boolean) {
+    console.log(hasSound);
   }
 
   drawTests() {
@@ -218,5 +224,21 @@ export default class Score {
         staff = new Staff(1, this.width, this.painter, this.fontLoader, this.activeColorScheme, true);
         staff.render();
     */
+  }
+
+  setAction(actionMode: ActionMode) {
+    console.log(actionMode);
+  }
+
+  setDuration(duration: string) {
+    console.log(duration);
+  }
+
+  setDotted(isDotted: boolean) {
+    console.log(isDotted);
+  }
+
+  setAccidental(accidental: string) {
+    console.log(accidental);
   }
 }

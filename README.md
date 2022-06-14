@@ -1,8 +1,8 @@
 # Kâtip (Work in progress...)
 - a browser based note editor for Turkish Makam Music (TMM)
 - See live preview(S) 
-[old editor](https://katip.netlify.app/old) and 
-[new editor](https://katip.netlify.app)
+[new editor](https://katip.netlify.app) vs.
+[old editor](http://music.cs.deu.edu.tr/tmmgui/)
 - please do not contribute... yet :-)
 
 ## Ingredients
