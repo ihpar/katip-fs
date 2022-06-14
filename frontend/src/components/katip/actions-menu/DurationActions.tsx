@@ -1,7 +1,8 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "store";
 import { noteModifierActions } from "store/slices/note-modifiers";
-import { Mode } from "store/slices/note-modifiers";
+import { ActionMode } from "store/slices/note-modifiers";
 
 import "./DurationActions.scss";
 
@@ -17,17 +18,21 @@ const durations = [
 ];
 
 const DurationActions = () => {
+  const actionMode = useSelector<RootState, ActionMode>(state => state.noteModifier.mode);
   const dispatch = useDispatch();
 
   const durationButtonClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    // TODO: fix here
     const noteDuration = event.currentTarget.dataset.durVal;
     event.currentTarget.classList.toggle("active");
     if (noteDuration === "bd") {
-      dispatch(noteModifierActions.toggleDotted());
-      return;
+      if (actionMode === ActionMode.InsertNote) {
+        dispatch(noteModifierActions.toggleDotted());
+        return;
+      }
     }
     dispatch(noteModifierActions.changeDuration(noteDuration));
-    dispatch(noteModifierActions.setMode(Mode.InsertNote));
+    dispatch(noteModifierActions.setMode(ActionMode.InsertNote));
   };
 
   return (

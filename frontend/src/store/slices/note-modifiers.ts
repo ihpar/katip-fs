@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export enum Mode {
+export enum ActionMode {
   InsertNote,
   InsertRest,
   Select
 }
 
 const initialState = {
-  mode: Mode.InsertNote,
+  mode: ActionMode.InsertNote,
   accidental: null as null | string,
   duration: "n8",
   isDotted: false,

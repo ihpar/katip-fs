@@ -3,7 +3,7 @@
 - See live preview(S) 
 [old editor](https://katip.netlify.app/old) and 
 [new editor](https://katip.netlify.app)
-- please do not contribute
+- please do not contribute... yet :-)
 
 ## Ingredients
 ### Frontend
