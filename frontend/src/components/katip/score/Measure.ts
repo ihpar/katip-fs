@@ -59,11 +59,6 @@ export default class Measure {
 
     this.rootGroup = this.painter.group();
 
-    // draw bounding rectangle
-    this.boundingRect = this.rootGroup.rect(ghostLineWidth, 15 * this.lineGap)
-      .move(ghostLineLeft, this.top - 6 * this.lineGap + this.lineGap / 2)
-      .fill("transparent");
-
     // draw top guide lines
     this.guideLinesGroup = this.painter.group();
     for (let i = 0; i < 5; i++) {
@@ -85,6 +80,11 @@ export default class Measure {
         .move(this.left + this.width - 1, this.top)
         .fill(this.colorScheme.staffLineColor);
     }
+
+    // draw bounding rectangle
+    this.boundingRect = this.rootGroup.rect(ghostLineWidth, 15 * this.lineGap)
+      .move(ghostLineLeft, this.top - 6 * this.lineGap + this.lineGap / 2)
+      .fill("transparent");
 
     // attach mouse events
     this.rootGroup.on("mouseover", () => {

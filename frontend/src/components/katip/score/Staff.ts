@@ -40,9 +40,9 @@ export default class Staff {
     this.staffLines = [];
     this.measures = [];
     this.measureOffset = Math.floor(this.symbols.getDims("gClef")[0] + this.firstMeasureMargin);
-    this.defaultMeasureWidth = Math.floor(
-      (this.width - this.measureOffset) / this.defaultMeasureCount
-    );
+    this.defaultMeasureWidth = Math.round(
+      (this.width - this.measureOffset) * 100 / this.defaultMeasureCount
+    ) / 100;
 
     this.init();
   }
