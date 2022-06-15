@@ -17,9 +17,9 @@ export default class Score {
 
   activeColorScheme: ColorScheme;
 
-  constructor(scoreRootId: string, numPages = 1) {
+  constructor(scoreRootId: string, theme: Theme, numPages = 1) {
     this.fontLoader = new FontLoader(BravuraFont);
-    this.activeColorScheme = colorSchemes[Theme.Light];
+    this.activeColorScheme = colorSchemes[theme];
 
     this.pages = [];
     for (let i = 0; i < numPages; i++) {
@@ -34,15 +34,11 @@ export default class Score {
     }
   }
 
-  setTheme(theme: Theme) {
-    if (theme === Theme.Dark) {
-      this.activeColorScheme = colorSchemes[Theme.Dark];
-    } else {
-      this.activeColorScheme = colorSchemes[Theme.Light];
-    }
+  changeTheme(theme: Theme) {
+    this.activeColorScheme = colorSchemes[theme];
 
     for (let page of this.pages) {
-      page.setColorScheme(this.activeColorScheme);
+      page.changeColorScheme(this.activeColorScheme);
     }
   }
 
@@ -58,9 +54,6 @@ export default class Score {
   }
 
   drawTests() {
-    for (let page of this.pages) {
-      page.testRender();
-    }
     /*
         const symbols = this.fontLoader;
         const painter = this.painter;

@@ -14,6 +14,7 @@ export default class Page {
   svgRootId: string;
   painter: Svg;
   staves: Staff[];
+  staveCount = 8;
 
   constructor(
     scoreRootId: string,
@@ -53,16 +54,17 @@ export default class Page {
 
     this.painter.addTo(svgRoot).size(this.width, this.height);
 
-  }
-
-  testRender() {
-    for (let i = 0; i < 8; i++) {
-      let staff = new Staff(i, this.width, this.painter, this.fontLoader, this.colorScheme, true);
-      staff.render();
+    for (let i = 0; i < this.staveCount; i++) {
+      this.staves.push(
+        new Staff(i, this.width, this.painter, this.fontLoader, this.colorScheme)
+      );
     }
   }
 
-  setColorScheme(colorScheme: ColorScheme) {
+  changeColorScheme(colorScheme: ColorScheme) {
     this.colorScheme = colorScheme;
+    for (let staff of this.staves) {
+      staff.changeColorScheme(this.colorScheme);
+    }
   }
 }

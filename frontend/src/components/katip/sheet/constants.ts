@@ -207,6 +207,7 @@ export const ALL_MAKAMS: Makam[] = [
   new Makam("beyati_araban", "Beyâtî Araban", "beyati-araban.svg", "beyati-araban_dark.svg", ["Si4b1", "Mi5b4", "Fa5#4"]),
   new Makam("hicaz", "Hicaz", "hicaz.svg", "hicaz_dark.svg", ["Si4b4", "Fa5#4", "Do5#4"]),
   new Makam("nihavent", "Nihâvent", "nihavent.svg", "nihavent_dark.svg", ["Si4b5", "Mi5b5"]),
+  new Makam("ussak", "Uşşak", "ussak.svg", "ussak_dark.svg", ["Si4b1"]),
 ];
 
 export const ALL_USULS = [

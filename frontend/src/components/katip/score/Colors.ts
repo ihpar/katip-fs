@@ -5,9 +5,9 @@ export interface ColorScheme {
   noteColor: string,
   noteErrColor: string,
   mainColor: string,
-  porteLineColor: string,
+  staffLineColor: string,
   ghostColor: string,
-  ghostLineColor: string,
+  guideLineColor: string,
 }
 
 export const colorSchemes: { [key: string]: ColorScheme; } = {
@@ -16,17 +16,17 @@ export const colorSchemes: { [key: string]: ColorScheme; } = {
     noteColor: "#243041",
     noteErrColor: "#9B1800",
     mainColor: "#565345",
-    porteLineColor: "#BDA37E",
+    staffLineColor: "#BDA37E",
     ghostColor: "#998166",
-    ghostLineColor: "#E5DCD0",
+    guideLineColor: "#E5DCD0",
   },
   [Theme.Dark]: {
     highColor: "#389edb",
     noteColor: "#38c9a9",
     noteErrColor: "#ff5f57",
     mainColor: "#8fb2c7",
-    porteLineColor: "#698a96",
+    staffLineColor: "#698a96",
     ghostColor: "#288a7d",
-    ghostLineColor: "#4d5a5e",
+    guideLineColor: "#4d5a5e",
   },
 };

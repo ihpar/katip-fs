@@ -20,12 +20,12 @@ const Sheets = () => {
   const actionDotted = useSelector<RootState, boolean>(state => state.noteModifier.isDotted);
 
   useEffect(() => {
-    score = new Score("score-root", 2);
-  }, []);
-
-  useEffect(() => {
-    score.setTheme(theme);
-    // score.drawTests();
+    if (!score) {
+      score = new Score("score-root", theme, 2);
+    }
+    else {
+      score.changeTheme(theme);
+    }
   }, [theme]);
 
   useEffect(() => {
