@@ -54,10 +54,10 @@ export default class Measure {
   }
 
   init() {
+    this.rootGroup = this.painter.group();
+
     const ghostLineWidth = this.width - 3;
     const ghostLineLeft = this.left + 1;
-
-    this.rootGroup = this.painter.group();
 
     // draw top guide lines
     this.guideLinesGroup = this.painter.group();
@@ -71,14 +71,26 @@ export default class Measure {
       this.guideLinesGroup.rect(ghostLineWidth, 1)
         .move(ghostLineLeft, this.top + (i + 5) * this.lineGap);
     }
-    this.guideLinesGroup.fill("transparent");
+    this.guideLinesGroup.addClass("guide-lines");
     this.rootGroup.add(this.guideLinesGroup);
 
     // draw bar
     if (this.renderBar) {
-      this.bar = this.painter.rect(1, this.lineGap * 4)
+      this.rootGroup.rect(1, this.lineGap * 4)
         .move(this.left + this.width - 1, this.top)
-        .fill(this.colorScheme.staffLineColor);
+        .addClass("measure-bar");
+    }
+
+    if (this.showAccidentals) {
+      const accidentals = this.makam.accidentals;
+      for (let accidental of this.accidentals) {
+        // Fa+5-#:4 
+        // Si+4-b:1
+        const [pitch, acci] = accidental.split("-");
+        const [pitchRoot, octave] = pitch.split("+");
+        const [acciDirection, acciAmount] = acci.split(":");
+      }
+      console.log(accidentals);
     }
 
     // draw bounding rectangle
@@ -86,19 +98,10 @@ export default class Measure {
       .move(ghostLineLeft, this.top - 6 * this.lineGap + this.lineGap / 2)
       .fill("transparent");
 
-    // attach mouse events
-    this.rootGroup.on("mouseover", () => {
-      this.guideLinesGroup.fill(this.colorScheme.guideLineColor);
-    });
-    this.rootGroup.on("mouseout", () => {
-      this.guideLinesGroup.fill("transparent");
-    });
+    this.rootGroup.addClass("measure-root");
   }
 
   changeColorScheme(colorScheme: ColorScheme) {
     this.colorScheme = colorScheme;
-    if (this.renderBar) {
-      this.bar.fill(this.colorScheme.staffLineColor);
-    }
   }
 }

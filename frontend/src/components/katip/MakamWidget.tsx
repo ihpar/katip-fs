@@ -1,4 +1,4 @@
-import { ALL_MAKAMS } from "./sheet/constants";
+import MAKAMS from "./score/Makams";
 import { Theme } from "store/slices/theme";
 
 import "./MakamWidget.scss";
@@ -15,7 +15,7 @@ const MakamWidget: React.FC<{ height: number; theme: string; }> = (props) => {
   return (
     <div className="content-scroller" style={{ height: props.height }}>
       <ul>
-        {ALL_MAKAMS.map((makam) => (
+        {MAKAMS.map((makam) => (
           <li
             draggable="true"
             onDragStart={dragStartHandler}

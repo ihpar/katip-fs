@@ -1,8 +1,9 @@
-import { Svg, Rect, Path } from "@svgdotjs/svg.js";
+import { Svg, Rect, Path, G } from "@svgdotjs/svg.js";
 import { FontLoader } from "./fonts/FontLoader";
 import { ColorScheme } from "./Colors";
 import Measure from "./Measure";
-import { ALL_MAKAMS, ALL_USULS } from "../sheet/constants";
+import MAKAMS from "./Makams";
+import USULS from "./Usuls";
 
 export default class Staff {
   index: number;
@@ -11,14 +12,16 @@ export default class Staff {
   painter: Svg;
   symbols: FontLoader;
   colorScheme: ColorScheme;
+  rootGroup: G;
+  linesGroup: G;
   staffLines: Rect[];
   clef: Path;
   bar: Rect;
   measures: Measure[];
   measureOffset: number;
   defaultMeasureWidth: number;
-  defaultMakam = ALL_MAKAMS.find(makam => makam.id === "ussak")!;
-  defaultUsul = ALL_USULS.find(usul => usul.id === "sofyan_4_4")!;
+  defaultMakam = MAKAMS.find(makam => makam.id === "ussak")!;
+  defaultUsul = USULS.find(usul => usul.id === "sofyan_4_4")!;
 
   defaultMeasureCount = 6;
   firstMeasureMargin = 10;
@@ -43,12 +46,14 @@ export default class Staff {
     this.defaultMeasureWidth = Math.round(
       (this.width - this.measureOffset) * 100 / this.defaultMeasureCount
     ) / 100;
+    this.rootGroup = this.painter.group();
 
     this.init();
   }
 
   init() {
     this.drawStaff();
+
     for (let i = 0; i < this.defaultMeasureCount; i++) {
       this.measures.push(
         new Measure(
@@ -69,35 +74,30 @@ export default class Staff {
   }
 
   drawStaff() {
+    this.linesGroup = this.painter.group();
     // Render staff lines
     for (let i = 0; i < 5; i++) {
-      this.staffLines.push(
-        this.painter.rect(this.width, 1)
-          .y(i * 9 + this.top)
-          .fill(this.colorScheme.staffLineColor)
-      );
+      this.linesGroup.rect(this.width, 1).y(i * 9 + this.top);
     }
 
     // render final bar
-    this.bar = this.painter.rect(1, this.lineGap * 4)
-      .move(this.width - 1, this.top)
-      .fill(this.colorScheme.staffLineColor);
+    this.linesGroup.rect(1, this.lineGap * 4).move(this.width - 1, this.top);
 
     // render clef
     this.clef = this.painter.path(this.symbols.getPath("gClef"))
       .center(15, this.top + 18)
       .fill(this.colorScheme.mainColor);
+
+    this.linesGroup.fill(this.colorScheme.staffLineColor);
+    this.rootGroup.add(this.linesGroup);
+    this.rootGroup.add(this.clef);
   }
 
   changeColorScheme(colorScheme: ColorScheme) {
     this.colorScheme = colorScheme;
 
-    for (let staffLine of this.staffLines) {
-      staffLine.fill(this.colorScheme.staffLineColor);
-    }
-
+    this.linesGroup.fill(this.colorScheme.staffLineColor);
     this.clef.fill(this.colorScheme.mainColor);
-    this.bar.fill(this.colorScheme.staffLineColor);
 
     for (let measure of this.measures) {
       measure.changeColorScheme(colorScheme);

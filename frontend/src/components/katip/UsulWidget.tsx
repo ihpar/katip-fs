@@ -1,8 +1,8 @@
-import { ALL_USULS } from "./sheet/constants";
+import USULS from "./score/Usuls";
 
 import "./UsulWidget.scss";
 
-const UsulWidget: React.FC<{ height: number }> = (props) => {
+const UsulWidget: React.FC<{ height: number; }> = (props) => {
   const dragStartHandler = (event: React.DragEvent<HTMLLIElement>) => {
     const usul = event.currentTarget.dataset.usul as string;
     event.dataTransfer.setData("text/plain", "usul:" + usul);
@@ -11,7 +11,7 @@ const UsulWidget: React.FC<{ height: number }> = (props) => {
   return (
     <div className="content-scroller" style={{ height: props.height }}>
       <ul>
-        {ALL_USULS.map((usul) => (
+        {USULS.map((usul) => (
           <li
             draggable="true"
             onDragStart={dragStartHandler}
