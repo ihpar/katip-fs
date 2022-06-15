@@ -6,7 +6,7 @@ export enum ActionMode {
   Select
 }
 
-const initialState = {
+export const initialState = {
   mode: ActionMode.Select,
   accidental: "",
   duration: "",

@@ -1,53 +1,25 @@
+import Soundfont from "soundfont-player";
 import { FontLoader } from "./fonts/FontLoader";
 import { BravuraFont } from "./fonts/bravura";
 import { Theme } from "store/slices/theme";
-import { ActionMode } from "store/slices/note-modifiers";
+import { colorSchemes, ColorScheme } from "./Colors";
+import { initialState as action } from "store/slices/note-modifiers";
 
 import Page from "./Page";
-
-export interface ColorScheme {
-  highColor: string,
-  noteColor: string,
-  noteErrColor: string,
-  mainColor: string,
-  porteLineColor: string,
-  ghostColor: string,
-  ghostLineColor: string,
-}
 
 export default class Score {
   readonly width = 836;
   readonly height = 1202;
   fontLoader: FontLoader;
-
   pages: Page[];
-
-  colorSchemes = {
-    [Theme.Light]: {
-      highColor: "#46879E",
-      noteColor: "#243041",
-      noteErrColor: "#9B1800",
-      mainColor: "#565345",
-      porteLineColor: "#BDA37E",
-      ghostColor: "#998166",
-      ghostLineColor: "#E5DCD0",
-    },
-    [Theme.Dark]: {
-      highColor: "#389edb",
-      noteColor: "#38c9a9",
-      noteErrColor: "#ff5f57",
-      mainColor: "#8fb2c7",
-      porteLineColor: "#698a96",
-      ghostColor: "#288a7d",
-      ghostLineColor: "#4d5a5e",
-    },
-  };
+  hasSound = false;
+  player: Soundfont.Player;
 
   activeColorScheme: ColorScheme;
 
   constructor(scoreRootId: string, numPages = 1) {
     this.fontLoader = new FontLoader(BravuraFont);
-    this.activeColorScheme = this.colorSchemes[Theme.Light];
+    this.activeColorScheme = colorSchemes[Theme.Light];
 
     this.pages = [];
     for (let i = 0; i < numPages; i++) {
@@ -64,9 +36,9 @@ export default class Score {
 
   setTheme(theme: Theme) {
     if (theme === Theme.Dark) {
-      this.activeColorScheme = this.colorSchemes[Theme.Dark];
+      this.activeColorScheme = colorSchemes[Theme.Dark];
     } else {
-      this.activeColorScheme = this.colorSchemes[Theme.Light];
+      this.activeColorScheme = colorSchemes[Theme.Light];
     }
 
     for (let page of this.pages) {
@@ -75,7 +47,14 @@ export default class Score {
   }
 
   setHasSound(hasSound: boolean) {
-    console.log(hasSound);
+    let that = this;
+    that.hasSound = hasSound;
+    if (that.hasSound && !that.player) {
+      Soundfont.instrument(new AudioContext(), "acoustic_grand_piano")
+        .then((instrument) => {
+          that.player = instrument;
+        });
+    }
   }
 
   drawTests() {
@@ -226,19 +205,7 @@ export default class Score {
     */
   }
 
-  setAction(actionMode: ActionMode) {
-    console.log(actionMode);
-  }
-
-  setDuration(duration: string) {
-    console.log(duration);
-  }
-
-  setDotted(isDotted: boolean) {
-    console.log(isDotted);
-  }
-
-  setAccidental(accidental: string) {
-    console.log(accidental);
+  setAction(controlAction: typeof action) {
+    console.log(controlAction);
   }
 }

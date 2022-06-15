@@ -1,5 +1,5 @@
 import { Svg, SVG } from "@svgdotjs/svg.js";
-import { ColorScheme } from "./Score";
+import { ColorScheme } from "./Colors";
 import { FontLoader } from "./fonts/FontLoader";
 import Staff from "./Staff";
 

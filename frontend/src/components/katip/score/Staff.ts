@@ -1,6 +1,6 @@
 import { Svg } from "@svgdotjs/svg.js";
 import { FontLoader } from "./fonts/FontLoader";
-import { ColorScheme } from "./Score";
+import { ColorScheme } from "./Colors";
 
 export default class Staff {
   index: number;

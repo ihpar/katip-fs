@@ -25,17 +25,17 @@ const Footer = () => {
           <div>
             <ul>
               <li>
-                <a href="https://github.com/ihpar/katip">
+                <a href="https://github.com/ihpar/katip-fs" target="_blank" rel="noreferrer">
                   <img alt="Github" src={isDark ? githubImgDark : githubImg} />
                 </a>
               </li>
               <li>
-                <a href="https://www.instagram.com">
+                <a href="https://www.instagram.com" target="_blank" rel="noreferrer">
                   <img alt="Instagram" src={isDark ? instagramImgDark : instagramImg} />
                 </a>
               </li>
               <li>
-                <a href="https://twitter.com">
+                <a href="https://twitter.com" target="_blank" rel="noreferrer">
                   <img alt="Twitter" src={isDark ? twitterImgDark : twitterImg} />
                 </a>
               </li>
