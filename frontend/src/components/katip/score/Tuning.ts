@@ -1,3 +1,4 @@
+// tmm tunings
 export const tmmKomas = {
   1: 0.235,
   2: 0.445, // opt
