@@ -4,7 +4,6 @@ import { Usul } from "models/Usul";
 import { ColorScheme } from "./Colors";
 import { FontLoader } from "./fonts/FontLoader";
 import { BravuraFont } from "./fonts/bravura";
-import { NotePositions } from "./NotePositions";
 import Accidental from "./Accidental";
 
 export default class Measure {

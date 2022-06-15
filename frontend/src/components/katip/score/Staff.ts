@@ -3,9 +3,7 @@ import { FontLoader } from "./fonts/FontLoader";
 import { BravuraFont } from "./fonts/bravura";
 import { ColorScheme } from "./Colors";
 import Measure from "./Measure";
-import MAKAMS from "./Makams";
 import { Makam } from "models/Makam";
-import USULS from "./Usuls";
 import { Usul } from "models/Usul";
 
 export default class Staff {
