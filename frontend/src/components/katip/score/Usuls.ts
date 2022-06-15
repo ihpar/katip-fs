@@ -15,4 +15,5 @@ const USULS = [
   new Usul("turk_aksagi_5_8", "Türk Aksağı", 5, 8),
 ];
 
+export const DEFAULT_USUL = USULS.find(usul => usul.id === "sofyan_4_4")!;
 export default USULS;

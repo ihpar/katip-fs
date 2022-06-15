@@ -1,9 +1,12 @@
 import { Svg, Rect, Path, G } from "@svgdotjs/svg.js";
 import { FontLoader } from "./fonts/FontLoader";
+import { BravuraFont } from "./fonts/bravura";
 import { ColorScheme } from "./Colors";
 import Measure from "./Measure";
 import MAKAMS from "./Makams";
+import { Makam } from "models/Makam";
 import USULS from "./Usuls";
+import { Usul } from "models/Usul";
 
 export default class Staff {
   index: number;
@@ -20,8 +23,8 @@ export default class Staff {
   measures: Measure[];
   measureOffset: number;
   defaultMeasureWidth: number;
-  defaultMakam = MAKAMS.find(makam => makam.id === "ussak")!;
-  defaultUsul = USULS.find(usul => usul.id === "sofyan_4_4")!;
+  defaultMakam: Makam;
+  defaultUsul: Usul;
 
   defaultMeasureCount = 6;
   firstMeasureMargin = 10;
@@ -31,15 +34,18 @@ export default class Staff {
     index: number,
     width: number,
     painter: Svg,
-    symbols: FontLoader,
-    colorScheme: ColorScheme
+    colorScheme: ColorScheme,
+    defaultMakam: Makam,
+    defaultUsul: Usul
   ) {
     this.index = index;
     this.top = index * (16 * this.lineGap) + (6 * this.lineGap);
     this.width = width;
     this.painter = painter;
-    this.symbols = symbols;
+    this.symbols = new FontLoader(BravuraFont);
     this.colorScheme = colorScheme;
+    this.defaultMakam = defaultMakam;
+    this.defaultUsul = defaultUsul;
     this.staffLines = [];
     this.measures = [];
     this.measureOffset = Math.floor(this.symbols.getDims("gClef")[0] + this.firstMeasureMargin);
@@ -86,18 +92,15 @@ export default class Staff {
     // render clef
     this.clef = this.painter.path(this.symbols.getPath("gClef"))
       .center(15, this.top + 18)
-      .fill(this.colorScheme.mainColor);
+      .addClass("main-color");
 
-    this.linesGroup.fill(this.colorScheme.staffLineColor);
+    this.linesGroup.addClass("staff-line-color");
     this.rootGroup.add(this.linesGroup);
     this.rootGroup.add(this.clef);
   }
 
   changeColorScheme(colorScheme: ColorScheme) {
     this.colorScheme = colorScheme;
-
-    this.linesGroup.fill(this.colorScheme.staffLineColor);
-    this.clef.fill(this.colorScheme.mainColor);
 
     for (let measure of this.measures) {
       measure.changeColorScheme(colorScheme);

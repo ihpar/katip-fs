@@ -2,12 +2,16 @@ import { Rect, Svg, G } from "@svgdotjs/svg.js";
 import { Makam } from "models/Makam";
 import { Usul } from "models/Usul";
 import { ColorScheme } from "./Colors";
+import { FontLoader } from "./fonts/FontLoader";
+import { BravuraFont } from "./fonts/bravura";
+import { NotePositions } from "./NotePositions";
+import Accidental from "./Accidental";
 
 export default class Measure {
   painter: Svg;
+  symbols: FontLoader;
   makam: Makam;
   usul: Usul;
-  accidentals: string[];
   hasMakamChange: boolean;
   hasUsulCahnge: boolean;
   index: number;
@@ -39,6 +43,7 @@ export default class Measure {
     renderBar: boolean
   ) {
     this.painter = painter;
+    this.symbols = new FontLoader(BravuraFont);
     this.index = index;
     this.makam = makam;
     this.usul = usul;
@@ -78,19 +83,17 @@ export default class Measure {
     if (this.renderBar) {
       this.rootGroup.rect(1, this.lineGap * 4)
         .move(this.left + this.width - 1, this.top)
-        .addClass("measure-bar");
+        .addClass("staff-line-color");
     }
 
     if (this.showAccidentals) {
       const accidentals = this.makam.accidentals;
-      for (let accidental of this.accidentals) {
-        // Fa+5-#:4 
-        // Si+4-b:1
-        const [pitch, acci] = accidental.split("-");
-        const [pitchRoot, octave] = pitch.split("+");
-        const [acciDirection, acciAmount] = acci.split(":");
+      let acciLeft = this.left + 5;
+      for (let accidentalStr of accidentals) {
+        const accidental = new Accidental(accidentalStr, this.rootGroup);
+        accidental.render(acciLeft, this.top);
+        acciLeft += accidental.width + 5;
       }
-      console.log(accidentals);
     }
 
     // draw bounding rectangle

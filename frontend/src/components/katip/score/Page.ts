@@ -1,4 +1,6 @@
 import { Svg, SVG } from "@svgdotjs/svg.js";
+import { Makam } from "models/Makam";
+import { Usul } from "models/Usul";
 import { ColorScheme } from "./Colors";
 import { FontLoader } from "./fonts/FontLoader";
 import Staff from "./Staff";
@@ -14,6 +16,8 @@ export default class Page {
   svgRootId: string;
   painter: Svg;
   staves: Staff[];
+  defaultMakam: Makam;
+  defaultUsul: Usul;
   staveCount = 8;
 
   constructor(
@@ -22,7 +26,9 @@ export default class Page {
     width: number,
     height: number,
     colorScheme: ColorScheme,
-    fontLoader: FontLoader
+    fontLoader: FontLoader,
+    defaultMakam: Makam,
+    defaultUsul: Usul
   ) {
     this.scoreRootId = scoreRootId;
     this.index = index;
@@ -30,6 +36,8 @@ export default class Page {
     this.height = height;
     this.colorScheme = colorScheme;
     this.fontLoader = fontLoader;
+    this.defaultMakam = defaultMakam;
+    this.defaultUsul = defaultUsul;
 
     this.pageId = `a4-${this.index}`;
     this.svgRootId = `svg-root-${this.index}`;
@@ -56,7 +64,14 @@ export default class Page {
 
     for (let i = 0; i < this.staveCount; i++) {
       this.staves.push(
-        new Staff(i, this.width, this.painter, this.fontLoader, this.colorScheme)
+        new Staff(
+          i,
+          this.width,
+          this.painter,
+          this.colorScheme,
+          this.defaultMakam,
+          this.defaultUsul
+        )
       );
     }
   }

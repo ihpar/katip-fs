@@ -4,6 +4,8 @@ import { BravuraFont } from "./fonts/bravura";
 import { Theme } from "store/slices/theme";
 import { colorSchemes, ColorScheme } from "./Colors";
 import { initialState as action } from "store/slices/note-modifiers";
+import { DEFAULT_MAKAM } from "./Makams";
+import { DEFAULT_USUL } from "./Usuls";
 
 import Page from "./Page";
 
@@ -11,25 +13,36 @@ export default class Score {
   readonly width = 836;
   readonly height = 1202;
   fontLoader: FontLoader;
+  scoreRootId: string;
   pages: Page[];
+  numPages: number;
   hasSound = false;
   player: Soundfont.Player;
+  defaultMakam = DEFAULT_MAKAM;
+  defaultUsul = DEFAULT_USUL;
 
   activeColorScheme: ColorScheme;
 
   constructor(scoreRootId: string, theme: Theme, numPages = 1) {
+    this.scoreRootId = scoreRootId;
     this.fontLoader = new FontLoader(BravuraFont);
     this.activeColorScheme = colorSchemes[theme];
-
     this.pages = [];
-    for (let i = 0; i < numPages; i++) {
+    this.numPages = numPages;
+    this.init();
+  }
+
+  init() {
+    for (let i = 0; i < this.numPages; i++) {
       this.pages.push(new Page(
-        scoreRootId,
+        this.scoreRootId,
         i,
         this.width,
         this.height,
         this.activeColorScheme,
-        this.fontLoader
+        this.fontLoader,
+        this.defaultMakam,
+        this.defaultUsul
       ));
     }
   }
