@@ -2,28 +2,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { playerActions } from "store/slices/player";
 import { RootState } from "store/index";
 
-import soundOff from "static/images/controls/sound-off.svg";
-import soundOffDark from "static/images/controls/sound-off_dark.svg";
-import soundOn from "static/images/controls/sound-on.svg";
-import soundOnDark from "static/images/controls/sound-on_dark.svg";
-import rewind from "static/images/controls/rewind.svg";
-import rewindDark from "static/images/controls/rewind_dark.svg";
-import play from "static/images/controls/play.svg";
-import playDark from "static/images/controls/play_dark.svg";
-import pause from "static/images/controls/pause.svg";
-import pauseDark from "static/images/controls/pause_dark.svg";
-import repeat from "static/images/controls/repeat.svg";
-import repeatDark from "static/images/controls/repeat_dark.svg";
-import metronome from "static/images/controls/metronome.svg";
-import metronomeDark from "static/images/controls/metronome_dark.svg";
-import tuningFork from "static/images/controls/tuning-fork.svg";
-import tuningForkDark from "static/images/controls/tuning-fork_dark.svg";
+import "./PlayerActions.scss";
 
 const PlayerActions: React.FC<{ isDark: boolean; }> = ({ isDark }) => {
   const dispatch = useDispatch();
 
   const isSoundOn = useSelector<RootState, boolean>((state) => state.player.soundOn);
   const isPlaying = useSelector<RootState, boolean>((state) => state.player.playing);
+  // sound, rewind, play, loop, metronome, fork
 
   const soundButtonClickHandler = () => {
     dispatch(playerActions.toggleSound());
@@ -37,37 +23,32 @@ const PlayerActions: React.FC<{ isDark: boolean; }> = ({ isDark }) => {
     <ul className="top-menu-list player-controls">
       <li>
         <button onClick={soundButtonClickHandler} data-sound-status={isSoundOn}>
-          <img alt="sound on" className="img-ht on" src={isDark ? soundOnDark : soundOn} />
-          <img alt="sound off" className="img-ht off" src={isDark ? soundOffDark : soundOff} />
+          <span className={`p-act sound ${isSoundOn ? "on" : "off"}`}></span>
         </button>
       </li>
       <li>
         <button>
-          <img alt="rewind" className="img-ht" src={isDark ? rewindDark : rewind} />
+          <span className="p-act rewind"></span>
         </button>
       </li>
       <li>
         <button onClick={playButtonClickHandler}>
-          <img alt="play pause" className="img-ht" src={
-            isPlaying ?
-              (isDark ? pauseDark : pause) :
-              (isDark ? playDark : play)
-          } />
+          <span className={`p-act ${isPlaying ? "pause" : "play"}`}></span>
         </button>
       </li>
       <li>
         <button>
-          <img alt="loop" className="img-ht" src={isDark ? repeatDark : repeat} />
+          <span className="p-act loop"></span>
         </button>
       </li>
       <li>
         <button>
-          <img alt="metronome" className="img-ht" src={isDark ? metronomeDark : metronome} />
+          <span className="p-act metronome"></span>
         </button>
       </li>
       <li>
         <button>
-          <img alt="tuning fork" className="img-ht" src={isDark ? tuningForkDark : tuningFork} />
+          <span className="p-act tuning-fork"></span>
         </button>
       </li>
     </ul>

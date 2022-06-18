@@ -2,7 +2,6 @@ import { Svg, SVG } from "@svgdotjs/svg.js";
 import { Makam } from "models/Makam";
 import { Usul } from "models/Usul";
 import { ColorScheme } from "./Colors";
-import { FontLoader } from "./fonts/FontLoader";
 import Staff from "./Staff";
 
 export default class Page {
@@ -11,7 +10,6 @@ export default class Page {
   width: number;
   height: number;
   colorScheme: ColorScheme;
-  fontLoader: FontLoader;
   pageId: string;
   svgRootId: string;
   painter: Svg;
@@ -26,7 +24,6 @@ export default class Page {
     width: number,
     height: number,
     colorScheme: ColorScheme,
-    fontLoader: FontLoader,
     defaultMakam: Makam,
     defaultUsul: Usul
   ) {
@@ -35,7 +32,6 @@ export default class Page {
     this.width = width;
     this.height = height;
     this.colorScheme = colorScheme;
-    this.fontLoader = fontLoader;
     this.defaultMakam = defaultMakam;
     this.defaultUsul = defaultUsul;
 
@@ -45,10 +41,11 @@ export default class Page {
     this.painter = SVG();
     this.staves = [];
 
-    this.init();
+    this.initPage();
+    this.initStaves();
   }
 
-  init() {
+  initPage() {
     const A4 = document.createElement("div");
     A4.className = "A4";
     A4.setAttribute("id", this.pageId);
@@ -61,7 +58,9 @@ export default class Page {
     root?.appendChild(A4);
 
     this.painter.addTo(svgRoot).size(this.width, this.height);
+  }
 
+  initStaves() {
     for (let i = 0; i < this.staveCount; i++) {
       this.staves.push(
         new Staff(
@@ -78,8 +77,6 @@ export default class Page {
 
   changeColorScheme(colorScheme: ColorScheme) {
     this.colorScheme = colorScheme;
-    for (let staff of this.staves) {
-      staff.changeColorScheme(this.colorScheme);
-    }
+    this.staves.forEach(staff => staff.changeColorScheme(this.colorScheme));
   }
 }

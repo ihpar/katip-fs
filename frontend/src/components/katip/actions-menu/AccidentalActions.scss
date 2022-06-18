@@ -1,0 +1,79 @@
+.top-menu-list.accidental-controls {
+  button {
+    display: flex;
+
+    span.acci {
+      background-image: url("../../../static/images/sprites/acci_sprite.svg");
+      height: 30px;
+      background-size: auto 60px;
+      background-position-y: 0;
+
+      &.bekar {
+        background-position-x: 1px;
+        width: 10px;
+      }
+
+      &.fazla-bemol {
+        background-position-x: -175px;
+        width: 10px;
+      }
+
+      &.bakiyye-bemol {
+        background-position-x: -237px;
+        width: 10px;
+      }
+
+      &.k-mucennep-bemol {
+        background-position-x: -186px;
+        width: 10px;
+      }
+
+      &.b-mucennep-bemol {
+        background-position-x: -251px;
+        width: 10px;
+      }
+
+      &.tanini-bemol {
+        background-position-x: -218px;
+        width: 15px;
+      }
+
+      &.fazla-diyez {
+        background-position-x: -11px;
+        width: 10px;
+      }
+
+      &.bakiyye-diyez {
+        background-position-x: -23px;
+        width: 11px;
+      }
+
+      &.k-mucennep-diyez {
+        background-position-x: -65px;
+        width: 12px;
+      }
+
+      &.b-mucennep-diyez {
+        background-position-x: -81px;
+        width: 12px;
+      }
+
+      &.tanini-diyez {
+        background-position-x: -52px;
+        width: 10px;
+      }
+    }
+  }
+}
+
+.dark {
+  .top-menu-list.accidental-controls {
+    button {
+      span.acci {
+        height: 30px;
+        background-size: auto 60px;
+        background-position-y: -30px;
+      }
+    }
+  }
+}

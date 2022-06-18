@@ -1,6 +1,5 @@
 import { Svg, Rect, Path, G } from "@svgdotjs/svg.js";
-import { FontLoader } from "./fonts/FontLoader";
-import { BravuraFont } from "./fonts/bravura";
+import { symbols } from "./fonts/FontLoader";
 import { ColorScheme } from "./Colors";
 import Measure from "./Measure";
 import { Makam } from "models/Makam";
@@ -11,7 +10,6 @@ export default class Staff {
   top: number;
   width: number;
   painter: Svg;
-  symbols: FontLoader;
   colorScheme: ColorScheme;
   rootGroup: G;
   linesGroup: G;
@@ -40,23 +38,22 @@ export default class Staff {
     this.top = index * (16 * this.lineGap) + (6 * this.lineGap);
     this.width = width;
     this.painter = painter;
-    this.symbols = new FontLoader(BravuraFont);
     this.colorScheme = colorScheme;
     this.defaultMakam = defaultMakam;
     this.defaultUsul = defaultUsul;
     this.staffLines = [];
     this.measures = [];
-    this.measureOffset = Math.floor(this.symbols.getDims("gClef")[0] + this.firstMeasureMargin);
+    this.measureOffset = Math.floor(symbols.getDims("gClef")[0] + this.firstMeasureMargin);
     this.defaultMeasureWidth = Math.round(
       (this.width - this.measureOffset) * 100 / this.defaultMeasureCount
     ) / 100;
     this.rootGroup = this.painter.group();
 
-    this.init();
+    this.initStaff();
   }
 
-  init() {
-    this.drawStaff();
+  initStaff() {
+    this.render();
 
     for (let i = 0; i < this.defaultMeasureCount; i++) {
       this.measures.push(
@@ -77,7 +74,7 @@ export default class Staff {
     }
   }
 
-  drawStaff() {
+  render() {
     this.linesGroup = this.painter.group();
     // Render staff lines
     for (let i = 0; i < 5; i++) {
@@ -88,7 +85,7 @@ export default class Staff {
     this.linesGroup.rect(1, this.lineGap * 4).move(this.width - 1, this.top);
 
     // render clef
-    this.clef = this.painter.path(this.symbols.getPath("gClef"))
+    this.clef = this.painter.path(symbols.getPath("gClef"))
       .center(15, this.top + 18)
       .addClass("main-color");
 
@@ -99,9 +96,6 @@ export default class Staff {
 
   changeColorScheme(colorScheme: ColorScheme) {
     this.colorScheme = colorScheme;
-
-    for (let measure of this.measures) {
-      measure.changeColorScheme(colorScheme);
-    }
+    this.measures.forEach(measure => measure.changeColorScheme(this.colorScheme));
   }
 }

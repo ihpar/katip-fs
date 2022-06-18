@@ -2,13 +2,10 @@ import { Rect, Svg, G } from "@svgdotjs/svg.js";
 import { Makam } from "models/Makam";
 import { Usul } from "models/Usul";
 import { ColorScheme } from "./Colors";
-import { FontLoader } from "./fonts/FontLoader";
-import { BravuraFont } from "./fonts/bravura";
 import Accidental from "./Accidental";
 
 export default class Measure {
   painter: Svg;
-  symbols: FontLoader;
   makam: Makam;
   usul: Usul;
   hasMakamChange: boolean;
@@ -42,7 +39,6 @@ export default class Measure {
     renderBar: boolean
   ) {
     this.painter = painter;
-    this.symbols = new FontLoader(BravuraFont);
     this.index = index;
     this.makam = makam;
     this.usul = usul;
@@ -54,10 +50,10 @@ export default class Measure {
     this.showUsul = showUsul;
     this.renderBar = renderBar;
 
-    this.init();
+    this.initMeasure();
   }
 
-  init() {
+  initMeasure() {
     this.rootGroup = this.painter.group();
 
     const ghostLineWidth = this.width - 3;

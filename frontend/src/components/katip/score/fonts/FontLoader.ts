@@ -1,6 +1,7 @@
 import FontType from "./FontType";
+import { BravuraFont } from "./bravura";
 
-export class FontLoader {
+class FontLoader {
   font: FontType;
 
   constructor(font: FontType) {
@@ -19,3 +20,5 @@ export class FontLoader {
     ];
   }
 }
+
+export const symbols = new FontLoader(BravuraFont);

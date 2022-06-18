@@ -1,0 +1,64 @@
+.top-menu-list.player-controls {
+  button {
+    display: flex;
+
+    span.p-act {
+      background-image: url("../../../static/images/sprites/pa_sprite.svg");
+      height: 30px;
+      background-size: auto 60px;
+      background-position-y: 0;
+
+      &.sound {
+        width: 28px;
+
+        &.off {
+          background-position-x: -1px;
+        }
+
+        &.on {
+          background-position-x: -44px;
+        }
+      }
+
+      &.rewind {
+        width: 27px;
+        background-position-x: -88px;
+      }
+
+      &.play {
+        width: 22px;
+        background-position-x: -134px;
+      }
+
+      &.pause {
+        width: 22px;
+        background-position-x: -175px;
+      }
+
+      &.loop {
+        width: 28px;
+        background-position-x: -216px;
+      }
+
+      &.metronome {
+        width: 24px;
+        background-position-x: -261px;
+      }
+
+      &.tuning-fork {
+        width: 28px;
+        background-position-x: -302px;
+      }
+    }
+  }
+}
+
+.dark {
+  .top-menu-list.player-controls {
+    button {
+      span.p-act {
+        background-position-y: -30px;
+      }
+    }
+  }
+}

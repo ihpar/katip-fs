@@ -4,6 +4,8 @@ import { RootState } from "store";
 import { ActionMode } from "store/slices/note-modifiers";
 import { useEffect } from "react";
 
+import "./AccidentalActions.scss";
+
 const accidentals = [
   { name: "bekar", value: "n:n" },
   { name: "fazla-bemol", value: "b:1" },

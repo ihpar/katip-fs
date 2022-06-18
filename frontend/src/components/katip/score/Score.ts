@@ -1,6 +1,4 @@
 import Soundfont from "soundfont-player";
-import { FontLoader } from "./fonts/FontLoader";
-import { BravuraFont } from "./fonts/bravura";
 import { Theme } from "store/slices/theme";
 import { colorSchemes, ColorScheme } from "./Colors";
 import { initialState as action } from "store/slices/note-modifiers";
@@ -12,7 +10,6 @@ import Page from "./Page";
 export default class Score {
   readonly width = 836;
   readonly height = 1202;
-  fontLoader: FontLoader;
   scoreRootId: string;
   pages: Page[];
   numPages: number;
@@ -25,14 +22,13 @@ export default class Score {
 
   constructor(scoreRootId: string, theme: Theme, numPages = 1) {
     this.scoreRootId = scoreRootId;
-    this.fontLoader = new FontLoader(BravuraFont);
     this.activeColorScheme = colorSchemes[theme];
     this.pages = [];
     this.numPages = numPages;
-    this.init();
+    this.initScore();
   }
 
-  init() {
+  initScore() {
     for (let i = 0; i < this.numPages; i++) {
       this.pages.push(new Page(
         this.scoreRootId,
@@ -40,7 +36,6 @@ export default class Score {
         this.width,
         this.height,
         this.activeColorScheme,
-        this.fontLoader,
         this.defaultMakam,
         this.defaultUsul
       ));
@@ -49,10 +44,7 @@ export default class Score {
 
   changeTheme(theme: Theme) {
     this.activeColorScheme = colorSchemes[theme];
-
-    for (let page of this.pages) {
-      page.changeColorScheme(this.activeColorScheme);
-    }
+    this.pages.forEach(page => page.changeColorScheme(this.activeColorScheme));
   }
 
   setHasSound(hasSound: boolean) {

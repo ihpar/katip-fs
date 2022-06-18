@@ -1,10 +1,54 @@
-.rest-controls {
-  li {
-    button {
-      height: 36px;
+.top-menu-list.rest-controls {
+  button {
+    display: flex;
 
-      img {
-        height: 100%;
+    span.rests {
+      background-image: url("../../../static/images/sprites/rests_sprite.svg");
+      background-repeat: no-repeat;
+      height: 30px;
+      background-size: auto 60px;
+      background-position-y: 0;
+
+      &.rest_1 {
+        background-position-x: 0px;
+        width: 21px;
+      }
+
+      &.rest_2 {
+        background-position-x: -28px;
+        width: 21px;
+      }
+
+      &.rest_4 {
+        background-position-x: -56px;
+        width: 15px;
+      }
+
+      &.rest_8 {
+        background-position-x: -78px;
+        width: 20px;
+      }
+
+      &.rest_16 {
+        background-position-x: -106px;
+        width: 18px;
+      }
+
+      &.rest_32 {
+        background-position-x: -131px;
+        width: 16px;
+      }
+    }
+  }
+}
+
+.dark {
+  .top-menu-list.rest-controls {
+    button {
+      span.rests {
+        height: 30px;
+        background-size: auto 60px;
+        background-position-y: -30px;
       }
     }
   }

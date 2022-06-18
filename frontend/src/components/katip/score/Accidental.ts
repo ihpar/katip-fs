@@ -1,10 +1,9 @@
 import { G } from "@svgdotjs/svg.js";
-import { FontLoader } from "./fonts/FontLoader";
-import { BravuraFont } from "./fonts/bravura";
+import { symbols } from "./fonts/FontLoader";
 import { NotePositions } from "./NotePositions";
 
 class Accidental {
-  symbols: FontLoader;
+  symbols;
   lineGap = 9;
   rootGroup: G;
   dims: number[];
@@ -12,7 +11,7 @@ class Accidental {
   pitchStr: string;
 
   constructor(accidentalStr: string, rootGroup: G) {
-    this.symbols = new FontLoader(BravuraFont);
+    this.symbols = symbols;
     this.rootGroup = rootGroup;
 
     const [pitch, acci] = accidentalStr.split("-"); // fa+5-d:4 

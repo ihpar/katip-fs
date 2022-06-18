@@ -1,0 +1,65 @@
+.top-menu-list.duration-controls {
+  button {
+    display: flex;
+
+    span.durs {
+      background-image: url("../../../static/images/sprites/dur_sprite.svg");
+      background-repeat: no-repeat;
+      height: 30px;
+      background-size: auto 60px;
+      background-position-y: 0;
+
+      &.whole {
+        background-position-x: 0px;
+        width: 17px;
+      }
+
+      &.half {
+        background-position-x: -26px;
+        width: 16px;
+      }
+
+      &.fourth {
+        background-position-x: -50px;
+        width: 16px;
+      }
+
+      &.eighth {
+        background-position-x: -73px;
+        width: 22px;
+      }
+
+      &.sixteenth {
+        background-position-x: -103px;
+        width: 22px;
+      }
+
+      &.thirtysecond {
+        background-position-x: -134px;
+        width: 21px;
+      }
+
+      &.sixtyfourth {
+        background-position-x: -164px;
+        width: 21px;
+      }
+
+      &.dotted {
+        background-position-x: -220px;
+        width: 12px;
+      }
+    }
+  }
+}
+
+.dark {
+  .top-menu-list.duration-controls {
+    button {
+      span.durs {
+        height: 30px;
+        background-size: auto 60px;
+        background-position-y: -30px;
+      }
+    }
+  }
+}

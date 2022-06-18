@@ -5,6 +5,8 @@ import { RootState } from "store";
 import { ActionMode } from "store/slices/note-modifiers";
 import { useEffect } from "react";
 
+import "./Dot.scss";
+
 const Dot = () => {
   const dispatch = useDispatch();
 
