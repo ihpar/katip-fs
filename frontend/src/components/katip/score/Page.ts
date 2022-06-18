@@ -1,51 +1,34 @@
 import { Svg, SVG } from "@svgdotjs/svg.js";
 import { Makam } from "models/Makam";
 import { Usul } from "models/Usul";
-import { ColorScheme } from "./Colors";
 import Staff from "./Staff";
 
 export default class Page {
-  scoreRootId: string;
-  index: number;
-  width: number;
-  height: number;
-  colorScheme: ColorScheme;
   pageId: string;
   svgRootId: string;
   painter: Svg;
   staves: Staff[];
-  defaultMakam: Makam;
-  defaultUsul: Usul;
   staveCount = 8;
 
   constructor(
-    scoreRootId: string,
-    index: number,
-    width: number,
-    height: number,
-    colorScheme: ColorScheme,
-    defaultMakam: Makam,
-    defaultUsul: Usul
+    private scoreRootId: string,
+    private index: number,
+    private width: number,
+    private height: number,
+    private defaultMakam: Makam,
+    private defaultUsul: Usul
   ) {
-    this.scoreRootId = scoreRootId;
-    this.index = index;
-    this.width = width;
-    this.height = height;
-    this.colorScheme = colorScheme;
-    this.defaultMakam = defaultMakam;
-    this.defaultUsul = defaultUsul;
-
     this.pageId = `a4-${this.index}`;
     this.svgRootId = `svg-root-${this.index}`;
 
     this.painter = SVG();
     this.staves = [];
 
-    this.initPage();
+    this.init();
     this.initStaves();
   }
 
-  initPage() {
+  init() {
     const A4 = document.createElement("div");
     A4.className = "A4";
     A4.setAttribute("id", this.pageId);
@@ -67,16 +50,12 @@ export default class Page {
           i,
           this.width,
           this.painter,
-          this.colorScheme,
           this.defaultMakam,
           this.defaultUsul
         )
       );
     }
-  }
 
-  changeColorScheme(colorScheme: ColorScheme) {
-    this.colorScheme = colorScheme;
-    this.staves.forEach(staff => staff.changeColorScheme(this.colorScheme));
+    this.staves.forEach(staff => staff.render());
   }
 }

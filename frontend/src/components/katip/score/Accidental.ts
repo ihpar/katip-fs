@@ -5,14 +5,12 @@ import { NotePositions } from "./NotePositions";
 class Accidental {
   symbols;
   lineGap = 9;
-  rootGroup: G;
   dims: number[];
   path: string;
   pitchStr: string;
 
-  constructor(accidentalStr: string, rootGroup: G) {
+  constructor(accidentalStr: string, public rootGroup: G) {
     this.symbols = symbols;
-    this.rootGroup = rootGroup;
 
     const [pitch, acci] = accidentalStr.split("-"); // fa+5-d:4 
     const [pitchRoot, octave] = pitch.split("+"); // ["fa", "5"]

@@ -1,101 +1,71 @@
-import { Svg, Rect, Path, G } from "@svgdotjs/svg.js";
-import { symbols } from "./fonts/FontLoader";
-import { ColorScheme } from "./Colors";
+import { Svg } from "@svgdotjs/svg.js";
 import Measure from "./Measure";
 import { Makam } from "models/Makam";
 import { Usul } from "models/Usul";
+import ScoreElement from "./ScoreElement";
+import AccidentalSection from "./AccidentalSection";
+import ClefSection from "./ClefSection";
+import { lineGap } from "./Constants";
 
-export default class Staff {
-  index: number;
+export default class Staff implements ScoreElement {
   top: number;
-  width: number;
-  painter: Svg;
-  colorScheme: ColorScheme;
-  rootGroup: G;
-  linesGroup: G;
-  staffLines: Rect[];
-  clef: Path;
-  bar: Rect;
-  measures: Measure[];
-  measureOffset: number;
-  defaultMeasureWidth: number;
-  defaultMakam: Makam;
-  defaultUsul: Usul;
-
+  elements: ScoreElement[];
   defaultMeasureCount = 6;
-  firstMeasureMargin = 10;
-  lineGap = 9;
+  clefSection: ClefSection;
+  accidentalsSection: AccidentalSection;
 
   constructor(
-    index: number,
-    width: number,
-    painter: Svg,
-    colorScheme: ColorScheme,
-    defaultMakam: Makam,
-    defaultUsul: Usul
+    private index: number,
+    public width: number,
+    private painter: Svg,
+    private defaultMakam: Makam,
+    private defaultUsul: Usul
   ) {
-    this.index = index;
-    this.top = index * (16 * this.lineGap) + (6 * this.lineGap);
-    this.width = width;
-    this.painter = painter;
-    this.colorScheme = colorScheme;
-    this.defaultMakam = defaultMakam;
-    this.defaultUsul = defaultUsul;
-    this.staffLines = [];
-    this.measures = [];
-    this.measureOffset = Math.floor(symbols.getDims("gClef")[0] + this.firstMeasureMargin);
-    this.defaultMeasureWidth = Math.round(
-      (this.width - this.measureOffset) * 100 / this.defaultMeasureCount
-    ) / 100;
-    this.rootGroup = this.painter.group();
-
-    this.initStaff();
+    this.top = index * (16 * lineGap) + (6 * lineGap);
+    this.elements = [];
+    this.init();
   }
 
-  initStaff() {
-    this.render();
+  init() {
+    this.clefSection = new ClefSection(
+      this.painter,
+      0,
+      this.top
+    );
+
+    this.elements.push(this.clefSection);
+    const accidentalSectionLeft = this.clefSection.width;
+
+    this.accidentalsSection = new AccidentalSection(
+      this.painter,
+      1,
+      this.defaultMakam.accidentals,
+      accidentalSectionLeft,
+      this.top,
+      false
+    );
+
+    this.elements.push(this.accidentalsSection);
+
+    const firstMeasureLeft = accidentalSectionLeft + this.accidentalsSection.width;
+    const defaultMeasureWidth = (this.width - firstMeasureLeft) / this.defaultMeasureCount;
 
     for (let i = 0; i < this.defaultMeasureCount; i++) {
-      this.measures.push(
+      this.elements.push(
         new Measure(
           this.painter,
-          i,
+          i + 2,
           this.defaultMakam,
           this.defaultUsul,
-          this.colorScheme,
-          this.measureOffset + i * this.defaultMeasureWidth,
+          firstMeasureLeft + i * defaultMeasureWidth,
           this.top,
-          this.defaultMeasureWidth,
-          i === 0,
-          i === 0,
-          i !== this.defaultMeasureCount - 1
+          defaultMeasureWidth
         )
       );
     }
   }
 
   render() {
-    this.linesGroup = this.painter.group();
-    // Render staff lines
-    for (let i = 0; i < 5; i++) {
-      this.linesGroup.rect(this.width, 1).y(i * 9 + this.top);
-    }
-
-    // render final bar
-    this.linesGroup.rect(1, this.lineGap * 4).move(this.width - 1, this.top);
-
-    // render clef
-    this.clef = this.painter.path(symbols.getPath("gClef"))
-      .center(15, this.top + 18)
-      .addClass("main-color");
-
-    this.linesGroup.addClass("staff-line-color");
-    this.rootGroup.add(this.linesGroup);
-    this.rootGroup.add(this.clef);
-  }
-
-  changeColorScheme(colorScheme: ColorScheme) {
-    this.colorScheme = colorScheme;
-    this.measures.forEach(measure => measure.changeColorScheme(this.colorScheme));
+    this.elements.forEach(element => element.render());
   }
 }

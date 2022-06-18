@@ -1,6 +1,4 @@
 import Soundfont from "soundfont-player";
-import { Theme } from "store/slices/theme";
-import { colorSchemes, ColorScheme } from "./Colors";
 import { initialState as action } from "store/slices/note-modifiers";
 import { DEFAULT_MAKAM } from "./Makams";
 import { DEFAULT_USUL } from "./Usuls";
@@ -10,41 +8,31 @@ import Page from "./Page";
 export default class Score {
   readonly width = 836;
   readonly height = 1202;
-  scoreRootId: string;
   pages: Page[];
-  numPages: number;
   hasSound = false;
   player: Soundfont.Player;
   defaultMakam = DEFAULT_MAKAM;
   defaultUsul = DEFAULT_USUL;
 
-  activeColorScheme: ColorScheme;
-
-  constructor(scoreRootId: string, theme: Theme, numPages = 1) {
-    this.scoreRootId = scoreRootId;
-    this.activeColorScheme = colorSchemes[theme];
+  constructor(
+    private scoreRootId: string,
+    private numPages = 1
+  ) {
     this.pages = [];
-    this.numPages = numPages;
-    this.initScore();
+    this.init();
   }
 
-  initScore() {
+  init() {
     for (let i = 0; i < this.numPages; i++) {
       this.pages.push(new Page(
         this.scoreRootId,
         i,
         this.width,
         this.height,
-        this.activeColorScheme,
         this.defaultMakam,
         this.defaultUsul
       ));
     }
-  }
-
-  changeTheme(theme: Theme) {
-    this.activeColorScheme = colorSchemes[theme];
-    this.pages.forEach(page => page.changeColorScheme(this.activeColorScheme));
   }
 
   setHasSound(hasSound: boolean) {

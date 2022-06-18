@@ -10,5 +10,5 @@ const MAKAMS: Makam[] = [
   new Makam("nihavent", "Nihâvent", "nihavent.svg", "nihavent_dark.svg", ["si+4-b:5", "mi+5-b:5"]),
   new Makam("ussak", "Uşşak", "ussak.svg", "ussak_dark.svg", ["si+4-b:1"]),
 ];
-export const DEFAULT_MAKAM = MAKAMS.find(makam => makam.id === "ussak")!;
+export const DEFAULT_MAKAM = MAKAMS.find(makam => makam.id === "hicaz")!;
 export default MAKAMS;

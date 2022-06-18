@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "store/index";
-import { Theme } from "store/slices/theme";
 import { ActionMode } from "store/slices/note-modifiers";
 
 import Score from "./score/Score";
@@ -10,8 +9,6 @@ import "./Sheets.scss";
 
 let score: Score;
 const Sheets = () => {
-  const theme = useSelector<RootState, Theme>(state => state.theme.theme);
-
   const isSoundOn = useSelector<RootState, boolean>((state) => state.player.soundOn);
 
   const actionMode = useSelector<RootState, ActionMode>(state => state.noteModifier.mode);
@@ -21,12 +18,9 @@ const Sheets = () => {
 
   useEffect(() => {
     if (!score) {
-      score = new Score("score-root", theme, 2);
+      score = new Score("score-root", 2);
     }
-    else {
-      score.changeTheme(theme);
-    }
-  }, [theme]);
+  }, []);
 
   useEffect(() => {
     score.setHasSound(isSoundOn);
