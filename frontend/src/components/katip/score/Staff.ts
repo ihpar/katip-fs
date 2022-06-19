@@ -1,11 +1,12 @@
 import { Svg } from "@svgdotjs/svg.js";
-import Measure from "./Measure";
 import { Makam } from "models/Makam";
 import { Usul } from "models/Usul";
+import { lineGap } from "./Constants";
+import Measure from "./Measure";
 import ScoreElement from "./ScoreElement";
 import AccidentalSection from "./AccidentalSection";
 import ClefSection from "./ClefSection";
-import { lineGap } from "./Constants";
+import UsulSection from "./UsulSection";
 
 export default class Staff implements ScoreElement {
   top: number;
@@ -13,6 +14,7 @@ export default class Staff implements ScoreElement {
   defaultMeasureCount = 6;
   clefSection: ClefSection;
   accidentalsSection: AccidentalSection;
+  usulSection: UsulSection;
 
   constructor(
     private index: number,
@@ -27,37 +29,47 @@ export default class Staff implements ScoreElement {
   }
 
   init() {
+    let nextElementLeft = 0;
     this.clefSection = new ClefSection(
       this.painter,
       0,
       this.top
     );
-
     this.elements.push(this.clefSection);
-    const accidentalSectionLeft = this.clefSection.width;
+    nextElementLeft += this.clefSection.width;
 
     this.accidentalsSection = new AccidentalSection(
       this.painter,
       1,
       this.defaultMakam.accidentals,
-      accidentalSectionLeft,
+      nextElementLeft,
       this.top,
       false
     );
-
     this.elements.push(this.accidentalsSection);
+    nextElementLeft += this.accidentalsSection.width;
 
-    const firstMeasureLeft = accidentalSectionLeft + this.accidentalsSection.width;
-    const defaultMeasureWidth = (this.width - firstMeasureLeft) / this.defaultMeasureCount;
+    if (this.index === 0) {
+      this.usulSection = new UsulSection(
+        this.painter,
+        2,
+        this.defaultUsul,
+        nextElementLeft,
+        this.top
+      );
+      this.elements.push(this.usulSection);
+      nextElementLeft += this.usulSection.width;
+    }
 
+    const defaultMeasureWidth = (this.width - nextElementLeft) / this.defaultMeasureCount;
     for (let i = 0; i < this.defaultMeasureCount; i++) {
       this.elements.push(
         new Measure(
           this.painter,
-          i + 2,
+          i,
           this.defaultMakam,
           this.defaultUsul,
-          firstMeasureLeft + i * defaultMeasureWidth,
+          nextElementLeft + i * defaultMeasureWidth,
           this.top,
           defaultMeasureWidth
         )

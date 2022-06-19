@@ -1,7 +1,8 @@
 import { Usul } from "models/Usul";
 
 const USULS = [
-  new Usul("duyek_9_4", "Aksak", 9, 4),
+  new Usul("aksak_9_4", "Aksak", 9, 4),
+  new Usul("aksak_semai_10_4", "Aksak Semâî", 10, 4),
   new Usul("duyek_8_8", "Düyek", 8, 8),
   new Usul("nim_sofyan_2_4", "Nim Sofyan", 2, 4),
   new Usul("nim_sofyan_2_8", "Nim Sofyan", 2, 8),
