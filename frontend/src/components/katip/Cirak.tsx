@@ -1,3 +1,4 @@
+import React from "react";
 import useLanguage from "hooks/use-language";
 
 import "./Cirak.scss";
@@ -17,9 +18,11 @@ const Cirak = () => {
             <input type="text" className="txt-input" placeholder={t.search} />
             <span className="i-sharp search-icon">search</span>
             <br />
-            <div className="text-underline"></div>
+            <div className="text-underline" />
           </div>
-          <div className="content-scroller info-section" dangerouslySetInnerHTML={{ __html: t.rast }}></div>
+          <div className="content-scroller info-section">
+            {t.rast}
+          </div>
           <a
             className="assistant-link"
             target="_blank"

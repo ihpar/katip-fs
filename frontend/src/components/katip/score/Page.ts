@@ -1,13 +1,17 @@
 import { Svg, SVG } from "@svgdotjs/svg.js";
-import { Makam } from "models/Makam";
-import { Usul } from "models/Usul";
+import Makam from "models/Makam";
+import Usul from "models/Usul";
 import Staff from "./Staff";
 
 export default class Page {
   pageId: string;
+
   svgRootId: string;
+
   painter: Svg;
+
   staves: Staff[];
+
   staveCount = 8;
 
   constructor(
@@ -16,7 +20,7 @@ export default class Page {
     private width: number,
     private height: number,
     private defaultMakam: Makam,
-    private defaultUsul: Usul
+    private defaultUsul: Usul,
   ) {
     this.pageId = `a4-${this.index}`;
     this.svgRootId = `svg-root-${this.index}`;
@@ -44,18 +48,18 @@ export default class Page {
   }
 
   initStaves() {
-    for (let i = 0; i < this.staveCount; i++) {
+    for (let i = 0; i < this.staveCount; i += 1) {
       this.staves.push(
         new Staff(
           i,
           this.width,
           this.painter,
           this.defaultMakam,
-          this.defaultUsul
-        )
+          this.defaultUsul,
+        ),
       );
     }
 
-    this.staves.forEach(staff => staff.render());
+    this.staves.forEach((staff) => staff.render());
   }
 }

@@ -1,3 +1,4 @@
+import React from "react";
 import { languageActions } from "store/slices/language";
 import flagTr from "static/images/flags/tr.svg";
 import flagEn from "static/images/flags/en.svg";
@@ -10,20 +11,21 @@ const LANGUAGES = [
   { code: "en", text: "English", flag: flagEn },
 ];
 
-const LanguageSelector: React.FC<{ onClose: () => void; }> = (props) => {
-
+const LanguageSelector: React.FC<{ onClose: () => void; }> = ({
+  onClose,
+}) => {
   const dispatch = useDispatch();
 
   const languageButtonClickHandler = (langCode: string) => {
     dispatch(languageActions.setLenguage(langCode));
-    props.onClose();
+    onClose();
   };
 
   return (
     <div className="language-selector-wrap">
-      {LANGUAGES.map(lang => (
+      {LANGUAGES.map((lang) => (
         <div className="lang-selector-button-wrap" key={lang.code}>
-          <button onClick={() => { languageButtonClickHandler(lang.code); }}>
+          <button type="button" onClick={() => { languageButtonClickHandler(lang.code); }}>
             <img alt={lang.text} src={lang.flag} />
           </button>
         </div>

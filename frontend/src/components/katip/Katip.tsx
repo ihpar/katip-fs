@@ -1,3 +1,4 @@
+import React from "react";
 import { Provider } from "react-redux";
 import store from "store/index";
 
@@ -10,21 +11,19 @@ import Cirak from "./Cirak";
 import LHSWidgets from "./LHSWidgets";
 import NoteSheetArea from "./NoteSheetArea";
 
-const Katip = () => {
-  return (
-    <Provider store={store}>
-      <div className="page-grid">
-        <Navigation />
-        <LHSWidgets />
-        <main>
-          <ActionsMenu />
-          <NoteSheetArea />
-        </main>
-        <Cirak />
-        <Footer />
-      </div>
-    </Provider>
-  );
-};
+const Katip = () => (
+  <Provider store={store}>
+    <div className="page-grid">
+      <Navigation />
+      <LHSWidgets />
+      <main>
+        <ActionsMenu />
+        <NoteSheetArea />
+      </main>
+      <Cirak />
+      <Footer />
+    </div>
+  </Provider>
+);
 
 export default Katip;

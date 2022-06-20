@@ -1,15 +1,16 @@
+import React from "react";
 import USULS from "./score/Usuls";
 
 import "./UsulWidget.scss";
 
-const UsulWidget: React.FC<{ height: number; }> = (props) => {
+const UsulWidget: React.FC<{ height: number; }> = ({ height }) => {
   const dragStartHandler = (event: React.DragEvent<HTMLLIElement>) => {
     const usul = event.currentTarget.dataset.usul as string;
-    event.dataTransfer.setData("text/plain", "usul:" + usul);
+    event.dataTransfer.setData("text/plain", `usul:${usul}`);
   };
 
   return (
-    <div className="content-scroller" style={{ height: props.height }}>
+    <div className="content-scroller" style={{ height }}>
       <ul>
         {USULS.map((usul) => (
           <li
@@ -20,7 +21,7 @@ const UsulWidget: React.FC<{ height: number; }> = (props) => {
             key={usul.id}
           >
             <div className="widget-usul-rep">
-              <div className="fraction" data-top={usul.numerator} data-bottom={usul.denominator}></div>
+              <div className="fraction" data-top={usul.numerator} data-bottom={usul.denominator} />
             </div>
             <div className="widget-usul-name">{usul.name}</div>
           </li>

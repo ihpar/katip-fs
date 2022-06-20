@@ -1,18 +1,26 @@
 import { Svg, G } from "@svgdotjs/svg.js";
+import Usul from "models/Usul";
 import ScoreElement from "./ScoreElement";
-import { lineGap } from "./Constants";
-import { Usul } from "models/Usul";
-import { symbols } from "./fonts/FontLoader";
+import lineGap from "./Constants";
+import symbols from "./fonts/FontLoader";
 
 class UsulSection implements ScoreElement {
   rootGroup: G;
+
   linesGroup: G;
+
   numeratorGroup: G;
+
   denominatorGroup: G;
+
   marginWidth = 5;
+
   gap = 2;
+
   width = 0;
+
   numNumbers: string[];
+
   denNumbers: string[];
 
   constructor(
@@ -20,7 +28,7 @@ class UsulSection implements ScoreElement {
     private index: number,
     private usul: Usul,
     private left: number,
-    private top: number
+    private top: number,
   ) {
     this.init();
   }
@@ -48,7 +56,7 @@ class UsulSection implements ScoreElement {
     this.rootGroup = this.painter.group();
     this.linesGroup = this.painter.group();
     // Render staff lines
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i += 1) {
       this.linesGroup.rect(this.width, 1).move(this.left, i * 9 + this.top);
     }
     this.linesGroup.addClass("staff-line-color");
@@ -56,12 +64,12 @@ class UsulSection implements ScoreElement {
 
     // render usul symbols
     const left = this.left + this.marginWidth;
-    let top = this.top;
+    let { top } = this;
 
     // render numerator group
     this.numeratorGroup = this.painter.group();
     let numGLeft = left;
-    this.numNumbers.forEach(num => {
+    this.numNumbers.forEach((num) => {
       this.numeratorGroup.path(symbols.getPath(num))
         .move(numGLeft, top);
       numGLeft += symbols.getDims(num)[0] + this.gap;
@@ -74,7 +82,7 @@ class UsulSection implements ScoreElement {
     top += lineGap * 2;
     this.denominatorGroup = this.painter.group();
     let denGLeft = left;
-    this.denNumbers.forEach(num => {
+    this.denNumbers.forEach((num) => {
       this.denominatorGroup.path(symbols.getPath(num))
         .move(denGLeft, top);
       denGLeft += symbols.getDims(num)[0] + this.gap;
@@ -87,8 +95,7 @@ class UsulSection implements ScoreElement {
     const shift = (numGWidth - denGWidth) / 2;
     if (shift < 0) {
       this.numeratorGroup.dx(-shift);
-    }
-    else {
+    } else {
       this.denominatorGroup.dx(shift);
     }
   }

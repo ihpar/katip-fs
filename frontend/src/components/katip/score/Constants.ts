@@ -1,1 +1,2 @@
-export const lineGap = 9;
+const lineGap = 9;
+export default lineGap;

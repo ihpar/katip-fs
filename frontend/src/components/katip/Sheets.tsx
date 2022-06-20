@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "store/index";
 import { ActionMode } from "store/slices/note-modifiers";
@@ -11,10 +11,10 @@ let score: Score;
 const Sheets = () => {
   const isSoundOn = useSelector<RootState, boolean>((state) => state.player.soundOn);
 
-  const actionMode = useSelector<RootState, ActionMode>(state => state.noteModifier.mode);
-  const actionAccidental = useSelector<RootState, string>(state => state.noteModifier.accidental);
-  const actionDuration = useSelector<RootState, string>(state => state.noteModifier.duration);
-  const actionDotted = useSelector<RootState, boolean>(state => state.noteModifier.isDotted);
+  const actionMode = useSelector<RootState, ActionMode>((state) => state.noteModifier.mode);
+  const actionAccidental = useSelector<RootState, string>((state) => state.noteModifier.accidental);
+  const actionDuration = useSelector<RootState, string>((state) => state.noteModifier.duration);
+  const actionDotted = useSelector<RootState, boolean>((state) => state.noteModifier.isDotted);
 
   useEffect(() => {
     if (!score) {
@@ -31,16 +31,16 @@ const Sheets = () => {
   }, []);
 
   useEffect(() => {
-    score.setAction({
-      mode: actionMode,
-      accidental: actionAccidental,
-      duration: actionDuration,
-      isDotted: actionDotted,
-    });
+    // score.setAction({
+    //   mode: actionMode,
+    //   accidental: actionAccidental,
+    //   duration: actionDuration,
+    //   isDotted: actionDotted,
+    // });
   }, [actionMode, actionAccidental, actionDuration, actionDotted]);
 
   return (
-    <div id="score-root"></div>
+    <div id="score-root" />
   );
 };
 

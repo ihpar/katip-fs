@@ -1,9 +1,38 @@
 .widget-makam-img {
-  display: flex;
+  background-image: url("../../static/images/sprites/makam_sprite.svg");
+  background-size: auto 100px;
+  width: 40px;
+  height: 50px;
+  width: 62px;
   margin-right: 12px;
 
-  img {
-    height: 48px;
-    transition: opacity 200ms;
+  &.si4b5 {
+    background-position-x: 0px;
+  }
+
+  &.si4b1 {
+    background-position-x: -67px;
+  }
+
+  &.si4b1-re5b4 {
+    background-position-x: -134px;
+  }
+
+  &.si4b1-mi5b4-fa5d4 {
+    background-position-x: -201px;
+  }
+
+  &.si4b4-fa5d4-do5d4 {
+    background-position-x: -268px;
+  }
+
+  &.si4b5-mi5b5 {
+    background-position-x: -335px;
+  }
+}
+
+.dark {
+  .widget-makam-img {
+    background-position-y: -50px;
   }
 }

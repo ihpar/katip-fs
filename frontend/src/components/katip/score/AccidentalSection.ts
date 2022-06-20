@@ -1,14 +1,19 @@
 import { Svg, G } from "@svgdotjs/svg.js";
 import ScoreElement from "./ScoreElement";
 import Accidental from "./Accidental";
-import { lineGap } from "./Constants";
+import lineGap from "./Constants";
 
 class AccidentalSection implements ScoreElement {
   rootGroup: G;
+
   linesGroup: G;
+
   marginWidth = 5;
+
   gap = 4;
+
   width = 0;
+
   accidentals: Accidental[];
 
   constructor(
@@ -17,7 +22,7 @@ class AccidentalSection implements ScoreElement {
     private accidentalStrs: string[],
     private left: number,
     private top: number,
-    private renderBar: boolean
+    private renderBar: boolean,
   ) {
     this.accidentals = [];
     this.init();
@@ -29,7 +34,7 @@ class AccidentalSection implements ScoreElement {
     this.rootGroup = this.painter.group();
 
     this.width = this.marginWidth;
-    this.accidentalStrs.forEach(accidentalStr => {
+    this.accidentalStrs.forEach((accidentalStr) => {
       const accidental = new Accidental(accidentalStr, this.rootGroup);
       this.accidentals.push(accidental);
       this.width += accidental.width;
@@ -44,7 +49,7 @@ class AccidentalSection implements ScoreElement {
 
     this.linesGroup = this.painter.group();
     // Render staff lines
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i += 1) {
       this.linesGroup.rect(this.width, 1).move(this.left, i * 9 + this.top);
     }
     // render final bar
@@ -56,8 +61,8 @@ class AccidentalSection implements ScoreElement {
 
     // render accidental symbols
     let left = this.left + this.marginWidth;
-    let top = this.top;
-    this.accidentals.forEach(accidental => {
+    const { top } = this;
+    this.accidentals.forEach((accidental) => {
       accidental.render(left, top);
       left += accidental.width + this.gap;
     });

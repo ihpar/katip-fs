@@ -1,21 +1,24 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import useLanguage from "../../hooks/use-language";
 import { RootState } from "store/index";
 import { themeActions, Theme } from "store/slices/theme";
+import useLanguage from "../../hooks/use-language";
 
 import "./UserSettingsItems.scss";
 
-interface propsType {
+interface PropsType {
   onSelectLanguage: () => void;
   langCode: string;
   langFlag: string;
 }
 
-const UserSettingsItems: React.FC<propsType> = (props) => {
-
+const UserSettingsItems: React.FC<PropsType> = ({
+  onSelectLanguage,
+  langCode,
+  langFlag,
+}) => {
   const themeIconRef = useRef<HTMLSpanElement>(null);
-  const currTheme = useSelector<RootState, string>(state => state.theme.theme);
+  const currTheme = useSelector<RootState, string>((state) => state.theme.theme);
   const dispatch = useDispatch();
   const { t } = useLanguage("nav-titles");
 
@@ -27,8 +30,7 @@ const UserSettingsItems: React.FC<propsType> = (props) => {
     setTimeout(() => {
       if (currTheme === Theme.Light) {
         dispatch(themeActions.setTheme(Theme.Dark));
-      }
-      else {
+      } else {
         dispatch(themeActions.setTheme(Theme.Light));
       }
       themeIconRef.current?.classList.remove("set");
@@ -38,8 +40,7 @@ const UserSettingsItems: React.FC<propsType> = (props) => {
   useEffect(() => {
     if (currTheme === Theme.Light) {
       document.body.classList.remove(Theme.Dark);
-    }
-    else {
+    } else {
       document.body.classList.add(Theme.Dark);
     }
   }, [currTheme]);
@@ -47,15 +48,18 @@ const UserSettingsItems: React.FC<propsType> = (props) => {
   return (
     <ul className="user-menu">
       <li>
-        <button className="btn-theme-switcher"
+        <button
+          type="button"
+          className="btn-theme-switcher"
           title={themeSwitcherTitle}
-          onClick={switchThemeButtonClickHandler}>
+          onClick={switchThemeButtonClickHandler}
+        >
           <span ref={themeIconRef} className="i-sharp md-36 theme-icon">{nextMode}</span>
         </button>
       </li>
       <li>
-        <button onClick={props.onSelectLanguage} title={t.change_language}>
-          <img className="flag" alt={props.langCode} src={props.langFlag} />
+        <button type="button" onClick={onSelectLanguage} title={t.change_language}>
+          <img className="flag" alt={langCode} src={langFlag} />
         </button>
       </li>
     </ul>

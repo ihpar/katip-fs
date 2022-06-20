@@ -1,8 +1,7 @@
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { noteModifierActions } from "store/slices/note-modifiers";
+import { noteModifierActions, ActionMode } from "store/slices/note-modifiers";
 import { RootState } from "store";
-import { ActionMode } from "store/slices/note-modifiers";
-import { useEffect } from "react";
 
 import "./AccidentalActions.scss";
 
@@ -23,16 +22,15 @@ const accidentals = [
 const AccidentalActions = () => {
   const dispatch = useDispatch();
 
-  const actionMode = useSelector<RootState, ActionMode>(state => state.noteModifier.mode);
-  const actionAccidental = useSelector<RootState, string>(state => state.noteModifier.accidental);
+  const actionMode = useSelector<RootState, ActionMode>((state) => state.noteModifier.mode);
+  const actionAccidental = useSelector<RootState, string>((state) => state.noteModifier.accidental);
 
   const accidentalButtonClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (actionMode === ActionMode.InsertNote) {
       const accidental = event.currentTarget.dataset.value;
       if (accidental === actionAccidental) {
         dispatch(noteModifierActions.changeAccidental(""));
-      }
-      else {
+      } else {
         dispatch(noteModifierActions.changeAccidental(accidental));
       }
     }
@@ -49,10 +47,12 @@ const AccidentalActions = () => {
       {accidentals.map((accidental) => (
         <li key={accidental.value}>
           <button
+            type="button"
             className={actionAccidental === accidental.value ? "active" : ""}
             data-value={accidental.value}
-            onClick={accidentalButtonClickHandler}>
-            <span className={`acci ${accidental.name}`}></span>
+            onClick={accidentalButtonClickHandler}
+          >
+            <span className={`acci ${accidental.name}`} />
           </button>
         </li>
       ))}

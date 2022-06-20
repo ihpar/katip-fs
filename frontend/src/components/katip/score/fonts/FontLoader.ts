@@ -1,5 +1,5 @@
 import FontType from "./FontType";
-import { BravuraFont } from "./bravura";
+import BravuraFont from "./bravura";
 
 class FontLoader {
   font: FontType;
@@ -16,9 +16,18 @@ class FontLoader {
     return [
       this.font.glyphs[symbolKey].width,
       this.font.glyphs[symbolKey].height,
-      this.font.glyphs[symbolKey].yOffset || 0
+      this.font.glyphs[symbolKey].yOffset || 0,
     ];
+  }
+
+  getWidth(symbolKey: string): number {
+    return this.font.glyphs[symbolKey].width;
+  }
+
+  getYOffset(symbolKey: string): number {
+    return this.font.glyphs[symbolKey].yOffset || 0;
   }
 }
 
-export const symbols = new FontLoader(BravuraFont);
+const symbols = new FontLoader(BravuraFont);
+export default symbols;

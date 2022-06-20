@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "store/index";
 
-
 import Modal from "../utils/Modal";
 import LanguageSelector from "../utils/LanguageSelector";
 
@@ -16,8 +15,8 @@ const Navigation = () => {
   const [isLangModalVisible, setIsLangModalVisible] = useState(false);
   const [isKillModal, setIsKillModal] = useState(true);
 
-  const langCode = useSelector<RootState, string>(state => state.language.code);
-  const langFlag = useSelector<RootState, string>(state => state.language.flag);
+  const langCode = useSelector<RootState, string>((state) => state.language.code);
+  const langFlag = useSelector<RootState, string>((state) => state.language.flag);
 
   const hamburgerClickHandler = () => {
     setIsNavVisible((prev) => !prev);
@@ -39,16 +38,16 @@ const Navigation = () => {
   const hamburgerClass = `hamburger hamburger--squeeze ${isNavVisible ? "is-active" : ""}`;
 
   return (
-    <React.Fragment>
+    <>
       <Modal show={isLangModalVisible} kill={isKillModal} onClose={closeModalHandler}>
         <LanguageSelector onClose={closeModalHandler} />
       </Modal>
-      <div className="no-print"></div>
+      <div className="no-print" />
       <header id="header-menu" className="header-section no-print">
         <div>
-          <button onClick={hamburgerClickHandler} className={hamburgerClass} type="button">
+          <button type="button" onClick={hamburgerClickHandler} className={hamburgerClass}>
             <span className="hamburger-box">
-              <span className="hamburger-inner"></span>
+              <span className="hamburger-inner" />
             </span>
           </button>
         </div>
@@ -58,7 +57,7 @@ const Navigation = () => {
             {/* User account actions */}
             <ul className="user-menu">
               <li>
-                <button disabled>
+                <button type="button" disabled>
                   <span className="i-sharp md-36">account_circle</span>
                 </button>
               </li>
@@ -68,12 +67,12 @@ const Navigation = () => {
             {/* User action controls */}
             <ul className="user-menu">
               <li>
-                <button disabled>
+                <button type="button" disabled>
                   <span className="i-sharp md-36">undo</span>
                 </button>
               </li>
               <li>
-                <button disabled>
+                <button type="button" disabled>
                   <span className="i-sharp md-36">redo</span>
                 </button>
               </li>
@@ -82,21 +81,22 @@ const Navigation = () => {
             <UserSettingsItems
               langCode={langCode}
               langFlag={langFlag}
-              onSelectLanguage={languageSelectorClickHandler} />
+              onSelectLanguage={languageSelectorClickHandler}
+            />
             {/* User social actions */}
             <ul className="user-menu">
               <li>
-                <button disabled>
+                <button type="button" disabled>
                   <span className="i-sharp md-36">share</span>
                 </button>
               </li>
               <li>
-                <button disabled>
+                <button type="button" disabled>
                   <span className="i-sharp md-36">help</span>
                 </button>
               </li>
               <li>
-                <button disabled>
+                <button type="button" disabled>
                   <span className="i-sharp md-36">feedback</span>
                 </button>
               </li>
@@ -104,7 +104,7 @@ const Navigation = () => {
             {/* User logout */}
             <ul className="user-menu">
               <li>
-                <button disabled>
+                <button type="button" disabled>
                   <span className="i-sharp md-36">logout</span>
                 </button>
               </li>
@@ -112,8 +112,8 @@ const Navigation = () => {
           </div>
         </div>
       </header>
-      <div className="no-print"></div>
-    </React.Fragment>
+      <div className="no-print" />
+    </>
   );
 };
 

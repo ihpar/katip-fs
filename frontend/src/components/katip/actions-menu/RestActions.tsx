@@ -1,8 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store";
-import { noteModifierActions } from "store/slices/note-modifiers";
-import { ActionMode } from "store/slices/note-modifiers";
+import { noteModifierActions, ActionMode } from "store/slices/note-modifiers";
 
 import "./RestActions.scss";
 
@@ -15,18 +14,17 @@ const rests = [
   { value: "1/32", name: "rest_32" },
 ];
 
-const RestActions: React.FC<{ isDark: boolean; }> = ({ isDark }) => {
+const RestActions = () => {
   const dispatch = useDispatch();
-  const actionMode = useSelector<RootState, ActionMode>(state => state.noteModifier.mode);
-  const actionDuration = useSelector<RootState, string>(state => state.noteModifier.duration);
+  const actionMode = useSelector<RootState, ActionMode>((state) => state.noteModifier.mode);
+  const actionDuration = useSelector<RootState, string>((state) => state.noteModifier.duration);
 
   const restButtonClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     const restDuration = event.currentTarget.dataset.value as string;
     if (actionMode === ActionMode.InsertRest && restDuration === actionDuration) {
       dispatch(noteModifierActions.setMode(ActionMode.Select));
       dispatch(noteModifierActions.changeDuration(""));
-    }
-    else {
+    } else {
       dispatch(noteModifierActions.setMode(ActionMode.InsertRest));
       dispatch(noteModifierActions.changeDuration(restDuration));
     }
@@ -37,10 +35,12 @@ const RestActions: React.FC<{ isDark: boolean; }> = ({ isDark }) => {
       {rests.map((rest) => (
         <li key={rest.value}>
           <button
+            type="button"
             className={actionMode === ActionMode.InsertRest && actionDuration === rest.value ? "active" : ""}
             onClick={restButtonClickHandler}
-            data-value={rest.value}>
-            <span className={`rests ${rest.name}`}></span>
+            data-value={rest.value}
+          >
+            <span className={`rests ${rest.name}`} />
           </button>
         </li>
       ))}

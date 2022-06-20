@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { soundOn: false, playing: false, loop: false, isInstrumentCreated: false };
+const initialState = {
+  soundOn: false, playing: false, loop: false, isInstrumentCreated: false,
+};
 
 const playerSlice = createSlice({
   name: "instrument",
-  initialState: initialState,
+  initialState,
   reducers: {
     toggleSound(state) {
       state.soundOn = !state.soundOn;

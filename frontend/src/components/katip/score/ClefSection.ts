@@ -1,20 +1,25 @@
 import { Svg, G } from "@svgdotjs/svg.js";
 import ScoreElement from "./ScoreElement";
-import { symbols } from "./fonts/FontLoader";
-import { lineGap } from "./Constants";
+import symbols from "./fonts/FontLoader";
+import lineGap from "./Constants";
 
 class ClefSection implements ScoreElement {
   rootGroup: G;
+
   linesGroup: G;
+
   marginWidth = 5;
+
   width = 0;
+
   clefYOffset = 0;
+
   clefStr = "gClef";
 
   constructor(
     private painter: Svg,
     private left: number,
-    private top: number
+    private top: number,
   ) {
     this.init();
   }
@@ -22,6 +27,7 @@ class ClefSection implements ScoreElement {
   init() {
     const clefDims = symbols.getDims(this.clefStr);
     this.width = 2 * this.marginWidth + Math.ceil(clefDims[0]);
+    // eslint-disable-next-line prefer-destructuring
     this.clefYOffset = clefDims[2];
   }
 
@@ -30,7 +36,7 @@ class ClefSection implements ScoreElement {
     this.linesGroup = this.painter.group();
 
     // Render staff lines
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i += 1) {
       this.linesGroup.rect(this.width, 1).move(this.left, i * lineGap + this.top);
     }
     this.linesGroup.addClass("staff-line-color");

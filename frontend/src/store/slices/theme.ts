@@ -6,18 +6,18 @@ export enum Theme {
 }
 
 const initialState = {
-  theme: localStorage.getItem("tmmTheme") as Theme || Theme.Light
+  theme: localStorage.getItem("tmmTheme") as Theme || Theme.Light,
 };
 
 const themeSlice = createSlice({
   name: "theme",
-  initialState: initialState,
+  initialState,
   reducers: {
     setTheme(state, action) {
       state.theme = action.payload;
       localStorage.setItem("tmmTheme", action.payload);
-    }
-  }
+    },
+  },
 });
 
 export const themeActions = themeSlice.actions;

@@ -1,9 +1,8 @@
+import React from "react";
 import "./Card.scss";
 
-const Card: React.FC = (props) => {
-  return (
-    <div className="card-wrapper">{props.children}</div>
-  );
-};
+const Card: React.FC = ({ children }) => (
+  <div className="card-wrapper">{children}</div>
+);
 
 export default Card;

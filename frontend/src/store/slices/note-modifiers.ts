@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export enum ActionMode {
   InsertNote,
   InsertRest,
-  Select
+  Select,
 }
 
 export const initialState = {
@@ -15,7 +15,7 @@ export const initialState = {
 
 const noteModifierSlice = createSlice({
   name: "note-modifier-slice",
-  initialState: initialState,
+  initialState,
   reducers: {
     changeAccidental(state, action) {
       state.accidental = action.payload;
@@ -34,7 +34,7 @@ const noteModifierSlice = createSlice({
     },
     setMode(state, action) {
       state.mode = action.payload;
-    }
+    },
   },
 });
 

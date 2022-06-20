@@ -1,20 +1,28 @@
 import { Rect, Svg, G } from "@svgdotjs/svg.js";
-import { Makam } from "models/Makam";
-import { Usul } from "models/Usul";
+import Makam from "models/Makam";
+import Usul from "models/Usul";
 import ScoreElement from "./ScoreElement";
-import { lineGap } from "./Constants";
+import lineGap from "./Constants";
 
 export default class Measure implements ScoreElement {
   hasMakamChange: boolean;
+
   hasUsulCahnge: boolean;
+
   rootGroup: G;
+
   guideLinesGroup: G;
+
   staffLinesGroup: G;
 
   boundingRect: Rect;
+
   bar: Rect;
+
   showAccidentals: boolean;
+
   showUsul: boolean;
+
   renderBar: boolean;
 
   constructor(
@@ -24,13 +32,13 @@ export default class Measure implements ScoreElement {
     private usul: Usul,
     private left: number,
     private top: number,
-    private initialWidth: number
+    private initialWidth: number,
   ) {
     this.init();
   }
 
+  // eslint-disable-next-line class-methods-use-this
   init() {
-
   }
 
   render() {
@@ -41,14 +49,14 @@ export default class Measure implements ScoreElement {
 
     // draw top guide lines
     this.guideLinesGroup = this.painter.group();
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i += 1) {
       this.guideLinesGroup.rect(ghostLineWidth, 1)
         .move(ghostLineLeft, this.top - (5 - i) * lineGap);
     }
 
     // draw staff lines
     this.staffLinesGroup = this.painter.group();
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i += 1) {
       this.staffLinesGroup.rect(this.initialWidth, 1)
         .move(this.left, this.top + i * lineGap);
     }
@@ -61,7 +69,7 @@ export default class Measure implements ScoreElement {
       .addClass("staff-line-color");
 
     // draw bottom guide lines
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i += 1) {
       this.guideLinesGroup.rect(ghostLineWidth, 1)
         .move(ghostLineLeft, this.top + (i + 5) * lineGap);
     }
@@ -77,6 +85,6 @@ export default class Measure implements ScoreElement {
   }
 
   get width() {
-    return 50;
+    return this.left;
   }
 }

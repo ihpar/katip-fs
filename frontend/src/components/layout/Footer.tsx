@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "store/index";
 import { Theme } from "store/slices/theme";
@@ -13,13 +13,12 @@ import twitterImg from "static/images/social/twitter.svg";
 import twitterImgDark from "static/images/social/twitter_dark.svg";
 
 const Footer = () => {
-
-  const theme = useSelector<RootState, string>(state => state.theme.theme);
+  const theme = useSelector<RootState, string>((state) => state.theme.theme);
   const isDark = theme === Theme.Dark;
 
   return (
-    <Fragment>
-      <div></div>
+    <>
+      <div />
       <div>
         <footer className="footer no-print">
           <div>
@@ -46,8 +45,8 @@ const Footer = () => {
           </div>
         </footer>
       </div>
-      <div></div>
-    </Fragment>
+      <div />
+    </>
   );
 };
 

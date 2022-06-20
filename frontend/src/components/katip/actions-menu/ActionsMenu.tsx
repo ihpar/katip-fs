@@ -1,7 +1,5 @@
-import { useSelector } from "react-redux";
-import { RootState } from "store/index";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { Theme } from "store/slices/theme";
 
 import AccidentalActions from "./AccidentalActions";
 import DurationActions from "./DurationActions";
@@ -11,18 +9,15 @@ import RestActions from "./RestActions";
 
 import "./ActionsMenu.scss";
 
-const ActionsMenu = () => {
-
-  const theme = useSelector<RootState, string>(state => state.theme.theme);
-  const isDark = theme === Theme.Dark;
-
-  return (
-    <div className="top-menu no-print">
-      <Routes>
-        <Route path="/" element={
+const ActionsMenu = () => (
+  <div className="top-menu no-print">
+    <Routes>
+      <Route
+        path="/"
+        element={(
           <>
             {/* Player controls */}
-            <PlayerActions isDark={isDark} />
+            <PlayerActions />
             {/* Accidental controls */}
             <AccidentalActions />
             {/*  Duration controls */}
@@ -30,12 +25,12 @@ const ActionsMenu = () => {
             {/* Dot */}
             <Dot />
             {/* Rest controls */}
-            <RestActions isDark={isDark} />
+            <RestActions />
           </>
-        } />
-      </Routes>
-    </div>
-  );
-};
+        )}
+      />
+    </Routes>
+  </div>
+);
 
 export default ActionsMenu;

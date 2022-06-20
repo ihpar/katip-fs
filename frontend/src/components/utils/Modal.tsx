@@ -1,40 +1,52 @@
-import { Fragment, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import useLanguage from "hooks/use-language";
 import Card from "./Card";
 
 import "./Modal.scss";
 
-const Modal: React.FC<{ show: boolean; kill: boolean; onClose: () => void; }> = (props) => {
+const Modal: React.FC<{ show: boolean; kill: boolean; onClose: () => void; }> = ({
+  show,
+  kill,
+  onClose,
+  children,
+}) => {
+  const { t } = useLanguage("utils");
   const overlayRef = useRef<HTMLDivElement>(null);
   const modalContentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (props.show) {
+    if (show) {
       modalContentRef.current?.classList.remove("opening");
       overlayRef.current?.classList.remove("opening");
-    }
-    else {
+    } else {
       modalContentRef.current?.classList.add("closing");
       overlayRef.current?.classList.add("closing");
     }
-  }, [props.show]);
+  }, [show]);
 
-  if (props.kill) {
+  if (kill) {
     return null;
   }
 
+  const keyDownHandler = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Escape") {
+      onClose();
+    }
+  };
+
   return createPortal(
     (
-      <Fragment>
-        <div ref={overlayRef} className="overlay opening" onClick={props.onClose}></div>
+      <>
+        <div role="button" aria-label={t.close_modal} tabIndex={0} onClick={onClose} onKeyDown={keyDownHandler} ref={overlayRef} className="overlay opening" />
         <div ref={modalContentRef} className="modal-content-wrapper opening">
           <Card>
-            {props.children}
+            {children}
           </Card>
         </div>
-      </Fragment>
+      </>
     ),
-    document.getElementById("overlay-root")!
+    document.getElementById("overlay-root")!,
   );
 };
 

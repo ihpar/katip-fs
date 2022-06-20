@@ -1,8 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store";
-import { noteModifierActions } from "store/slices/note-modifiers";
-import { ActionMode } from "store/slices/note-modifiers";
+import { noteModifierActions, ActionMode } from "store/slices/note-modifiers";
 
 import "./DurationActions.scss";
 
@@ -17,8 +16,8 @@ const durations = [
 ];
 
 const DurationActions = () => {
-  const actionMode = useSelector<RootState, ActionMode>(state => state.noteModifier.mode);
-  const actionDuration = useSelector<RootState, string>(state => state.noteModifier.duration);
+  const actionMode = useSelector<RootState, ActionMode>((state) => state.noteModifier.mode);
+  const actionDuration = useSelector<RootState, string>((state) => state.noteModifier.duration);
 
   const dispatch = useDispatch();
 
@@ -28,8 +27,7 @@ const DurationActions = () => {
     if (actionMode === ActionMode.InsertNote && noteDuration === actionDuration) {
       dispatch(noteModifierActions.setMode(ActionMode.Select));
       dispatch(noteModifierActions.changeDuration(""));
-    }
-    else {
+    } else {
       dispatch(noteModifierActions.setMode(ActionMode.InsertNote));
       dispatch(noteModifierActions.changeDuration(noteDuration));
     }
@@ -40,10 +38,12 @@ const DurationActions = () => {
       {durations.map((duration) => (
         <li key={duration.name}>
           <button
+            type="button"
             data-value={duration.value}
             onClick={durationButtonClickHandler}
-            className={actionMode === ActionMode.InsertNote && actionDuration === duration.value ? "active" : ""}>
-            <span className={`durs ${duration.name}`}></span>
+            className={actionMode === ActionMode.InsertNote && actionDuration === duration.value ? "active" : ""}
+          >
+            <span className={`durs ${duration.name}`} />
           </button>
         </li>
       ))}
