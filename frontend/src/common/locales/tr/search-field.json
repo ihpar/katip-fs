@@ -1,5 +1,6 @@
 {
   "search": "Ara",
   "search_makam": "Makam Ara",
-  "search_usul": "Usûl Ara"
+  "search_usul": "Usûl Ara",
+  "no_results": "Sonuç bulunamadı."
 }

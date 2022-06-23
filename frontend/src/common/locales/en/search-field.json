@@ -1,5 +1,6 @@
 {
   "search": "Search",
   "search_makam": "Search Makams",
-  "search_usul": "Search Usuls"
+  "search_usul": "Search Usuls",
+  "no_results": "Nothing found."
 }

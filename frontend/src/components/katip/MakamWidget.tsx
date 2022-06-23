@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import useLanguage from "hooks/use-language";
 import MAKAMS from "./score/Makams";
 
 import "./MakamWidget.scss";
@@ -13,6 +14,7 @@ const MakamWidget: React.FC<MakamWidgetProps> = ({
   filterText,
 }) => {
   const [makams, setMakams] = useState([...MAKAMS]);
+  const { t } = useLanguage("search-field");
 
   const dragStartHandler = (event: React.DragEvent<HTMLLIElement>) => {
     const makam = event.currentTarget.dataset.makam as string;
@@ -29,7 +31,7 @@ const MakamWidget: React.FC<MakamWidgetProps> = ({
   }, [filterText]);
 
   return (
-    <div className="content-scroller" style={{ height }}>
+    <div className="content-scroller" style={{ maxHeight: height }}>
       <ul>
         {makams.map((makam) => (
           <li
@@ -43,6 +45,9 @@ const MakamWidget: React.FC<MakamWidgetProps> = ({
             <div className="widget-makam-name">{makam.name}</div>
           </li>
         ))}
+        {makams.length === 0 && (
+          <li>{t.no_results}</li>
+        )}
       </ul>
     </div>
   );
