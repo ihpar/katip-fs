@@ -8,10 +8,6 @@ const Cirak = () => {
   const { t } = useLanguage("cirak");
   const [searchTerm, setSeachTerm] = useState("");
 
-  if (searchTerm) {
-    console.log("st:", searchTerm);
-  }
-
   return (
     <aside className="no-print">
       <div className="assistant accordion-wrapper">
@@ -22,6 +18,7 @@ const Cirak = () => {
         <div className="assistant-body">
           <SearchField setFilter={setSeachTerm} />
           <div className="content-scroller info-section">
+            {`${searchTerm}: `}
             {t.rast}
           </div>
           <a
