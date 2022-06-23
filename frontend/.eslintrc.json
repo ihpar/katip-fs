@@ -45,6 +45,7 @@
             {
                 "props": false
             }
-        ]
+        ],
+        "react/prop-types": "off"
     }
 }

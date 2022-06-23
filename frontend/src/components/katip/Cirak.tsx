@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import useLanguage from "hooks/use-language";
+import SearchField from "components/utils/SearchField";
 
 import "./Cirak.scss";
 
 const Cirak = () => {
   const { t } = useLanguage("cirak");
+  const [searchTerm, setSeachTerm] = useState("");
+
+  if (searchTerm) {
+    console.log("st:", searchTerm);
+  }
 
   return (
     <aside className="no-print">
@@ -14,12 +20,7 @@ const Cirak = () => {
           {t.apprentice}
         </div>
         <div className="assistant-body">
-          <div className="search-section">
-            <input type="text" className="txt-input" placeholder={t.search} />
-            <span className="i-sharp search-icon">search</span>
-            <br />
-            <div className="text-underline" />
-          </div>
+          <SearchField setFilter={setSeachTerm} />
           <div className="content-scroller info-section">
             {t.rast}
           </div>

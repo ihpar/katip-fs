@@ -3,13 +3,13 @@ import React, { useState } from "react";
 type AccordionProps = {
   initialVisibility: boolean;
   title: string;
-  contentHeight: number;
+  expandHeight: number;
 };
 
 const AccordionWidget: React.FC<AccordionProps> = ({
   initialVisibility,
   title,
-  contentHeight,
+  expandHeight,
   children,
 }) => {
   const [isVisible, setIsVisible] = useState<boolean>(initialVisibility || false);
@@ -19,7 +19,7 @@ const AccordionWidget: React.FC<AccordionProps> = ({
   };
 
   const accordionButtonClass = `btn-accordion ${isVisible ? "accordion-active" : ""}`;
-  const accordionHeight = isVisible ? contentHeight + 24 : 0;
+  const accordionHeight = isVisible ? expandHeight : 0;
 
   return (
     <div className="accordion-wrapper">

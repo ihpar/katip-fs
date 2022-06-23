@@ -1,18 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import USULS from "./score/Usuls";
 
 import "./UsulWidget.scss";
 
-const UsulWidget: React.FC<{ height: number; }> = ({ height }) => {
+interface UsulWidgetProps {
+  height: number,
+  filterText: string,
+}
+
+const UsulWidget: React.FC<UsulWidgetProps> = ({ height, filterText }) => {
+  const [usuls, setUsuls] = useState([...USULS]);
   const dragStartHandler = (event: React.DragEvent<HTMLLIElement>) => {
     const usul = event.currentTarget.dataset.usul as string;
     event.dataTransfer.setData("text/plain", `usul:${usul}`);
   };
 
+  useEffect(() => {
+    setUsuls(USULS.filter((usul) => {
+      if (filterText) {
+        return usul.aliases.findIndex((alias) => alias.includes(filterText)) > -1;
+      }
+      return true;
+    }));
+  }, [filterText]);
+
   return (
     <div className="content-scroller" style={{ height }}>
       <ul>
-        {USULS.map((usul) => (
+        {usuls.map((usul) => (
           <li
             draggable="true"
             onDragStart={dragStartHandler}

@@ -4,6 +4,7 @@ class Usul {
     public name: string,
     public numerator: number,
     public denominator: number,
+    public aliases: string[],
   ) { }
 }
 
