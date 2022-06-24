@@ -13,7 +13,6 @@ const DEBOUNCE_INTERVAL = 200;
 
 const SearchField: React.FC<SearchFieldProps> = ({ placeholder = "search", setFilter }) => {
   const { t } = useLanguage("search-field");
-  const [actionIcon, setActionIcon] = useState(<span className="i-sharp search-icon">search</span>);
   const [inputVal, setInputVal] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -23,6 +22,19 @@ const SearchField: React.FC<SearchFieldProps> = ({ placeholder = "search", setFi
     inputRef.current?.focus();
   };
 
+  const [actionIcons] = useState([
+    <span className="i-sharp search-icon">search</span>,
+    <span
+      onClick={clearSearch}
+      onKeyDown={clearSearch}
+      role="button"
+      tabIndex={0}
+      className="i-sharp close-icon"
+    >
+      close
+    </span>,
+  ]);
+
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     clearTimeout(timer);
 
@@ -31,21 +43,6 @@ const SearchField: React.FC<SearchFieldProps> = ({ placeholder = "search", setFi
 
     timer = setTimeout(() => {
       setFilter(text);
-      setActionIcon(
-        text.length > 0
-          ? (
-            <span
-              onClick={clearSearch}
-              onKeyDown={clearSearch}
-              role="button"
-              tabIndex={0}
-              className="i-sharp close-icon"
-            >
-              close
-            </span>
-          )
-          : <span className="i-sharp search-icon">search</span>,
-      );
     }, DEBOUNCE_INTERVAL);
   };
 
@@ -59,7 +56,7 @@ const SearchField: React.FC<SearchFieldProps> = ({ placeholder = "search", setFi
         value={inputVal}
         ref={inputRef}
       />
-      {actionIcon}
+      {inputVal.length > 0 ? actionIcons[1] : actionIcons[0]}
       <div className="text-underline" />
     </div>
   );
