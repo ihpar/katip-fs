@@ -18,7 +18,8 @@
   font-weight: bold;
 }
 
-.i-sharp.search-icon {
+.i-sharp.search-icon,
+.i-sharp.close-icon {
   position: absolute;
   top: 0;
   right: 0;
@@ -26,7 +27,12 @@
   transition: opacity 200ms;
 }
 
-.txt-input:focus+span.i-sharp.search-icon {
+.i-sharp.close-icon {
+  cursor: pointer;
+}
+
+.txt-input:focus+span.i-sharp.search-icon,
+.txt-input:focus+span.i-sharp.close-icon {
   opacity: 1;
 }
 
