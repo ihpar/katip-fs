@@ -23,7 +23,12 @@ const SearchField: React.FC<SearchFieldProps> = ({ placeholder = "search", setFi
   };
 
   const [actionIcons] = useState([
-    <span className="i-sharp search-icon">search</span>,
+    <span
+      role="button"
+      className="i-sharp search-icon"
+    >
+      search
+    </span>,
     <span
       onClick={clearSearch}
       onKeyDown={clearSearch}
@@ -50,6 +55,7 @@ const SearchField: React.FC<SearchFieldProps> = ({ placeholder = "search", setFi
     <div className="search-section">
       <input
         type="text"
+        role="searchbox"
         className="txt-input"
         placeholder={t[placeholder]}
         onChange={inputChangeHandler}

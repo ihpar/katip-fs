@@ -29,8 +29,8 @@ const Modal: React.FC<{ show: boolean; kill: boolean; onClose: () => void; }> = 
     return null;
   }
 
-  const keyDownHandler = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "Escape") {
+  const keyDownHandler = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Escape") {
       onClose();
     }
   };
@@ -39,7 +39,7 @@ const Modal: React.FC<{ show: boolean; kill: boolean; onClose: () => void; }> = 
     (
       <>
         <div role="button" aria-label={t.close_modal} tabIndex={0} onClick={onClose} onKeyDown={keyDownHandler} ref={overlayRef} className="overlay opening" />
-        <div ref={modalContentRef} className="modal-content-wrapper opening">
+        <div ref={modalContentRef} data-testid="modal-content-wrapper" className="modal-content-wrapper opening">
           <Card>
             {children}
           </Card>

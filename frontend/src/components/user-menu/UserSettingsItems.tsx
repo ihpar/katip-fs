@@ -51,6 +51,7 @@ const UserSettingsItems: React.FC<PropsType> = ({
         <button
           type="button"
           className="btn-theme-switcher"
+          data-testid="btn-theme-switcher"
           title={themeSwitcherTitle}
           onClick={switchThemeButtonClickHandler}
         >
@@ -58,7 +59,12 @@ const UserSettingsItems: React.FC<PropsType> = ({
         </button>
       </li>
       <li>
-        <button type="button" onClick={onSelectLanguage} title={t.change_language}>
+        <button
+          type="button"
+          data-testid="btn-locale-displayer"
+          onClick={onSelectLanguage}
+          title={t.change_language}
+        >
           <img className="flag" alt={langCode} src={langFlag} />
         </button>
       </li>
