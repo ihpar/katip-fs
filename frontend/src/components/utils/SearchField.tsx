@@ -51,6 +51,12 @@ const SearchField: React.FC<SearchFieldProps> = ({ placeholder = "search", setFi
     }, DEBOUNCE_INTERVAL);
   };
 
+  const keypressHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Escape") {
+      clearSearch();
+    }
+  };
+
   return (
     <div className="search-section">
       <input
@@ -59,6 +65,7 @@ const SearchField: React.FC<SearchFieldProps> = ({ placeholder = "search", setFi
         className="txt-input"
         placeholder={t[placeholder]}
         onChange={inputChangeHandler}
+        onKeyDown={keypressHandler}
         value={inputVal}
         ref={inputRef}
       />
