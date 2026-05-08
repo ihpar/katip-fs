@@ -10,6 +10,7 @@ import ActionsMenu from "./actions-menu/ActionsMenu";
 import Cirak from "./Cirak";
 import LHSWidgets from "./LHSWidgets";
 import NoteSheetArea from "./NoteSheetArea";
+import ThreeTest from "./ThreeTest";
 
 const Katip = () => (
   <Provider store={store}>
@@ -18,6 +19,7 @@ const Katip = () => (
       <LHSWidgets />
       <main>
         <ActionsMenu />
+        <ThreeTest />
         <NoteSheetArea />
       </main>
       <Cirak />
